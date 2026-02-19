@@ -170,6 +170,10 @@ export interface Enemy {
   elementRes: Partial<Record<ElementType, number>>;
   /** 방어 불능(Vulnerable) 상태 여부 */
   isVulnerable: boolean;
+  /** 현재 적 체력 비율 (0~100) */
+  hpPercent: number;
+  /** 불균형 상태 여부 */
+  isUnbalanced: boolean;
 }
 
 /** 버프/보너스 집계 */
@@ -217,10 +221,10 @@ export interface SpecialEffects {
   isBurning: boolean;
   /** 감전 상태 (아츠 피해 증가) */
   isShocked: boolean;
-  /** 대상 체력이 50% 이하 */
-  lowHpTarget: boolean;
-  /** 대상이 불균형 상태 */
-  unbalancedTarget: boolean;
+  /** 연타 1스택당 배틀 스킬 피해 증가율 */
+  comboBattlePerStack: number;
+  /** 연타 1스택당 궁극기 피해 증가율 */
+  comboUltimatePerStack: number;
 }
 
 /** 계산 단계 하나 */

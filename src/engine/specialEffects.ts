@@ -10,9 +10,6 @@ export interface EffectsResult {
   steps: CalcStep[];
 }
 
-const BATTLE_COMBO_BY_STACK = [0, 0.3, 0.45, 0.6, 0.75];
-const ULT_COMBO_BY_STACK = [0, 0.2, 0.3, 0.4, 0.5];
-
 export function calculateSpecialEffects(
   effects: SpecialEffects,
   damageType: DamageType,
@@ -23,13 +20,13 @@ export function calculateSpecialEffects(
 
   if (effects.comboStack > 0) {
     if (skillType === 'battle') {
-      const v = BATTLE_COMBO_BY_STACK[effects.comboStack] || 0;
+      const v = effects.comboStack * effects.comboBattlePerStack;
       dmgBonusFromEffects += v;
-      steps.push({ label: '연타 보정(배틀 스킬)', formula: `+${(v * 100).toFixed(0)}%`, value: v });
+      steps.push({ label: '연타 보정(배틀 스킬)', formula: `${effects.comboStack}스택 × ${(effects.comboBattlePerStack * 100).toFixed(0)}%`, value: v });
     } else if (skillType === 'ultimate') {
-      const v = ULT_COMBO_BY_STACK[effects.comboStack] || 0;
+      const v = effects.comboStack * effects.comboUltimatePerStack;
       dmgBonusFromEffects += v;
-      steps.push({ label: '연타 보정(궁극기)', formula: `+${(v * 100).toFixed(0)}%`, value: v });
+      steps.push({ label: '연타 보정(궁극기)', formula: `${effects.comboStack}스택 × ${(effects.comboUltimatePerStack * 100).toFixed(0)}%`, value: v });
     }
   }
 

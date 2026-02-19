@@ -17,9 +17,7 @@ const EnemyPanel: React.FC<Props> = ({ enemy, onChange }) => {
 
   return (
     <div>
-      <label className="block text-text-muted text-xs uppercase tracking-wider mb-1.5">
-        적 선택
-      </label>
+      <label className="block text-text-muted text-xs uppercase tracking-wider mb-1.5">적 선택</label>
 
       <select
         className="w-full bg-bg border border-border rounded px-3 py-2 text-text focus:border-accent focus:outline-none mb-3"
@@ -35,24 +33,22 @@ const EnemyPanel: React.FC<Props> = ({ enemy, onChange }) => {
       <div className="grid grid-cols-2 gap-2">
         <div>
           <label className="block text-text-dim text-xs mb-0.5">방어력(DEF)</label>
-          <input
-            type="number"
-            min={0}
-            className="w-full bg-bg border border-border rounded px-2 py-1.5 text-text text-sm font-mono focus:border-accent focus:outline-none"
-            value={enemy.def}
-            onChange={(e) => onChange({ ...enemy, id: 'custom', def: Math.max(0, parseInt(e.target.value) || 0) })}
-          />
+          <input type="number" min={0} className="w-full bg-bg border border-border rounded px-2 py-1.5 text-text text-sm font-mono focus:border-accent focus:outline-none" value={enemy.def} onChange={(e) => onChange({ ...enemy, id: 'custom', def: Math.max(0, parseInt(e.target.value) || 0) })} />
         </div>
         <div>
           <label className="block text-text-dim text-xs mb-0.5">저항(RES)</label>
-          <input
-            type="number"
-            min={0}
-            max={100}
-            className="w-full bg-bg border border-border rounded px-2 py-1.5 text-text text-sm font-mono focus:border-accent focus:outline-none"
-            value={enemy.res}
-            onChange={(e) => onChange({ ...enemy, id: 'custom', res: Math.max(0, parseInt(e.target.value) || 0) })}
-          />
+          <input type="number" min={0} max={100} className="w-full bg-bg border border-border rounded px-2 py-1.5 text-text text-sm font-mono focus:border-accent focus:outline-none" value={enemy.res} onChange={(e) => onChange({ ...enemy, id: 'custom', res: Math.max(0, parseInt(e.target.value) || 0) })} />
+        </div>
+        <div>
+          <label className="block text-text-dim text-xs mb-0.5">적 체력 %</label>
+          <input type="number" min={0} max={100} className="w-full bg-bg border border-border rounded px-2 py-1.5 text-text text-sm font-mono focus:border-accent focus:outline-none" value={enemy.hpPercent} onChange={(e) => onChange({ ...enemy, id: 'custom', hpPercent: Math.max(0, Math.min(100, parseInt(e.target.value) || 0)) })} />
+        </div>
+        <div>
+          <label className="block text-text-dim text-xs mb-0.5">불균형 상태</label>
+          <select className="w-full bg-bg border border-border rounded px-2 py-1.5 text-text text-sm focus:border-accent focus:outline-none" value={enemy.isUnbalanced ? '1' : '0'} onChange={(e) => onChange({ ...enemy, id: 'custom', isUnbalanced: e.target.value === '1' })}>
+            <option value="0">아님</option>
+            <option value="1">불균형</option>
+          </select>
         </div>
       </div>
     </div>

@@ -33,7 +33,7 @@ export function getAllGearSets(): GearSet[] {
 }
 
 export function getEnemyPresets(): Enemy[] {
-  return allEnemies;
+  return allEnemies.map(e => ({ ...e, hpPercent: e.hpPercent ?? 100, isUnbalanced: e.isUnbalanced ?? false }));
 }
 
 export function createDefaultEnemy(): Enemy {
@@ -44,6 +44,8 @@ export function createDefaultEnemy(): Enemy {
     res: 15,
     elementRes: {},
     isVulnerable: false,
+    hpPercent: 100,
+    isUnbalanced: false,
   };
 }
 
@@ -74,7 +76,7 @@ export function createDefaultEffects(): SpecialEffects {
     comboStack: 0,
     isBurning: false,
     isShocked: false,
-    lowHpTarget: false,
-    unbalancedTarget: false,
+    comboBattlePerStack: 0.3,
+    comboUltimatePerStack: 0.2,
   };
 }

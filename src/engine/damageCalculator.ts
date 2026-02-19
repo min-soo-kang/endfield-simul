@@ -49,13 +49,13 @@ function getPotentialSkillMultiplierBonus(list: PotentialBonus[], skillType: Ski
   return 0;
 }
 
-function getBuyoThirdOptionBonus(weapon: Weapon | null, lv: number, skillType: SkillType, effects: SpecialEffects): number {
+function getBuyoThirdOptionBonus(weapon: Weapon | null, lv: number, skillType: SkillType, enemy: Enemy): number {
   if (!weapon || weapon.id !== 'buyo') return 0;
   const wp = weapon.potentialBonuses?.find(p => p.level === lv);
   if (!wp) return 0;
   let bonus = 0;
   if (skillType === 'battle' || skillType === 'ultimate') bonus += wp.physDmgBonus || 0;
-  if (effects.unbalancedTarget) {
+  if (enemy.isUnbalanced) {
     const unbalancedByLevel = [0.9, 1.0, 1.1, 1.2, 1.2, 1.4];
     bonus += unbalancedByLevel[lv] || 0;
   }
@@ -79,7 +79,7 @@ export function calculateDamage(
   const opBonuses = getOperatorCumulativeBonuses(operator, operatorPotentialLevel);
   const opStats = applyOperatorPotentialStats(operator.stats, opBonuses);
 
-  const lowHpBonus = sumOperatorPotentialValue(opBonuses, 'skillDmgBonus', b => b.level !== 1 || effects.lowHpTarget);
+  const lowHpBonus = sumOperatorPotentialValue(opBonuses, 'skillDmgBonus', b => b.level !== 1 || enemy.hpPercent <= 50);
   const potentialPhys = sumOperatorPotentialValue(opBonuses, 'physDmgBonus');
   const potentialArts = sumOperatorPotentialValue(opBonuses, 'artsDmgBonus');
 
@@ -120,8 +120,8 @@ export function calculateDamage(
       ? (weapon?.artsDmgBonus || 0) + mergedBuffs.artsDmgBonus + gearArts
       : 0;
 
-  const buyoBonus = getBuyoThirdOptionBonus(weapon, weaponPotentialLevel, skillType, effects);
-  const unbalancedTaken = effects.unbalancedTarget ? 0.3 : 0;
+  const buyoBonus = getBuyoThirdOptionBonus(weapon, weaponPotentialLevel, skillType, enemy);
+  const unbalancedTaken = enemy.isUnbalanced ? 0.3 : 0;
   const additionalDmg = attributeBonus + mergedBuffs.skillDmgBonus + buyoBonus + mergedBuffs.extraDmgBonus + gearSkill + effectsResult.dmgBonusFromEffects;
 
   const amp = mergedBuffs.ampBonus;
