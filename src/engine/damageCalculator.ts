@@ -10,6 +10,7 @@ import type {
   CalcStep,
   OperatorStats,
   PotentialBonus,
+  SummaryCardItem,
 } from '../types';
 import type { SkillType } from '../data/constants';
 import { calculateAtk } from './atkCalculator';
@@ -141,6 +142,70 @@ export function calculateDamage(
   const critDamage = Math.round(totalBeforeCrit * (1 + critDmg));
   const expectedDamage = Math.round(totalBeforeCrit * critExpectedMult);
 
+  const atkPct = mergedBuffs.atkPercent + (weapon?.atkPercent || 0);
+  const statBonus = opStats.attributes[opStats.mainAttr] * 0.005 + opStats.attributes[opStats.subAttr] * 0.002;
+  const atkIncreasePct = (1 + atkPct) * (1 + statBonus) - 1;
+
+  const summaryCards: SummaryCardItem[] = [
+    {
+      key: 'atk',
+      title: '공격력 증가',
+      valueText: `${(atkIncreasePct * 100).toFixed(1)}%`,
+      details: [
+        `최종 공격력 ${atkResult.totalAtk.toLocaleString()}`,
+        `공퍼 ${(atkPct * 100).toFixed(1)}%`,
+        `스탯 보너스 ${(statBonus * 100).toFixed(1)}%`,
+      ],
+    },
+    {
+      key: 'crit_expected',
+      title: '치명타 기댓값',
+      valueText: `${(critExpectedMult * 100).toFixed(1)}%`,
+      details: [
+        `치명타 확률 ${(critRate * 100).toFixed(1)}%`,
+        `치명타 피해 ${(critDmg * 100).toFixed(1)}%`,
+      ],
+    },
+    {
+      key: 'phys',
+      title: '물리피해 증가',
+      valueText: `${(attributeBonus * 100).toFixed(1)}%`,
+      details: [
+        skill.damageType === 'Physical' ? `무기/버프/세트 합산` : '물리 스킬 아님',
+      ],
+    },
+    {
+      key: 'amp',
+      title: '증폭',
+      valueText: `${(amp * 100).toFixed(1)}%`,
+      details: ['증폭 버프 합연산'],
+    },
+    {
+      key: 'vuln',
+      title: '취약',
+      valueText: `${(vuln * 100).toFixed(1)}%`,
+      details: ['취약 디버프 합연산'],
+    },
+    {
+      key: 'taken',
+      title: '받피증',
+      valueText: `${(takenDmg * 100).toFixed(1)}%`,
+      details: ['취약 외 받는 피해 증가 합연산'],
+    },
+    {
+      key: 'unbalanced',
+      title: '불균형',
+      valueText: `${(unbalancedTaken * 100).toFixed(1)}%`,
+      details: [enemy.isUnbalanced ? '불균형 시 받는 피해 +30%' : 'OFF'],
+    },
+    {
+      key: 'status',
+      title: '상태',
+      valueText: `${(effectsResult.dmgBonusFromEffects * 100).toFixed(1)}%`,
+      details: effectsResult.steps.map(st => `${st.label} ${st.formula}`),
+    },
+  ];
+
   steps.push({ label: '공격력 계산', formula: atkResult.steps[0].formula, value: atkResult.totalAtk });
   steps.push({ label: '스킬 배율', formula: `${(levelData.multiplier * 100).toFixed(0)}%${multBonus > 0 ? ` × ${(1 + multBonus).toFixed(2)}` : ''}`, value: parseFloat(finalMultiplier.toFixed(4)) });
   steps.push({ label: '방어/저항 적용', formula: `× ${defMult.toFixed(4)}`, value: Math.round(afterDefense) });
@@ -162,5 +227,6 @@ export function calculateDamage(
     expectedDamage,
     critRate,
     critMultiplier: 1 + critDmg,
+    summaryCards,
   };
 }

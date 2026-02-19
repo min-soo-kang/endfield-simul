@@ -242,6 +242,14 @@ export interface CalcStep {
   value: number;
 }
 
+
+export interface SummaryCardItem {
+  key: string;
+  title: string;
+  valueText: string;
+  details: string[];
+}
+
 /** 최종 데미지 결과 */
 export interface DamageResult {
   finalDamage: number;
@@ -254,6 +262,7 @@ export interface DamageResult {
   expectedDamage: number;
   critRate: number;
   critMultiplier: number;
+  summaryCards: SummaryCardItem[];
 }
 
 /** 전체 시뮬레이터 입력 상태 */

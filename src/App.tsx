@@ -17,6 +17,7 @@ import EffectToggles from './components/EffectToggles';
 import GearSetSelector from './components/GearSetSelector';
 import ResultCard from './components/ResultCard';
 import DamageBreakdown from './components/DamageBreakdown';
+import DamageSummaryPanel from './components/DamageSummaryPanel';
 import PotentialSummaryTabs from './components/PotentialSummaryTabs';
 
 const operators = loadAllOperators();
@@ -191,6 +192,7 @@ function App() {
               operatorPotentialLevel={operatorPotentialLevel}
               weaponPotentialLevel={weaponPotentialLevel}
             />
+            {result && <DamageSummaryPanel items={result.summaryCards} />}
             {result && <DamageBreakdown steps={result.steps} />}
           </div>
         </div>
