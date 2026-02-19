@@ -194,6 +194,14 @@ export interface BuffSet {
   artsDmgBonus: number;
   /** 스킬 데미지 보너스 */
   skillDmgBonus: number;
+  /** 증폭 수치 */
+  ampBonus: number;
+  /** 취약 수치 */
+  vulnBonus: number;
+  /** 받는 피해 증가 수치 */
+  takenDmgBonus: number;
+  /** 기타 추가 데미지 */
+  extraDmgBonus: number;
 }
 
 /** 특수 효과 상태 */
@@ -203,8 +211,8 @@ export interface SpecialEffects {
   isVulnerable: boolean;
   /** 갑옷 파괴 (물리 피해 증가) */
   armorBreak: boolean;
-  /** 연타 (배틀 스킬 피해 +30%, 궁극기 피해 +20%) */
-  comboHit: boolean;
+  /** 연타 스택 (0~4) */
+  comboStack: 0 | 1 | 2 | 3 | 4;
   /** 연소 상태 */
   isBurning: boolean;
   /** 감전 상태 (아츠 피해 증가) */

@@ -1,24 +1,18 @@
 import type { SpecialEffects, DamageType, CalcStep } from '../types';
 import {
-  COMBO_HIT_BATTLE_SKILL_BONUS,
-  COMBO_HIT_ULTIMATE_BONUS,
   ARMOR_BREAK_PHYS_BONUS,
   SHOCK_ARTS_BONUS,
 } from '../data/constants';
 import type { SkillType } from '../data/constants';
 
 export interface EffectsResult {
-  /** 데미지 보너스 합산 (곱연산 아닌 합산) */
   dmgBonusFromEffects: number;
   steps: CalcStep[];
 }
 
-/**
- * 특수 효과 계산 (엔드필드 실제 시스템)
- * - 연타: 배틀 스킬 피해 +30%, 궁극기 피해 +20%
- * - 갑옷 파괴: 물리 피해 +18% (12~24% 중간값)
- * - 감전: 아츠 피해 +18% (12~24% 중간값)
- */
+const BATTLE_COMBO_BY_STACK = [0, 0.3, 0.45, 0.6, 0.75];
+const ULT_COMBO_BY_STACK = [0, 0.2, 0.3, 0.4, 0.5];
+
 export function calculateSpecialEffects(
   effects: SpecialEffects,
   damageType: DamageType,
@@ -27,43 +21,26 @@ export function calculateSpecialEffects(
   const steps: CalcStep[] = [];
   let dmgBonusFromEffects = 0;
 
-  // 연타 (Combo Hit)
-  if (effects.comboHit) {
+  if (effects.comboStack > 0) {
     if (skillType === 'battle') {
-      dmgBonusFromEffects += COMBO_HIT_BATTLE_SKILL_BONUS;
-      steps.push({
-        label: '연타 (배틀 스킬)',
-        formula: `+${(COMBO_HIT_BATTLE_SKILL_BONUS * 100).toFixed(0)}%`,
-        value: COMBO_HIT_BATTLE_SKILL_BONUS,
-      });
+      const v = BATTLE_COMBO_BY_STACK[effects.comboStack] || 0;
+      dmgBonusFromEffects += v;
+      steps.push({ label: '연타 보정(배틀 스킬)', formula: `+${(v * 100).toFixed(0)}%`, value: v });
     } else if (skillType === 'ultimate') {
-      dmgBonusFromEffects += COMBO_HIT_ULTIMATE_BONUS;
-      steps.push({
-        label: '연타 (궁극기)',
-        formula: `+${(COMBO_HIT_ULTIMATE_BONUS * 100).toFixed(0)}%`,
-        value: COMBO_HIT_ULTIMATE_BONUS,
-      });
+      const v = ULT_COMBO_BY_STACK[effects.comboStack] || 0;
+      dmgBonusFromEffects += v;
+      steps.push({ label: '연타 보정(궁극기)', formula: `+${(v * 100).toFixed(0)}%`, value: v });
     }
   }
 
-  // 갑옷 파괴 (Armor Break)
   if (effects.armorBreak && damageType === 'Physical') {
     dmgBonusFromEffects += ARMOR_BREAK_PHYS_BONUS;
-    steps.push({
-      label: '갑옷 파괴 (물리 피해+)',
-      formula: `+${(ARMOR_BREAK_PHYS_BONUS * 100).toFixed(0)}%`,
-      value: ARMOR_BREAK_PHYS_BONUS,
-    });
+    steps.push({ label: '갑옷 파괴', formula: `+${(ARMOR_BREAK_PHYS_BONUS * 100).toFixed(0)}%`, value: ARMOR_BREAK_PHYS_BONUS });
   }
 
-  // 감전 (Shocked)
   if (effects.isShocked && damageType === 'Arts') {
     dmgBonusFromEffects += SHOCK_ARTS_BONUS;
-    steps.push({
-      label: '감전 (아츠 피해+)',
-      formula: `+${(SHOCK_ARTS_BONUS * 100).toFixed(0)}%`,
-      value: SHOCK_ARTS_BONUS,
-    });
+    steps.push({ label: '감전', formula: `+${(SHOCK_ARTS_BONUS * 100).toFixed(0)}%`, value: SHOCK_ARTS_BONUS });
   }
 
   if (steps.length === 0) {

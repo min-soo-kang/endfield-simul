@@ -161,6 +161,24 @@ function App() {
                   <label className="block text-text-dim text-xs mb-0.5">스킬 피해 %</label>
                   <input type="number" min={0} step={1} className="w-full bg-bg border border-border rounded px-2 py-1.5 text-text text-sm font-mono focus:border-accent focus:outline-none" value={Math.round(buffs.skillDmgBonus * 100)} onChange={(e) => setBuffs(b => ({ ...b, skillDmgBonus: (parseInt(e.target.value) || 0) / 100 }))} />
                 </div>
+
+                <div>
+                  <label className="block text-text-dim text-xs mb-0.5">증폭 %</label>
+                  <input type="number" min={0} step={1} className="w-full bg-bg border border-border rounded px-2 py-1.5 text-text text-sm font-mono focus:border-accent focus:outline-none" value={Math.round(buffs.ampBonus * 100)} onChange={(e) => setBuffs(b => ({ ...b, ampBonus: (parseInt(e.target.value) || 0) / 100 }))} />
+                </div>
+                <div>
+                  <label className="block text-text-dim text-xs mb-0.5">취약 %</label>
+                  <input type="number" min={0} step={1} className="w-full bg-bg border border-border rounded px-2 py-1.5 text-text text-sm font-mono focus:border-accent focus:outline-none" value={Math.round(buffs.vulnBonus * 100)} onChange={(e) => setBuffs(b => ({ ...b, vulnBonus: (parseInt(e.target.value) || 0) / 100 }))} />
+                </div>
+                <div>
+                  <label className="block text-text-dim text-xs mb-0.5">받는 피해 증가 %</label>
+                  <input type="number" min={0} step={1} className="w-full bg-bg border border-border rounded px-2 py-1.5 text-text text-sm font-mono focus:border-accent focus:outline-none" value={Math.round(buffs.takenDmgBonus * 100)} onChange={(e) => setBuffs(b => ({ ...b, takenDmgBonus: (parseInt(e.target.value) || 0) / 100 }))} />
+                </div>
+                <div>
+                  <label className="block text-text-dim text-xs mb-0.5">기타 추가 데미지 %</label>
+                  <input type="number" min={0} step={1} className="w-full bg-bg border border-border rounded px-2 py-1.5 text-text text-sm font-mono focus:border-accent focus:outline-none" value={Math.round(buffs.extraDmgBonus * 100)} onChange={(e) => setBuffs(b => ({ ...b, extraDmgBonus: (parseInt(e.target.value) || 0) / 100 }))} />
+                </div>
+
               </div>
             </div>
           </div>

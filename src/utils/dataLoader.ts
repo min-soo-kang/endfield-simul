@@ -59,6 +59,10 @@ export function createDefaultBuffs(): BuffSet {
     physDmgBonus: 0,
     artsDmgBonus: 0,
     skillDmgBonus: 0,
+    ampBonus: 0,
+    vulnBonus: 0,
+    takenDmgBonus: 0,
+    extraDmgBonus: 0,
   };
 }
 
@@ -67,7 +71,7 @@ export function createDefaultEffects(): SpecialEffects {
     isCrit: false,
     isVulnerable: false,
     armorBreak: false,
-    comboHit: false,
+    comboStack: 0,
     isBurning: false,
     isShocked: false,
     lowHpTarget: false,
