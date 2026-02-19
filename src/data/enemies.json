@@ -1,0 +1,34 @@
+[
+  {
+    "id": "training_dummy",
+    "name": "Training Dummy",
+    "def": 0,
+    "res": 0,
+    "elementRes": {},
+    "isVulnerable": false
+  },
+  {
+    "id": "normal_enemy",
+    "name": "Standard Enemy",
+    "def": 300,
+    "res": 15,
+    "elementRes": {},
+    "isVulnerable": false
+  },
+  {
+    "id": "armored_enemy",
+    "name": "Heavy Armored",
+    "def": 800,
+    "res": 10,
+    "elementRes": {},
+    "isVulnerable": false
+  },
+  {
+    "id": "arts_resist",
+    "name": "Arts Resistant",
+    "def": 200,
+    "res": 40,
+    "elementRes": { "Fire": 20, "Ice": 20 },
+    "isVulnerable": false
+  }
+]

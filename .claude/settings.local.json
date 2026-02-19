@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cmd /c \"dir /b C:\\\\PROJECT\\\\endfield-simul\")",
+      "WebFetch(domain:namu.wiki)",
+      "Bash(npx react-scripts build:*)",
+      "Bash(curl:*)"
+    ]
+  }
+}

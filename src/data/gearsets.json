@@ -1,0 +1,70 @@
+[
+  {
+    "id": "mi_police",
+    "name": "M.I. Police Set",
+    "nameKo": "M.I. 경찰용",
+    "recommendedFor": "물리 딜러",
+    "bonuses": [
+      {
+        "pieces": 3,
+        "description": "치명타 확률 +5%, 치명타 적중 후 공격력 +5% (최대 5스택)",
+        "critRate": 0.05,
+        "atkPercent": 0.25
+      }
+    ]
+  },
+  {
+    "id": "yinglong_50",
+    "name": "Yinglong Type 50",
+    "nameKo": "응룡 50식",
+    "recommendedFor": "연계 스킬 딜러",
+    "bonuses": [
+      {
+        "pieces": 3,
+        "description": "공격력 +15%. 팀원 배틀 스킬 사용 시 연계 스킬 피해 +20% (최대 3스택)",
+        "atkPercent": 0.15,
+        "skillDmgBonus": 0.6
+      }
+    ]
+  },
+  {
+    "id": "tidal_wave",
+    "name": "Tidal Wave",
+    "nameKo": "조류의 물결",
+    "recommendedFor": "아츠 딜러",
+    "bonuses": [
+      {
+        "pieces": 3,
+        "description": "스킬 피해 +20%, 아츠 부착 2스택 이상 시 아츠 피해 +35%",
+        "skillDmgBonus": 0.20,
+        "artsDmgBonus": 0.35
+      }
+    ]
+  },
+  {
+    "id": "heat_work",
+    "name": "Heat Work Set",
+    "nameKo": "열 작업용",
+    "recommendedFor": "엘리멘탈 딜러",
+    "bonuses": [
+      {
+        "pieces": 3,
+        "description": "오리지늄 아츠 강도 +30, 연소/부식 상태 적에게 해당 피해 +50%",
+        "artsDmgBonus": 0.50
+      }
+    ]
+  },
+  {
+    "id": "breath_of_nourish",
+    "name": "Breath of Nourishment",
+    "nameKo": "식양의 숨결",
+    "recommendedFor": "서포터",
+    "bonuses": [
+      {
+        "pieces": 3,
+        "description": "생명력 +1000, 증폭/비호 부여 시 다른 팀원 피해 +16%",
+        "skillDmgBonus": 0.16
+      }
+    ]
+  }
+]

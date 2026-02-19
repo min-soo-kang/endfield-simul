@@ -1,0 +1,127 @@
+{
+  "id": "chen_qianyu",
+  "name": "Chen Qianyu",
+  "nameKo": "진천우",
+  "operatorClass": "Guard",
+  "weaponType": "OneHandSword",
+  "element": "None",
+  "rarity": 5,
+  "stats": {
+    "hp": 5495,
+    "baseAtk": 297,
+    "def": 0,
+    "res": 0,
+    "attributes": {
+      "str": 106,
+      "agi": 171,
+      "int": 85,
+      "wil": 93
+    },
+    "mainAttr": "agi",
+    "subAttr": "str"
+  },
+  "skills": [
+    {
+      "id": "chen_basic_1",
+      "name": "Soaring Break SEQ1",
+      "nameKo": "비파 1타",
+      "damageType": "Physical",
+      "element": "None",
+      "levels": [
+        { "level": 1, "multiplier": 0.20 },
+        { "level": 6, "multiplier": 0.30 },
+        { "level": 12, "multiplier": 0.39 }
+      ],
+      "hits": 1,
+      "description": "기본 공격 1타"
+    },
+    {
+      "id": "chen_basic_5",
+      "name": "Soaring Break SEQ5",
+      "nameKo": "비파 5타",
+      "damageType": "Physical",
+      "element": "None",
+      "levels": [
+        { "level": 1, "multiplier": 0.40 },
+        { "level": 6, "multiplier": 0.59 },
+        { "level": 12, "multiplier": 0.77 }
+      ],
+      "hits": 1,
+      "description": "기본 공격 5타 (마무리)"
+    },
+    {
+      "id": "chen_basic_finisher",
+      "name": "Soaring Break Finisher",
+      "nameKo": "비파 마무리 공격",
+      "damageType": "Physical",
+      "element": "None",
+      "levels": [
+        { "level": 1, "multiplier": 4.00 },
+        { "level": 6, "multiplier": 5.85 },
+        { "level": 12, "multiplier": 7.70 }
+      ],
+      "hits": 1,
+      "description": "기본 공격 마무리 강타"
+    },
+    {
+      "id": "chen_battle",
+      "name": "Ascending Strike",
+      "nameKo": "승천의 일격",
+      "damageType": "Physical",
+      "element": "None",
+      "levels": [
+        { "level": 1, "multiplier": 1.69 },
+        { "level": 3, "multiplier": 2.10 },
+        { "level": 5, "multiplier": 2.52 },
+        { "level": 7, "multiplier": 2.94 },
+        { "level": 9, "multiplier": 3.36 },
+        { "level": 12, "multiplier": 3.80 }
+      ],
+      "hits": 1,
+      "cost": 100,
+      "stagger": 10,
+      "description": "대상에게 상승 참격, ATK 169%~380% 물리 피해 + 부양(Lift)"
+    },
+    {
+      "id": "chen_combo",
+      "name": "Soar to the Stars",
+      "nameKo": "비성탄우",
+      "damageType": "Physical",
+      "element": "None",
+      "levels": [
+        { "level": 1, "multiplier": 1.20 },
+        { "level": 3, "multiplier": 1.50 },
+        { "level": 5, "multiplier": 1.80 },
+        { "level": 7, "multiplier": 2.10 },
+        { "level": 9, "multiplier": 2.40 },
+        { "level": 12, "multiplier": 2.70 }
+      ],
+      "hits": 1,
+      "cooldown": 16,
+      "description": "방어 불능 시 발동, 대상을 관통하며 경로상 적에게 ATK 120%~270% 물리 피해 + 부양"
+    },
+    {
+      "id": "chen_ultimate",
+      "name": "Blade Gale",
+      "nameKo": "회풍참",
+      "damageType": "Physical",
+      "element": "None",
+      "levels": [
+        { "level": 1, "multiplier": 7.07 },
+        { "level": 3, "multiplier": 8.84 },
+        { "level": 5, "multiplier": 10.61 },
+        { "level": 7, "multiplier": 12.37 },
+        { "level": 9, "multiplier": 14.14 },
+        { "level": 12, "multiplier": 15.48 }
+      ],
+      "hits": 8,
+      "cost": 70,
+      "stagger": 20,
+      "description": "7연속 참격(각 36%~75%) + 마지막 강타(455%~1023%). 총합 배율 표시. 스태거 15/20"
+    }
+  ],
+  "talents": [
+    "참격의 칼날: 스킬 적중 시 ATK +4% (최대 5스택, 10초 지속)",
+    "기세 꺾기: 적 돌진 공격 중단 시 스태거 +5"
+  ]
+}
