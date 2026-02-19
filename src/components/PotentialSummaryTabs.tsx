@@ -33,17 +33,15 @@ const PotentialSummaryTabs: React.FC<Props> = ({
 }) => {
   const [tab, setTab] = useState<'operator' | 'weapon'>('operator');
 
-  const opBonus = useMemo(
-    () => operator?.potentialBonuses?.find(p => p.level === operatorPotentialLevel),
+  const opBonuses = useMemo(
+    () => (operator?.potentialBonuses || []).filter(p => p.level > 0 && p.level <= operatorPotentialLevel),
     [operator, operatorPotentialLevel]
   );
+
   const weaponBonus = useMemo(
     () => weapon?.potentialBonuses?.find(p => p.level === weaponPotentialLevel),
     [weapon, weaponPotentialLevel]
   );
-
-  const current = tab === 'operator' ? opBonus : weaponBonus;
-  const lines = formatBonusList(current);
 
   return (
     <div className="bg-bg-panel border border-border rounded-lg overflow-hidden">
@@ -52,39 +50,42 @@ const PotentialSummaryTabs: React.FC<Props> = ({
       </div>
 
       <div className="px-4 pt-3 flex gap-2">
-        <button
-          onClick={() => setTab('operator')}
-          className={`px-3 py-1.5 text-xs rounded border ${
-            tab === 'operator' ? 'border-accent text-text bg-accent/10' : 'border-border text-text-muted'
-          }`}
-        >
+        <button onClick={() => setTab('operator')} className={`px-3 py-1.5 text-xs rounded border ${tab === 'operator' ? 'border-accent text-text bg-accent/10' : 'border-border text-text-muted'}`}>
           캐릭터 잠재
         </button>
-        <button
-          onClick={() => setTab('weapon')}
-          className={`px-3 py-1.5 text-xs rounded border ${
-            tab === 'weapon' ? 'border-accent text-text bg-accent/10' : 'border-border text-text-muted'
-          }`}
-        >
+        <button onClick={() => setTab('weapon')} className={`px-3 py-1.5 text-xs rounded border ${tab === 'weapon' ? 'border-accent text-text bg-accent/10' : 'border-border text-text-muted'}`}>
           무기 잠재
         </button>
       </div>
 
       <div className="px-4 py-3 text-sm">
-        <div className="text-text font-medium">
-          {tab === 'operator' ? (operator?.nameKo || '선택 없음') : (weapon?.nameKo || '선택 없음')}
-        </div>
-        {current?.title && <div className="text-accent text-xs mt-1">{current.title}</div>}
-        <div className="text-text-dim text-xs mt-1">{current?.description || '잠재 효과 없음'}</div>
-
-        <div className="mt-2 space-y-1">
-          {lines.length > 0 ? lines.map((line, i) => (
-            <div key={i} className="text-text-muted text-xs">• {line}</div>
-          )) : <div className="text-text-muted text-xs">• 수치 보너스 없음</div>}
-          {current?.notes?.map((n, i) => (
-            <div key={`n-${i}`} className="text-text-dim text-xs">※ {n}</div>
-          ))}
-        </div>
+        {tab === 'operator' ? (
+          <>
+            <div className="text-text font-medium">{operator?.nameKo || '선택 없음'} · 잠재 {operatorPotentialLevel}</div>
+            <div className="mt-2 space-y-2">
+              {opBonuses.length > 0 ? opBonuses.map((b) => (
+                <div key={b.level} className="border border-border rounded p-2">
+                  <div className="text-accent text-xs">잠재 {b.level} {b.title ? `· ${b.title}` : ''}</div>
+                  <div className="text-text-dim text-xs mt-1">{b.description}</div>
+                  <div className="mt-1 space-y-1">
+                    {formatBonusList(b).map((line, i) => <div key={i} className="text-text-muted text-xs">• {line}</div>)}
+                    {b.notes?.map((n, i) => <div key={`n-${i}`} className="text-text-dim text-xs">※ {n}</div>)}
+                  </div>
+                </div>
+              )) : <div className="text-text-muted text-xs">적용된 잠재 효과가 없습니다.</div>}
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="text-text font-medium">{weapon?.nameKo || '선택 없음'} · 잠재 {weaponPotentialLevel}</div>
+            {weaponBonus?.title && <div className="text-accent text-xs mt-1">{weaponBonus.title}</div>}
+            <div className="text-text-dim text-xs mt-1">{weaponBonus?.description || '잠재 효과 없음'}</div>
+            <div className="mt-2 space-y-1">
+              {formatBonusList(weaponBonus).map((line, i) => <div key={i} className="text-text-muted text-xs">• {line}</div>)}
+              {weaponBonus?.notes?.map((n, i) => <div key={`n-${i}`} className="text-text-dim text-xs">※ {n}</div>)}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

@@ -9,6 +9,7 @@ import type {
   DamageResult,
   CalcStep,
   OperatorStats,
+  PotentialBonus,
 } from '../types';
 import type { SkillType } from '../data/constants';
 import { calculateAtk } from './atkCalculator';
@@ -24,37 +25,67 @@ function inferSkillType(skillId: string): SkillType {
   return 'battle';
 }
 
+function getOperatorCumulativeBonuses(operator: Operator, operatorPotentialLevel: number): PotentialBonus[] {
+  return (operator.potentialBonuses || []).filter(p => p.level > 0 && p.level <= operatorPotentialLevel);
+}
+
+function getWeaponSelectedBonus(weapon: Weapon | null, weaponPotentialLevel: number): PotentialBonus | undefined {
+  return weapon?.potentialBonuses?.find(p => p.level === weaponPotentialLevel);
+}
+
+function sumOperatorPotentialValue(
+  operatorBonuses: PotentialBonus[],
+  key: keyof PotentialBonus,
+  conditional?: (bonus: PotentialBonus) => boolean
+): number {
+  return operatorBonuses.reduce((acc, b) => {
+    if (conditional && !conditional(b)) return acc;
+    const val = b[key];
+    return acc + (typeof val === 'number' ? val : 0);
+  }, 0);
+}
+
 function mergePotentialBuffs(
   base: BuffSet,
-  operator: Operator,
-  weapon: Weapon | null,
-  operatorPotentialLevel: number,
-  weaponPotentialLevel: number,
+  operatorBonuses: PotentialBonus[],
+  weaponBonus: PotentialBonus | undefined,
   effects: SpecialEffects
 ): BuffSet {
-  const opBonus = operator.potentialBonuses?.find(p => p.level === operatorPotentialLevel);
-  const wpBonus = weapon?.potentialBonuses?.find(p => p.level === weaponPotentialLevel);
-
-  const lowHpBonus = effects.lowHpTarget ? (opBonus?.skillDmgBonus || 0) : 0;
+  const lowHpConditionalBonus = sumOperatorPotentialValue(
+    operatorBonuses,
+    'skillDmgBonus',
+    (b) => b.level !== 1 || effects.lowHpTarget
+  );
 
   return {
     ...base,
-    atkPercent: base.atkPercent + (opBonus?.atkPercent || 0) + (wpBonus?.atkPercent || 0),
-    atkFlat: base.atkFlat + (opBonus?.atkFlat || 0) + (wpBonus?.atkFlat || 0),
-    critRate: base.critRate + (opBonus?.critRate || 0) + (wpBonus?.critRate || 0),
-    critDmg: base.critDmg + (opBonus?.critDmg || 0) + (wpBonus?.critDmg || 0),
-    defPenFlat: base.defPenFlat + (opBonus?.defPenFlat || 0) + (wpBonus?.defPenFlat || 0),
-    defPenPercent: base.defPenPercent + (opBonus?.defPenPercent || 0) + (wpBonus?.defPenPercent || 0),
+    atkPercent: base.atkPercent
+      + sumOperatorPotentialValue(operatorBonuses, 'atkPercent')
+      + (weaponBonus?.atkPercent || 0),
+    atkFlat: base.atkFlat
+      + sumOperatorPotentialValue(operatorBonuses, 'atkFlat')
+      + (weaponBonus?.atkFlat || 0),
+    critRate: base.critRate
+      + sumOperatorPotentialValue(operatorBonuses, 'critRate')
+      + (weaponBonus?.critRate || 0),
+    critDmg: base.critDmg
+      + sumOperatorPotentialValue(operatorBonuses, 'critDmg')
+      + (weaponBonus?.critDmg || 0),
+    defPenFlat: base.defPenFlat
+      + sumOperatorPotentialValue(operatorBonuses, 'defPenFlat')
+      + (weaponBonus?.defPenFlat || 0),
+    defPenPercent: base.defPenPercent
+      + sumOperatorPotentialValue(operatorBonuses, 'defPenPercent')
+      + (weaponBonus?.defPenPercent || 0),
     resPen: base.resPen,
-    physDmgBonus: base.physDmgBonus + (opBonus?.physDmgBonus || 0),
-    artsDmgBonus: base.artsDmgBonus + (opBonus?.artsDmgBonus || 0),
-    skillDmgBonus: base.skillDmgBonus + lowHpBonus + (opBonus?.level === 1 && !effects.lowHpTarget ? 0 : 0),
+    physDmgBonus: base.physDmgBonus + sumOperatorPotentialValue(operatorBonuses, 'physDmgBonus'),
+    artsDmgBonus: base.artsDmgBonus + sumOperatorPotentialValue(operatorBonuses, 'artsDmgBonus'),
+    skillDmgBonus: base.skillDmgBonus + lowHpConditionalBonus,
   };
 }
 
-function applyOperatorPotentialStats(stats: OperatorStats, operator: Operator, operatorPotentialLevel: number): OperatorStats {
-  const opBonus = operator.potentialBonuses?.find(p => p.level === operatorPotentialLevel);
-  const agiFlat = opBonus?.agiFlat || 0;
+function applyOperatorPotentialStats(stats: OperatorStats, operatorBonuses: PotentialBonus[]): OperatorStats {
+  const agiFlat = sumOperatorPotentialValue(operatorBonuses, 'agiFlat');
   if (!agiFlat) return stats;
 
   return {
@@ -66,12 +97,10 @@ function applyOperatorPotentialStats(stats: OperatorStats, operator: Operator, o
   };
 }
 
-function getPotentialSkillMultiplierBonus(operator: Operator, operatorPotentialLevel: number, skillType: SkillType): number {
-  const opBonus = operator.potentialBonuses?.find(p => p.level === operatorPotentialLevel);
-  if (!opBonus) return 0;
-  if (skillType === 'battle') return opBonus.battleSkillMultiplierBonus || 0;
-  if (skillType === 'combo') return opBonus.comboSkillMultiplierBonus || 0;
-  if (skillType === 'ultimate') return opBonus.ultimateSkillMultiplierBonus || 0;
+function getPotentialSkillMultiplierBonus(operatorBonuses: PotentialBonus[], skillType: SkillType): number {
+  if (skillType === 'battle') return sumOperatorPotentialValue(operatorBonuses, 'battleSkillMultiplierBonus');
+  if (skillType === 'combo') return sumOperatorPotentialValue(operatorBonuses, 'comboSkillMultiplierBonus');
+  if (skillType === 'ultimate') return sumOperatorPotentialValue(operatorBonuses, 'ultimateSkillMultiplierBonus');
   return 0;
 }
 
@@ -86,7 +115,7 @@ function getBuyoThirdOptionBonus(weapon: Weapon | null, weaponPotentialLevel: nu
   }
 
   if (effects.unbalancedTarget) {
-    const unbalancedByLevel = [0.9, 1.0, 1.1, 1.2, 1.4, 1.4];
+    const unbalancedByLevel = [0.9, 1.0, 1.1, 1.2, 1.2, 1.4];
     bonus += unbalancedByLevel[weaponPotentialLevel] || 0;
   }
 
@@ -107,8 +136,12 @@ export function calculateDamage(
 ): DamageResult {
   const allSteps: CalcStep[] = [];
   const skillType = inferSkillType(skill.id);
-  const effectiveStats = applyOperatorPotentialStats(operator.stats, operator, operatorPotentialLevel);
-  const mergedBuffs = mergePotentialBuffs(buffs, operator, weapon, operatorPotentialLevel, weaponPotentialLevel, effects);
+
+  const operatorBonuses = getOperatorCumulativeBonuses(operator, operatorPotentialLevel);
+  const weaponBonus = getWeaponSelectedBonus(weapon, weaponPotentialLevel);
+
+  const effectiveStats = applyOperatorPotentialStats(operator.stats, operatorBonuses);
+  const mergedBuffs = mergePotentialBuffs(buffs, operatorBonuses, weaponBonus, effects);
 
   allSteps.push({ label: '── 공격력 계산 ──', formula: '', value: 0 });
   const atkResult = calculateAtk(effectiveStats, weapon, mergedBuffs);
@@ -116,7 +149,7 @@ export function calculateDamage(
 
   const levelData = skill.levels.find(l => l.level === skillLevel)
     || skill.levels[skill.levels.length - 1];
-  const skillPotentialMult = getPotentialSkillMultiplierBonus(operator, operatorPotentialLevel, skillType);
+  const skillPotentialMult = getPotentialSkillMultiplierBonus(operatorBonuses, skillType);
   const multiplier = levelData.multiplier * (1 + skillPotentialMult);
 
   allSteps.push({ label: '── 스킬 배율 ──', formula: '', value: 0 });
