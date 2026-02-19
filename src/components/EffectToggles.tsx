@@ -20,6 +20,8 @@ const toggles: ToggleItem[] = [
   { key: 'comboHit', label: '연타', desc: '배틀스킬 +30%, 궁극기 +20%', color: 'bg-yellow-500' },
   { key: 'isBurning', label: '연소', desc: '연소 상태', color: 'bg-amber-600' },
   { key: 'isShocked', label: '감전', desc: '아츠 피해 +12~24%', color: 'bg-blue-500' },
+  { key: 'lowHpTarget', label: '적 체력 50% 이하', desc: '진천우 잠재 1 조건', color: 'bg-pink-500' },
+  { key: 'unbalancedTarget', label: '불균형 대상', desc: '부요 3옵 불균형 추가 피해 조건', color: 'bg-violet-500' },
 ];
 
 const EffectToggles: React.FC<Props> = ({ effects, onChange }) => {

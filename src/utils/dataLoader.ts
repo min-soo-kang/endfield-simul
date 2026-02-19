@@ -70,5 +70,7 @@ export function createDefaultEffects(): SpecialEffects {
     comboHit: false,
     isBurning: false,
     isShocked: false,
+    lowHpTarget: false,
+    unbalancedTarget: false,
   };
 }

@@ -8,14 +8,14 @@ import type {
   SpecialEffects,
   DamageResult,
   CalcStep,
+  OperatorStats,
 } from '../types';
-import type { SkillType, } from '../data/constants';
+import type { SkillType } from '../data/constants';
 import { calculateAtk } from './atkCalculator';
 import { calculateDefense } from './defenseCalc';
 import { calculateCrit } from './critCalc';
 import { calculateSpecialEffects } from './specialEffects';
 
-/** 스킬 ID에서 타입 추론 */
 function inferSkillType(skillId: string): SkillType {
   if (skillId.includes('basic')) return 'basic';
   if (skillId.includes('battle')) return 'battle';
@@ -29,10 +29,13 @@ function mergePotentialBuffs(
   operator: Operator,
   weapon: Weapon | null,
   operatorPotentialLevel: number,
-  weaponPotentialLevel: number
+  weaponPotentialLevel: number,
+  effects: SpecialEffects
 ): BuffSet {
   const opBonus = operator.potentialBonuses?.find(p => p.level === operatorPotentialLevel);
   const wpBonus = weapon?.potentialBonuses?.find(p => p.level === weaponPotentialLevel);
+
+  const lowHpBonus = effects.lowHpTarget ? (opBonus?.skillDmgBonus || 0) : 0;
 
   return {
     ...base,
@@ -43,10 +46,51 @@ function mergePotentialBuffs(
     defPenFlat: base.defPenFlat + (opBonus?.defPenFlat || 0) + (wpBonus?.defPenFlat || 0),
     defPenPercent: base.defPenPercent + (opBonus?.defPenPercent || 0) + (wpBonus?.defPenPercent || 0),
     resPen: base.resPen,
-    physDmgBonus: base.physDmgBonus + (opBonus?.physDmgBonus || 0) + (wpBonus?.physDmgBonus || 0),
-    artsDmgBonus: base.artsDmgBonus + (opBonus?.artsDmgBonus || 0) + (wpBonus?.artsDmgBonus || 0),
-    skillDmgBonus: base.skillDmgBonus + (opBonus?.skillDmgBonus || 0) + (wpBonus?.skillDmgBonus || 0),
+    physDmgBonus: base.physDmgBonus + (opBonus?.physDmgBonus || 0),
+    artsDmgBonus: base.artsDmgBonus + (opBonus?.artsDmgBonus || 0),
+    skillDmgBonus: base.skillDmgBonus + lowHpBonus + (opBonus?.level === 1 && !effects.lowHpTarget ? 0 : 0),
   };
+}
+
+function applyOperatorPotentialStats(stats: OperatorStats, operator: Operator, operatorPotentialLevel: number): OperatorStats {
+  const opBonus = operator.potentialBonuses?.find(p => p.level === operatorPotentialLevel);
+  const agiFlat = opBonus?.agiFlat || 0;
+  if (!agiFlat) return stats;
+
+  return {
+    ...stats,
+    attributes: {
+      ...stats.attributes,
+      agi: stats.attributes.agi + agiFlat,
+    },
+  };
+}
+
+function getPotentialSkillMultiplierBonus(operator: Operator, operatorPotentialLevel: number, skillType: SkillType): number {
+  const opBonus = operator.potentialBonuses?.find(p => p.level === operatorPotentialLevel);
+  if (!opBonus) return 0;
+  if (skillType === 'battle') return opBonus.battleSkillMultiplierBonus || 0;
+  if (skillType === 'combo') return opBonus.comboSkillMultiplierBonus || 0;
+  if (skillType === 'ultimate') return opBonus.ultimateSkillMultiplierBonus || 0;
+  return 0;
+}
+
+function getBuyoThirdOptionBonus(weapon: Weapon | null, weaponPotentialLevel: number, skillType: SkillType, effects: SpecialEffects): number {
+  if (!weapon || weapon.id !== 'buyo') return 0;
+  const wp = weapon.potentialBonuses?.find(p => p.level === weaponPotentialLevel);
+  if (!wp) return 0;
+
+  let bonus = 0;
+  if (skillType === 'battle' || skillType === 'ultimate') {
+    bonus += wp.physDmgBonus || 0;
+  }
+
+  if (effects.unbalancedTarget) {
+    const unbalancedByLevel = [0.9, 1.0, 1.1, 1.2, 1.4, 1.4];
+    bonus += unbalancedByLevel[weaponPotentialLevel] || 0;
+  }
+
+  return bonus;
 }
 
 export function calculateDamage(
@@ -63,20 +107,22 @@ export function calculateDamage(
 ): DamageResult {
   const allSteps: CalcStep[] = [];
   const skillType = inferSkillType(skill.id);
-  const mergedBuffs = mergePotentialBuffs(buffs, operator, weapon, operatorPotentialLevel, weaponPotentialLevel);
+  const effectiveStats = applyOperatorPotentialStats(operator.stats, operator, operatorPotentialLevel);
+  const mergedBuffs = mergePotentialBuffs(buffs, operator, weapon, operatorPotentialLevel, weaponPotentialLevel, effects);
 
   allSteps.push({ label: '── 공격력 계산 ──', formula: '', value: 0 });
-  const atkResult = calculateAtk(operator.stats, weapon, mergedBuffs);
+  const atkResult = calculateAtk(effectiveStats, weapon, mergedBuffs);
   allSteps.push(...atkResult.steps);
 
   const levelData = skill.levels.find(l => l.level === skillLevel)
     || skill.levels[skill.levels.length - 1];
-  const multiplier = levelData.multiplier;
+  const skillPotentialMult = getPotentialSkillMultiplierBonus(operator, operatorPotentialLevel, skillType);
+  const multiplier = levelData.multiplier * (1 + skillPotentialMult);
 
   allSteps.push({ label: '── 스킬 배율 ──', formula: '', value: 0 });
   allSteps.push({
     label: `${skill.nameKo} (Lv${levelData.level})`,
-    formula: `${(multiplier * 100).toFixed(0)}%`,
+    formula: `${(levelData.multiplier * 100).toFixed(0)}%${skillPotentialMult > 0 ? ` × ${(1 + skillPotentialMult).toFixed(2)}` : ''}`,
     value: parseFloat(multiplier.toFixed(4)),
   });
 
@@ -134,11 +180,22 @@ export function calculateDamage(
   allSteps.push(...effectsResult.steps);
 
   let totalDmgBonus = 0;
+
   if (skill.damageType === 'Physical') {
     totalDmgBonus += wpnPhys + mergedBuffs.physDmgBonus + gearPhys;
+    const buyoBonus = getBuyoThirdOptionBonus(weapon, weaponPotentialLevel, skillType, effects);
+    totalDmgBonus += buyoBonus;
+    if (buyoBonus > 0) {
+      allSteps.push({
+        label: '부요 3옵 보정',
+        formula: `+${(buyoBonus * 100).toFixed(1)}%`,
+        value: parseFloat(buyoBonus.toFixed(4)),
+      });
+    }
   } else if (skill.damageType === 'Arts') {
     totalDmgBonus += wpnArts + mergedBuffs.artsDmgBonus + gearArts;
   }
+
   totalDmgBonus += mergedBuffs.skillDmgBonus + gearSkill;
   totalDmgBonus += effectsResult.dmgBonusFromEffects;
 

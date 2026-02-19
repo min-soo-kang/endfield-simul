@@ -13,13 +13,15 @@ function formatBonusList(bonus?: PotentialBonus): string[] {
   const rows: string[] = [];
   if (bonus.atkPercent) rows.push(`공격력 +${(bonus.atkPercent * 100).toFixed(1)}%`);
   if (bonus.atkFlat) rows.push(`고정 공격력 +${bonus.atkFlat}`);
+  if (bonus.agiFlat) rows.push(`민첩 +${bonus.agiFlat}`);
   if (bonus.critRate) rows.push(`치명타 확률 +${(bonus.critRate * 100).toFixed(1)}%`);
   if (bonus.critDmg) rows.push(`치명타 피해 +${(bonus.critDmg * 100).toFixed(1)}%`);
   if (bonus.physDmgBonus) rows.push(`물리 피해 +${(bonus.physDmgBonus * 100).toFixed(1)}%`);
   if (bonus.artsDmgBonus) rows.push(`아츠 피해 +${(bonus.artsDmgBonus * 100).toFixed(1)}%`);
-  if (bonus.skillDmgBonus) rows.push(`스킬 피해 +${(bonus.skillDmgBonus * 100).toFixed(1)}%`);
-  if (bonus.defPenFlat) rows.push(`방어력 고정 관통 +${bonus.defPenFlat}`);
-  if (bonus.defPenPercent) rows.push(`방어력 % 관통 +${(bonus.defPenPercent * 100).toFixed(1)}%`);
+  if (bonus.skillDmgBonus) rows.push(`주는 피해 +${(bonus.skillDmgBonus * 100).toFixed(1)}%`);
+  if (bonus.battleSkillMultiplierBonus) rows.push(`배틀 스킬 배율 +${(bonus.battleSkillMultiplierBonus * 100).toFixed(1)}%`);
+  if (bonus.comboSkillMultiplierBonus) rows.push(`연계 스킬 배율 +${(bonus.comboSkillMultiplierBonus * 100).toFixed(1)}%`);
+  if (bonus.ultimateSkillMultiplierBonus) rows.push(`궁극기 배율 +${(bonus.ultimateSkillMultiplierBonus * 100).toFixed(1)}%`);
   return rows;
 }
 
@@ -72,12 +74,16 @@ const PotentialSummaryTabs: React.FC<Props> = ({
         <div className="text-text font-medium">
           {tab === 'operator' ? (operator?.nameKo || '선택 없음') : (weapon?.nameKo || '선택 없음')}
         </div>
+        {current?.title && <div className="text-accent text-xs mt-1">{current.title}</div>}
         <div className="text-text-dim text-xs mt-1">{current?.description || '잠재 효과 없음'}</div>
 
         <div className="mt-2 space-y-1">
           {lines.length > 0 ? lines.map((line, i) => (
             <div key={i} className="text-text-muted text-xs">• {line}</div>
           )) : <div className="text-text-muted text-xs">• 수치 보너스 없음</div>}
+          {current?.notes?.map((n, i) => (
+            <div key={`n-${i}`} className="text-text-dim text-xs">※ {n}</div>
+          ))}
         </div>
       </div>
     </div>

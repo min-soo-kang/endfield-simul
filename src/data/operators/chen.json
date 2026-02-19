@@ -24,7 +24,7 @@
     {
       "id": "chen_basic_1",
       "name": "Soaring Break SEQ1",
-      "nameKo": "비파 1타",
+      "nameKo": "기본공격",
       "damageType": "Physical",
       "element": "None",
       "levels": [
@@ -42,35 +42,12 @@
         }
       ],
       "hits": 1,
-      "description": "기본 공격 1타"
-    },
-    {
-      "id": "chen_basic_5",
-      "name": "Soaring Break SEQ5",
-      "nameKo": "비파 5타",
-      "damageType": "Physical",
-      "element": "None",
-      "levels": [
-        {
-          "level": 1,
-          "multiplier": 0.4
-        },
-        {
-          "level": 6,
-          "multiplier": 0.59
-        },
-        {
-          "level": 12,
-          "multiplier": 0.77
-        }
-      ],
-      "hits": 1,
-      "description": "기본 공격 5타 (마무리)"
+      "description": "기본 공격"
     },
     {
       "id": "chen_basic_finisher",
       "name": "Soaring Break Finisher",
-      "nameKo": "비파 마무리 공격",
+      "nameKo": "강력한 일격",
       "damageType": "Physical",
       "element": "None",
       "levels": [
@@ -88,12 +65,12 @@
         }
       ],
       "hits": 1,
-      "description": "기본 공격 마무리 강타"
+      "description": "기본공격 막타"
     },
     {
       "id": "chen_battle",
       "name": "Ascending Strike",
-      "nameKo": "승천의 일격",
+      "nameKo": "배틀 스킬 · 귀궁우",
       "damageType": "Physical",
       "element": "None",
       "levels": [
@@ -130,7 +107,7 @@
     {
       "id": "chen_combo",
       "name": "Soar to the Stars",
-      "nameKo": "비성탄우",
+      "nameKo": "연계 스킬 · 견천하",
       "damageType": "Physical",
       "element": "None",
       "levels": [
@@ -166,7 +143,7 @@
     {
       "id": "chen_ultimate",
       "name": "Blade Gale",
-      "nameKo": "회풍참",
+      "nameKo": "궁극기 · 예풍상",
       "damageType": "Physical",
       "element": "None",
       "levels": [
@@ -208,32 +185,45 @@
   "potentialBonuses": [
     {
       "level": 0,
+      "title": "잠재 0",
       "description": "잠재 미개방"
     },
     {
       "level": 1,
-      "description": "공격력 +2%",
-      "atkPercent": 0.02
+      "title": "절영",
+      "description": "생명력이 50% 이하인 적에게 주는 피해 +20%",
+      "skillDmgBonus": 0.2
     },
     {
       "level": 2,
-      "description": "치명타 확률 +2%",
-      "critRate": 0.02
+      "title": "가문의 무술",
+      "description": "민첩 +15, 주는 물리 피해 +8%",
+      "agiFlat": 15,
+      "physDmgBonus": 0.08
     },
     {
       "level": 3,
-      "description": "물리 피해 +4%",
-      "physDmgBonus": 0.04
+      "title": "쌍검의 협객",
+      "description": "배틀 스킬 귀궁우, 연계 스킬 견천하, 궁극기 예풍상의 피해 배율 1.1배",
+      "battleSkillMultiplierBonus": 0.1,
+      "comboSkillMultiplierBonus": 0.1,
+      "ultimateSkillMultiplierBonus": 0.1
     },
     {
       "level": 4,
-      "description": "공격력 +5%",
-      "atkPercent": 0.05
+      "title": "자체 개발한 적소검",
+      "description": "궁극기 예풍상 사용에 필요한 궁극기 에너지 -15%",
+      "notes": [
+        "데미지 계산에는 직접 반영되지 않음"
+      ]
     },
     {
       "level": 5,
-      "description": "치명타 피해 +10%",
-      "critDmg": 0.1
+      "title": "세상을 짊어진 마음",
+      "description": "연계 스킬 견천하 쿨타임 -3초",
+      "notes": [
+        "데미지 계산에는 직접 반영되지 않음"
+      ]
     }
   ]
 }

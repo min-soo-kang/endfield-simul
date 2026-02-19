@@ -36,7 +36,9 @@ export type MainAttribute = 'str' | 'agi' | 'int' | 'wil';
 /** 잠재 단계 효과 */
 export interface PotentialBonus {
   level: number;
+  title?: string;
   description: string;
+  notes?: string[];
   atkPercent?: number;
   atkFlat?: number;
   critRate?: number;
@@ -46,6 +48,10 @@ export interface PotentialBonus {
   skillDmgBonus?: number;
   defPenFlat?: number;
   defPenPercent?: number;
+  agiFlat?: number;
+  battleSkillMultiplierBonus?: number;
+  comboSkillMultiplierBonus?: number;
+  ultimateSkillMultiplierBonus?: number;
 }
 
 /** 스킬 레벨별 배율 */
@@ -203,6 +209,10 @@ export interface SpecialEffects {
   isBurning: boolean;
   /** 감전 상태 (아츠 피해 증가) */
   isShocked: boolean;
+  /** 대상 체력이 50% 이하 */
+  lowHpTarget: boolean;
+  /** 대상이 불균형 상태 */
+  unbalancedTarget: boolean;
 }
 
 /** 계산 단계 하나 */
