@@ -175,10 +175,14 @@ export function calculateDamage(
   });
 
   const finalDamage = effects.isCrit ? critDamage : nonCritDamage;
+  const hitCount = Math.max(skill.hits || 1, 1);
+  const perHitDamage = Math.round(finalDamage / hitCount);
 
   return {
     finalDamage,
     isCrit: effects.isCrit,
+    hitCount,
+    perHitDamage,
     steps: allSteps,
     nonCritDamage,
     critDamage,

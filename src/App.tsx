@@ -64,11 +64,11 @@ function App() {
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
           <div>
             <h1 className="text-lg font-bold tracking-tight">
-              Endfield <span className="text-accent">Damage Simulator</span>
+              엔드필드 <span className="text-accent">데미지 시뮬레이터</span>
             </h1>
-            <p className="text-text-dim text-xs">Single-hit damage calculator</p>
+            <p className="text-text-dim text-xs">단일 공격 피해 계산기</p>
           </div>
-          <div className="text-text-dim text-xs">v0.2</div>
+          <div className="text-text-dim text-xs">버전 0.2</div>
         </div>
       </header>
 
@@ -117,11 +117,11 @@ function App() {
             {/* Buff Inputs */}
             <div className="bg-bg-panel border border-border rounded-lg p-4">
               <label className="block text-text-muted text-xs uppercase tracking-wider mb-2">
-                Additional Buffs
+                추가 버프
               </label>
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="block text-text-dim text-xs mb-0.5">ATK %</label>
+                  <label className="block text-text-dim text-xs mb-0.5">공격력 %</label>
                   <input
                     type="number"
                     min={0}
@@ -132,7 +132,7 @@ function App() {
                   />
                 </div>
                 <div>
-                  <label className="block text-text-dim text-xs mb-0.5">ATK Flat</label>
+                  <label className="block text-text-dim text-xs mb-0.5">고정 공격력</label>
                   <input
                     type="number"
                     min={0}
@@ -142,7 +142,7 @@ function App() {
                   />
                 </div>
                 <div>
-                  <label className="block text-text-dim text-xs mb-0.5">DEF Pen (flat)</label>
+                  <label className="block text-text-dim text-xs mb-0.5">방어력 관통 (고정)</label>
                   <input
                     type="number"
                     min={0}
@@ -152,7 +152,7 @@ function App() {
                   />
                 </div>
                 <div>
-                  <label className="block text-text-dim text-xs mb-0.5">DEF Pen %</label>
+                  <label className="block text-text-dim text-xs mb-0.5">방어력 관통 %</label>
                   <input
                     type="number"
                     min={0}
@@ -164,7 +164,7 @@ function App() {
                   />
                 </div>
                 <div>
-                  <label className="block text-text-dim text-xs mb-0.5">Crit Rate %</label>
+                  <label className="block text-text-dim text-xs mb-0.5">치명타 확률 %</label>
                   <input
                     type="number"
                     min={0}
@@ -176,7 +176,7 @@ function App() {
                   />
                 </div>
                 <div>
-                  <label className="block text-text-dim text-xs mb-0.5">Crit DMG %</label>
+                  <label className="block text-text-dim text-xs mb-0.5">치명타 피해 %</label>
                   <input
                     type="number"
                     min={0}
@@ -187,7 +187,7 @@ function App() {
                   />
                 </div>
                 <div>
-                  <label className="block text-text-dim text-xs mb-0.5">Phys DMG %</label>
+                  <label className="block text-text-dim text-xs mb-0.5">물리 피해 %</label>
                   <input
                     type="number"
                     min={0}
@@ -198,7 +198,7 @@ function App() {
                   />
                 </div>
                 <div>
-                  <label className="block text-text-dim text-xs mb-0.5">Skill DMG %</label>
+                  <label className="block text-text-dim text-xs mb-0.5">스킬 피해 %</label>
                   <input
                     type="number"
                     min={0}

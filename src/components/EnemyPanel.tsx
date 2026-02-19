@@ -18,7 +18,7 @@ const EnemyPanel: React.FC<Props> = ({ enemy, onChange }) => {
   return (
     <div>
       <label className="block text-text-muted text-xs uppercase tracking-wider mb-1.5">
-        Enemy
+        적 선택
       </label>
 
       <select
@@ -26,7 +26,7 @@ const EnemyPanel: React.FC<Props> = ({ enemy, onChange }) => {
         value={enemy.id}
         onChange={(e) => handlePreset(e.target.value)}
       >
-        <option value="custom" disabled={enemy.id !== 'custom'}>Custom</option>
+        <option value="custom" disabled={enemy.id !== 'custom'}>사용자 설정</option>
         {presets.map(p => (
           <option key={p.id} value={p.id}>{p.name}</option>
         ))}
@@ -34,7 +34,7 @@ const EnemyPanel: React.FC<Props> = ({ enemy, onChange }) => {
 
       <div className="grid grid-cols-2 gap-2">
         <div>
-          <label className="block text-text-dim text-xs mb-0.5">DEF</label>
+          <label className="block text-text-dim text-xs mb-0.5">방어력(DEF)</label>
           <input
             type="number"
             min={0}
@@ -44,7 +44,7 @@ const EnemyPanel: React.FC<Props> = ({ enemy, onChange }) => {
           />
         </div>
         <div>
-          <label className="block text-text-dim text-xs mb-0.5">RES</label>
+          <label className="block text-text-dim text-xs mb-0.5">저항(RES)</label>
           <input
             type="number"
             min={0}

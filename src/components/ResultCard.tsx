@@ -10,7 +10,7 @@ const ResultCard: React.FC<Props> = ({ result }) => {
     return (
       <div className="bg-bg-panel border border-border rounded-lg p-6 text-center">
         <div className="text-text-dim text-sm">
-          Select an operator and skill to see damage
+          캐릭터와 스킬을 선택하면 결과가 표시됩니다
         </div>
       </div>
     );
@@ -20,7 +20,7 @@ const ResultCard: React.FC<Props> = ({ result }) => {
     <div className="bg-bg-panel border border-border rounded-lg p-6">
       <div className="text-center mb-4">
         <div className="text-text-dim text-xs uppercase tracking-wider mb-1">
-          {result.isCrit ? 'Critical Hit' : 'Normal Hit'}
+          {result.isCrit ? '치명타' : '일반 피해'}
         </div>
         <div
           className={`text-5xl font-bold font-mono tracking-tight ${
@@ -33,19 +33,19 @@ const ResultCard: React.FC<Props> = ({ result }) => {
 
       <div className="grid grid-cols-3 gap-3 mt-4">
         <div className="text-center bg-bg rounded px-2 py-2">
-          <div className="text-text-dim text-xs">Non-Crit</div>
+          <div className="text-text-dim text-xs">비치명타</div>
           <div className="text-text font-mono text-sm mt-0.5">
             {result.nonCritDamage.toLocaleString()}
           </div>
         </div>
         <div className="text-center bg-bg rounded px-2 py-2">
-          <div className="text-text-dim text-xs">Crit</div>
+          <div className="text-text-dim text-xs">치명타</div>
           <div className="text-highlight font-mono text-sm mt-0.5">
             {result.critDamage.toLocaleString()}
           </div>
         </div>
         <div className="text-center bg-bg rounded px-2 py-2">
-          <div className="text-text-dim text-xs">Expected</div>
+          <div className="text-text-dim text-xs">기대값</div>
           <div className="text-accent font-mono text-sm mt-0.5">
             {result.expectedDamage.toLocaleString()}
           </div>
@@ -53,8 +53,12 @@ const ResultCard: React.FC<Props> = ({ result }) => {
       </div>
 
       <div className="flex justify-between mt-3 text-xs text-text-muted px-1">
-        <span>Crit Rate: {(result.critRate * 100).toFixed(1)}%</span>
-        <span>Crit Multi: {result.critMultiplier.toFixed(2)}x</span>
+        <span>치명타 확률: {(result.critRate * 100).toFixed(1)}%</span>
+        <span>치명타 배율: {result.critMultiplier.toFixed(2)}x</span>
+      </div>
+
+      <div className="mt-2 text-xs text-text-muted text-center">
+        타격 수: {result.hitCount} · 타격당 피해: {result.perHitDamage.toLocaleString()}
       </div>
     </div>
   );

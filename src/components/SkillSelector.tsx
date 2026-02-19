@@ -15,14 +15,20 @@ const dmgTypeColor: Record<string, string> = {
   True: 'text-purple-400',
 };
 
+const dmgTypeLabel: Record<string, string> = {
+  Physical: '물리',
+  Arts: '아츠',
+  True: '고정',
+};
+
 const SkillSelector: React.FC<Props> = ({ skills, selected, selectedLevel, onSelect, onLevelChange }) => {
   if (skills.length === 0) {
     return (
       <div>
         <label className="block text-text-muted text-xs uppercase tracking-wider mb-1.5">
-          Skill
+          스킬 선택
         </label>
-        <div className="text-text-dim text-sm">Select an operator first</div>
+        <div className="text-text-dim text-sm">먼저 캐릭터를 선택하세요</div>
       </div>
     );
   }
@@ -33,7 +39,7 @@ const SkillSelector: React.FC<Props> = ({ skills, selected, selectedLevel, onSel
   return (
     <div>
       <label className="block text-text-muted text-xs uppercase tracking-wider mb-1.5">
-        Skill
+        스킬 선택
       </label>
       <div className="space-y-1.5">
         {skills.map(skill => {
@@ -51,7 +57,7 @@ const SkillSelector: React.FC<Props> = ({ skills, selected, selectedLevel, onSel
               <div className="flex justify-between items-center">
                 <span className="font-medium text-sm">{skill.nameKo}</span>
                 <span className={`text-xs font-mono ${dmgTypeColor[skill.damageType] || 'text-text'}`}>
-                  {skill.damageType} ×{maxLevel.multiplier}
+                  {dmgTypeLabel[skill.damageType] || skill.damageType} ×{maxLevel.multiplier}
                 </span>
               </div>
               <div className="text-[11px] text-text-dim mt-0.5 leading-tight">{skill.description}</div>
@@ -63,7 +69,7 @@ const SkillSelector: React.FC<Props> = ({ skills, selected, selectedLevel, onSel
       {selected && (
         <div className="mt-3">
           <label className="block text-text-muted text-xs uppercase tracking-wider mb-1">
-            Skill Level
+            스킬 레벨
           </label>
           <div className="flex items-center gap-2">
             <select

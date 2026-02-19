@@ -197,6 +197,8 @@ export interface CalcStep {
 export interface DamageResult {
   finalDamage: number;
   isCrit: boolean;
+  hitCount: number;
+  perHitDamage: number;
   steps: CalcStep[];
   nonCritDamage: number;
   critDamage: number;
