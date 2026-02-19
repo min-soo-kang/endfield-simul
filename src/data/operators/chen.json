@@ -28,9 +28,18 @@
       "damageType": "Physical",
       "element": "None",
       "levels": [
-        { "level": 1, "multiplier": 0.20 },
-        { "level": 6, "multiplier": 0.30 },
-        { "level": 12, "multiplier": 0.39 }
+        {
+          "level": 1,
+          "multiplier": 0.2
+        },
+        {
+          "level": 6,
+          "multiplier": 0.3
+        },
+        {
+          "level": 12,
+          "multiplier": 0.39
+        }
       ],
       "hits": 1,
       "description": "기본 공격 1타"
@@ -42,9 +51,18 @@
       "damageType": "Physical",
       "element": "None",
       "levels": [
-        { "level": 1, "multiplier": 0.40 },
-        { "level": 6, "multiplier": 0.59 },
-        { "level": 12, "multiplier": 0.77 }
+        {
+          "level": 1,
+          "multiplier": 0.4
+        },
+        {
+          "level": 6,
+          "multiplier": 0.59
+        },
+        {
+          "level": 12,
+          "multiplier": 0.77
+        }
       ],
       "hits": 1,
       "description": "기본 공격 5타 (마무리)"
@@ -56,9 +74,18 @@
       "damageType": "Physical",
       "element": "None",
       "levels": [
-        { "level": 1, "multiplier": 4.00 },
-        { "level": 6, "multiplier": 5.85 },
-        { "level": 12, "multiplier": 7.70 }
+        {
+          "level": 1,
+          "multiplier": 4.0
+        },
+        {
+          "level": 6,
+          "multiplier": 5.85
+        },
+        {
+          "level": 12,
+          "multiplier": 7.7
+        }
       ],
       "hits": 1,
       "description": "기본 공격 마무리 강타"
@@ -70,12 +97,30 @@
       "damageType": "Physical",
       "element": "None",
       "levels": [
-        { "level": 1, "multiplier": 1.69 },
-        { "level": 3, "multiplier": 2.10 },
-        { "level": 5, "multiplier": 2.52 },
-        { "level": 7, "multiplier": 2.94 },
-        { "level": 9, "multiplier": 3.36 },
-        { "level": 12, "multiplier": 3.80 }
+        {
+          "level": 1,
+          "multiplier": 1.69
+        },
+        {
+          "level": 3,
+          "multiplier": 2.1
+        },
+        {
+          "level": 5,
+          "multiplier": 2.52
+        },
+        {
+          "level": 7,
+          "multiplier": 2.94
+        },
+        {
+          "level": 9,
+          "multiplier": 3.36
+        },
+        {
+          "level": 12,
+          "multiplier": 3.8
+        }
       ],
       "hits": 1,
       "cost": 100,
@@ -89,12 +134,30 @@
       "damageType": "Physical",
       "element": "None",
       "levels": [
-        { "level": 1, "multiplier": 1.20 },
-        { "level": 3, "multiplier": 1.50 },
-        { "level": 5, "multiplier": 1.80 },
-        { "level": 7, "multiplier": 2.10 },
-        { "level": 9, "multiplier": 2.40 },
-        { "level": 12, "multiplier": 2.70 }
+        {
+          "level": 1,
+          "multiplier": 1.2
+        },
+        {
+          "level": 3,
+          "multiplier": 1.5
+        },
+        {
+          "level": 5,
+          "multiplier": 1.8
+        },
+        {
+          "level": 7,
+          "multiplier": 2.1
+        },
+        {
+          "level": 9,
+          "multiplier": 2.4
+        },
+        {
+          "level": 12,
+          "multiplier": 2.7
+        }
       ],
       "hits": 1,
       "cooldown": 16,
@@ -107,12 +170,30 @@
       "damageType": "Physical",
       "element": "None",
       "levels": [
-        { "level": 1, "multiplier": 7.07 },
-        { "level": 3, "multiplier": 8.84 },
-        { "level": 5, "multiplier": 10.61 },
-        { "level": 7, "multiplier": 12.37 },
-        { "level": 9, "multiplier": 14.14 },
-        { "level": 12, "multiplier": 15.48 }
+        {
+          "level": 1,
+          "multiplier": 7.07
+        },
+        {
+          "level": 3,
+          "multiplier": 8.84
+        },
+        {
+          "level": 5,
+          "multiplier": 10.61
+        },
+        {
+          "level": 7,
+          "multiplier": 12.37
+        },
+        {
+          "level": 9,
+          "multiplier": 14.14
+        },
+        {
+          "level": 12,
+          "multiplier": 15.48
+        }
       ],
       "hits": 8,
       "cost": 70,
@@ -123,5 +204,36 @@
   "talents": [
     "참격의 칼날: 스킬 적중 시 ATK +4% (최대 5스택, 10초 지속)",
     "기세 꺾기: 적 돌진 공격 중단 시 스태거 +5"
+  ],
+  "potentialBonuses": [
+    {
+      "level": 0,
+      "description": "잠재 미개방"
+    },
+    {
+      "level": 1,
+      "description": "공격력 +2%",
+      "atkPercent": 0.02
+    },
+    {
+      "level": 2,
+      "description": "치명타 확률 +2%",
+      "critRate": 0.02
+    },
+    {
+      "level": 3,
+      "description": "물리 피해 +4%",
+      "physDmgBonus": 0.04
+    },
+    {
+      "level": 4,
+      "description": "공격력 +5%",
+      "atkPercent": 0.05
+    },
+    {
+      "level": 5,
+      "description": "치명타 피해 +10%",
+      "critDmg": 0.1
+    }
   ]
 }

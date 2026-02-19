@@ -26,13 +26,13 @@ export function calculateDefense(
 
   if (damageType === 'Physical') {
     let effectiveDef = enemy.def;
-    steps.push({ label: 'Enemy DEF', formula: `${effectiveDef}`, value: effectiveDef });
+    steps.push({ label: '적 방어력(DEF)', formula: `${effectiveDef}`, value: effectiveDef });
 
     // DEF 퍼센트 관통
     if (buffs.defPenPercent > 0) {
       const reduced = effectiveDef * (1 - buffs.defPenPercent);
       steps.push({
-        label: 'DEF % Penetration',
+        label: '방어력 % 관통',
         formula: `${Math.round(effectiveDef)} × (1 - ${(buffs.defPenPercent * 100).toFixed(0)}%)`,
         value: Math.round(reduced),
       });
@@ -43,7 +43,7 @@ export function calculateDefense(
     if (buffs.defPenFlat > 0) {
       effectiveDef = Math.max(0, effectiveDef - buffs.defPenFlat);
       steps.push({
-        label: 'DEF Flat Penetration',
+        label: '방어력 고정 관통',
         formula: `max(0, ${Math.round(effectiveDef + buffs.defPenFlat)} - ${buffs.defPenFlat})`,
         value: Math.round(effectiveDef),
       });
@@ -51,20 +51,20 @@ export function calculateDefense(
 
     defMultiplier = DEF_CONSTANT / (effectiveDef + DEF_CONSTANT);
     steps.push({
-      label: 'DEF Multiplier',
+      label: '방어 배율',
       formula: `${DEF_CONSTANT} / (${Math.round(effectiveDef)} + ${DEF_CONSTANT})`,
       value: parseFloat(defMultiplier.toFixed(4)),
     });
   } else if (damageType === 'Arts') {
     let effectiveRes = enemy.res;
-    steps.push({ label: 'Enemy RES', formula: `${effectiveRes}`, value: effectiveRes });
+    steps.push({ label: '적 저항(RES)', formula: `${effectiveRes}`, value: effectiveRes });
 
     // 원소 저항 추가
     const elemRes = enemy.elementRes[element] || 0;
     if (elemRes > 0) {
       effectiveRes += elemRes;
       steps.push({
-        label: `${element} Element RES`,
+        label: `${element} 원소 저항`,
         formula: `${enemy.res} + ${elemRes}`,
         value: effectiveRes,
       });
@@ -74,7 +74,7 @@ export function calculateDefense(
     if (buffs.resPen > 0) {
       effectiveRes = Math.max(0, effectiveRes - buffs.resPen);
       steps.push({
-        label: 'RES Penetration',
+        label: '저항 관통',
         formula: `max(0, RES - ${buffs.resPen})`,
         value: effectiveRes,
       });
@@ -82,12 +82,12 @@ export function calculateDefense(
 
     resMultiplier = Math.max(0, 1 - effectiveRes / 100);
     steps.push({
-      label: 'RES Multiplier',
+      label: '저항 배율',
       formula: `1 - ${effectiveRes}/100`,
       value: parseFloat(resMultiplier.toFixed(4)),
     });
   } else {
-    steps.push({ label: 'True Damage', formula: 'No DEF/RES reduction', value: 1 });
+    steps.push({ label: '고정 피해', formula: '방어/저항 감소 없음', value: 1 });
   }
 
   return { defMultiplier, resMultiplier, steps };

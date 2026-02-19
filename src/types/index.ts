@@ -33,6 +33,21 @@ export interface Attributes {
 /** 주/보조 능력치 */
 export type MainAttribute = 'str' | 'agi' | 'int' | 'wil';
 
+/** 잠재 단계 효과 */
+export interface PotentialBonus {
+  level: number;
+  description: string;
+  atkPercent?: number;
+  atkFlat?: number;
+  critRate?: number;
+  critDmg?: number;
+  physDmgBonus?: number;
+  artsDmgBonus?: number;
+  skillDmgBonus?: number;
+  defPenFlat?: number;
+  defPenPercent?: number;
+}
+
 /** 스킬 레벨별 배율 */
 export interface SkillLevel {
   level: number;
@@ -84,6 +99,8 @@ export interface Operator {
   skills: Skill[];
   /** 재능/패시브 설명 */
   talents: string[];
+  /** 잠재 단계 효과 (0~5) */
+  potentialBonuses?: PotentialBonus[];
 }
 
 /** 무기 */
@@ -110,6 +127,8 @@ export interface Weapon {
   artsDmgBonus: number;
   /** 패시브 효과 설명 */
   passive: string;
+  /** 잠재 단계 효과 (0~5) */
+  potentialBonuses?: PotentialBonus[];
 }
 
 /** 장비 세트 효과 */

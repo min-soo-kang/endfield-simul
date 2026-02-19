@@ -17,6 +17,7 @@ import EffectToggles from './components/EffectToggles';
 import GearSetSelector from './components/GearSetSelector';
 import ResultCard from './components/ResultCard';
 import DamageBreakdown from './components/DamageBreakdown';
+import PotentialSummaryTabs from './components/PotentialSummaryTabs';
 
 const operators = loadAllOperators();
 const gearSets = getAllGearSets();
@@ -27,6 +28,8 @@ function App() {
   const [selectedSkill, setSelectedSkill] = useState<Skill | null>(null);
   const [selectedSkillLevel, setSelectedSkillLevel] = useState<number>(1);
   const [selectedGearSet, setSelectedGearSet] = useState<GearSet | null>(null);
+  const [operatorPotentialLevel, setOperatorPotentialLevel] = useState<number>(0);
+  const [weaponPotentialLevel, setWeaponPotentialLevel] = useState<number>(0);
   const [enemy, setEnemy] = useState<Enemy>(createDefaultEnemy());
   const [buffs, setBuffs] = useState<BuffSet>(createDefaultBuffs());
   const [effects, setEffects] = useState<SpecialEffects>(createDefaultEffects());
@@ -40,6 +43,8 @@ function App() {
     setSelectedWeapon(null);
     setSelectedSkill(null);
     setSelectedSkillLevel(1);
+    setOperatorPotentialLevel(0);
+    setWeaponPotentialLevel(0);
   }, []);
 
   const handleSkillSelect = useCallback((skill: Skill) => {
@@ -55,7 +60,9 @@ function App() {
     enemy,
     buffs,
     effects,
-    selectedGearSet
+    selectedGearSet,
+    operatorPotentialLevel,
+    weaponPotentialLevel
   );
 
   return (
@@ -68,25 +75,28 @@ function App() {
             </h1>
             <p className="text-text-dim text-xs">단일 공격 피해 계산기</p>
           </div>
-          <div className="text-text-dim text-xs">버전 0.2</div>
+          <div className="text-text-dim text-xs">버전 0.3</div>
         </div>
       </header>
 
       <main className="max-w-7xl mx-auto px-4 py-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          {/* Left Column - Inputs */}
           <div className="lg:col-span-5 space-y-4">
             <div className="bg-bg-panel border border-border rounded-lg p-4 space-y-4">
               <OperatorSelector
                 operators={operators}
                 selected={selectedOperator}
                 onSelect={handleOperatorSelect}
+                potentialLevel={operatorPotentialLevel}
+                onPotentialChange={setOperatorPotentialLevel}
               />
 
               <WeaponSelector
                 weapons={availableWeapons}
                 selected={selectedWeapon}
                 onSelect={setSelectedWeapon}
+                potentialLevel={weaponPotentialLevel}
+                onPotentialChange={setWeaponPotentialLevel}
               />
 
               <SkillSelector
@@ -114,7 +124,6 @@ function App() {
               <EffectToggles effects={effects} onChange={setEffects} />
             </div>
 
-            {/* Buff Inputs */}
             <div className="bg-bg-panel border border-border rounded-lg p-4">
               <label className="block text-text-muted text-xs uppercase tracking-wider mb-2">
                 추가 버프
@@ -122,99 +131,48 @@ function App() {
               <div className="grid grid-cols-2 gap-2">
                 <div>
                   <label className="block text-text-dim text-xs mb-0.5">공격력 %</label>
-                  <input
-                    type="number"
-                    min={0}
-                    step={1}
-                    className="w-full bg-bg border border-border rounded px-2 py-1.5 text-text text-sm font-mono focus:border-accent focus:outline-none"
-                    value={Math.round(buffs.atkPercent * 100)}
-                    onChange={(e) => setBuffs(b => ({ ...b, atkPercent: (parseInt(e.target.value) || 0) / 100 }))}
-                  />
+                  <input type="number" min={0} step={1} className="w-full bg-bg border border-border rounded px-2 py-1.5 text-text text-sm font-mono focus:border-accent focus:outline-none" value={Math.round(buffs.atkPercent * 100)} onChange={(e) => setBuffs(b => ({ ...b, atkPercent: (parseInt(e.target.value) || 0) / 100 }))} />
                 </div>
                 <div>
                   <label className="block text-text-dim text-xs mb-0.5">고정 공격력</label>
-                  <input
-                    type="number"
-                    min={0}
-                    className="w-full bg-bg border border-border rounded px-2 py-1.5 text-text text-sm font-mono focus:border-accent focus:outline-none"
-                    value={buffs.atkFlat}
-                    onChange={(e) => setBuffs(b => ({ ...b, atkFlat: parseInt(e.target.value) || 0 }))}
-                  />
+                  <input type="number" min={0} className="w-full bg-bg border border-border rounded px-2 py-1.5 text-text text-sm font-mono focus:border-accent focus:outline-none" value={buffs.atkFlat} onChange={(e) => setBuffs(b => ({ ...b, atkFlat: parseInt(e.target.value) || 0 }))} />
                 </div>
                 <div>
                   <label className="block text-text-dim text-xs mb-0.5">방어력 관통 (고정)</label>
-                  <input
-                    type="number"
-                    min={0}
-                    className="w-full bg-bg border border-border rounded px-2 py-1.5 text-text text-sm font-mono focus:border-accent focus:outline-none"
-                    value={buffs.defPenFlat}
-                    onChange={(e) => setBuffs(b => ({ ...b, defPenFlat: parseInt(e.target.value) || 0 }))}
-                  />
+                  <input type="number" min={0} className="w-full bg-bg border border-border rounded px-2 py-1.5 text-text text-sm font-mono focus:border-accent focus:outline-none" value={buffs.defPenFlat} onChange={(e) => setBuffs(b => ({ ...b, defPenFlat: parseInt(e.target.value) || 0 }))} />
                 </div>
                 <div>
                   <label className="block text-text-dim text-xs mb-0.5">방어력 관통 %</label>
-                  <input
-                    type="number"
-                    min={0}
-                    max={100}
-                    step={1}
-                    className="w-full bg-bg border border-border rounded px-2 py-1.5 text-text text-sm font-mono focus:border-accent focus:outline-none"
-                    value={Math.round(buffs.defPenPercent * 100)}
-                    onChange={(e) => setBuffs(b => ({ ...b, defPenPercent: (parseInt(e.target.value) || 0) / 100 }))}
-                  />
+                  <input type="number" min={0} max={100} step={1} className="w-full bg-bg border border-border rounded px-2 py-1.5 text-text text-sm font-mono focus:border-accent focus:outline-none" value={Math.round(buffs.defPenPercent * 100)} onChange={(e) => setBuffs(b => ({ ...b, defPenPercent: (parseInt(e.target.value) || 0) / 100 }))} />
                 </div>
                 <div>
                   <label className="block text-text-dim text-xs mb-0.5">치명타 확률 %</label>
-                  <input
-                    type="number"
-                    min={0}
-                    max={100}
-                    step={1}
-                    className="w-full bg-bg border border-border rounded px-2 py-1.5 text-text text-sm font-mono focus:border-accent focus:outline-none"
-                    value={Math.round(buffs.critRate * 100)}
-                    onChange={(e) => setBuffs(b => ({ ...b, critRate: (parseInt(e.target.value) || 0) / 100 }))}
-                  />
+                  <input type="number" min={0} max={100} step={1} className="w-full bg-bg border border-border rounded px-2 py-1.5 text-text text-sm font-mono focus:border-accent focus:outline-none" value={Math.round(buffs.critRate * 100)} onChange={(e) => setBuffs(b => ({ ...b, critRate: (parseInt(e.target.value) || 0) / 100 }))} />
                 </div>
                 <div>
                   <label className="block text-text-dim text-xs mb-0.5">치명타 피해 %</label>
-                  <input
-                    type="number"
-                    min={0}
-                    step={1}
-                    className="w-full bg-bg border border-border rounded px-2 py-1.5 text-text text-sm font-mono focus:border-accent focus:outline-none"
-                    value={Math.round(buffs.critDmg * 100)}
-                    onChange={(e) => setBuffs(b => ({ ...b, critDmg: (parseInt(e.target.value) || 0) / 100 }))}
-                  />
+                  <input type="number" min={0} step={1} className="w-full bg-bg border border-border rounded px-2 py-1.5 text-text text-sm font-mono focus:border-accent focus:outline-none" value={Math.round(buffs.critDmg * 100)} onChange={(e) => setBuffs(b => ({ ...b, critDmg: (parseInt(e.target.value) || 0) / 100 }))} />
                 </div>
                 <div>
                   <label className="block text-text-dim text-xs mb-0.5">물리 피해 %</label>
-                  <input
-                    type="number"
-                    min={0}
-                    step={1}
-                    className="w-full bg-bg border border-border rounded px-2 py-1.5 text-text text-sm font-mono focus:border-accent focus:outline-none"
-                    value={Math.round(buffs.physDmgBonus * 100)}
-                    onChange={(e) => setBuffs(b => ({ ...b, physDmgBonus: (parseInt(e.target.value) || 0) / 100 }))}
-                  />
+                  <input type="number" min={0} step={1} className="w-full bg-bg border border-border rounded px-2 py-1.5 text-text text-sm font-mono focus:border-accent focus:outline-none" value={Math.round(buffs.physDmgBonus * 100)} onChange={(e) => setBuffs(b => ({ ...b, physDmgBonus: (parseInt(e.target.value) || 0) / 100 }))} />
                 </div>
                 <div>
                   <label className="block text-text-dim text-xs mb-0.5">스킬 피해 %</label>
-                  <input
-                    type="number"
-                    min={0}
-                    step={1}
-                    className="w-full bg-bg border border-border rounded px-2 py-1.5 text-text text-sm font-mono focus:border-accent focus:outline-none"
-                    value={Math.round(buffs.skillDmgBonus * 100)}
-                    onChange={(e) => setBuffs(b => ({ ...b, skillDmgBonus: (parseInt(e.target.value) || 0) / 100 }))}
-                  />
+                  <input type="number" min={0} step={1} className="w-full bg-bg border border-border rounded px-2 py-1.5 text-text text-sm font-mono focus:border-accent focus:outline-none" value={Math.round(buffs.skillDmgBonus * 100)} onChange={(e) => setBuffs(b => ({ ...b, skillDmgBonus: (parseInt(e.target.value) || 0) / 100 }))} />
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Right Column - Results */}
           <div className="lg:col-span-7 space-y-4">
             <ResultCard result={result} />
+            <PotentialSummaryTabs
+              operator={selectedOperator}
+              weapon={selectedWeapon}
+              operatorPotentialLevel={operatorPotentialLevel}
+              weaponPotentialLevel={weaponPotentialLevel}
+            />
             {result && <DamageBreakdown steps={result.steps} />}
           </div>
         </div>

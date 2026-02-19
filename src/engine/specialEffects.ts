@@ -32,14 +32,14 @@ export function calculateSpecialEffects(
     if (skillType === 'battle') {
       dmgBonusFromEffects += COMBO_HIT_BATTLE_SKILL_BONUS;
       steps.push({
-        label: 'Combo Hit (Battle Skill)',
+        label: '연타 (배틀 스킬)',
         formula: `+${(COMBO_HIT_BATTLE_SKILL_BONUS * 100).toFixed(0)}%`,
         value: COMBO_HIT_BATTLE_SKILL_BONUS,
       });
     } else if (skillType === 'ultimate') {
       dmgBonusFromEffects += COMBO_HIT_ULTIMATE_BONUS;
       steps.push({
-        label: 'Combo Hit (Ultimate)',
+        label: '연타 (궁극기)',
         formula: `+${(COMBO_HIT_ULTIMATE_BONUS * 100).toFixed(0)}%`,
         value: COMBO_HIT_ULTIMATE_BONUS,
       });
@@ -50,7 +50,7 @@ export function calculateSpecialEffects(
   if (effects.armorBreak && damageType === 'Physical') {
     dmgBonusFromEffects += ARMOR_BREAK_PHYS_BONUS;
     steps.push({
-      label: 'Armor Break (Phys DMG+)',
+      label: '갑옷 파괴 (물리 피해+)',
       formula: `+${(ARMOR_BREAK_PHYS_BONUS * 100).toFixed(0)}%`,
       value: ARMOR_BREAK_PHYS_BONUS,
     });
@@ -60,14 +60,14 @@ export function calculateSpecialEffects(
   if (effects.isShocked && damageType === 'Arts') {
     dmgBonusFromEffects += SHOCK_ARTS_BONUS;
     steps.push({
-      label: 'Shocked (Arts DMG+)',
+      label: '감전 (아츠 피해+)',
       formula: `+${(SHOCK_ARTS_BONUS * 100).toFixed(0)}%`,
       value: SHOCK_ARTS_BONUS,
     });
   }
 
   if (steps.length === 0) {
-    steps.push({ label: 'Special Effects', formula: 'None active', value: 0 });
+    steps.push({ label: '상태 효과', formula: '적용 없음', value: 0 });
   }
 
   return { dmgBonusFromEffects, steps };
