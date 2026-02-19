@@ -133,6 +133,14 @@ export interface Weapon {
   artsDmgBonus: number;
   /** 패시브 효과 설명 */
   passive: string;
+  /** 주요 능력치 고정 증가량 (예: 부요 Lv9 = +132) */
+  mainStatFlatBonus?: number;
+  /** 주요 능력치 옵션 레벨 */
+  mainStatBonusLevel?: number;
+  /** 치명타 확률 옵션 레벨 */
+  critRateLevel?: number;
+  /** 3옵 기본 레벨 */
+  thirdOptionBaseLevel?: number;
   /** 잠재 단계 효과 (0~5) */
   potentialBonuses?: PotentialBonus[];
 }

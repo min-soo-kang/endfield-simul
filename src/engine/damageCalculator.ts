@@ -36,10 +36,13 @@ function sumOperatorPotentialValue(list: PotentialBonus[], key: keyof PotentialB
   }, 0);
 }
 
-function applyOperatorPotentialStats(stats: OperatorStats, list: PotentialBonus[]): OperatorStats {
+function applyOperatorPotentialStats(stats: OperatorStats, list: PotentialBonus[], weapon: Weapon | null): OperatorStats {
   const agiFlat = sumOperatorPotentialValue(list, 'agiFlat');
-  if (!agiFlat) return stats;
-  return { ...stats, attributes: { ...stats.attributes, agi: stats.attributes.agi + agiFlat } };
+  const mainStatBonus = weapon?.mainStatFlatBonus || 0;
+  const next = { ...stats, attributes: { ...stats.attributes } };
+  if (agiFlat) next.attributes.agi += agiFlat;
+  if (mainStatBonus) next.attributes[stats.mainAttr] += mainStatBonus;
+  return next;
 }
 
 function getPotentialSkillMultiplierBonus(list: PotentialBonus[], skillType: SkillType): number {
@@ -56,7 +59,7 @@ function getBuyoThirdOptionBonus(weapon: Weapon | null, lv: number, skillType: S
   let bonus = 0;
   if (skillType === 'battle' || skillType === 'ultimate') bonus += wp.physDmgBonus || 0;
   if (enemy.isUnbalanced) {
-    const unbalancedByLevel = [0.9, 1.0, 1.1, 1.2, 1.2, 1.4];
+    const unbalancedByLevel = [0.8, 0.9, 1.0, 1.1, 1.2, 1.4];
     bonus += unbalancedByLevel[lv] || 0;
   }
   return bonus;
@@ -77,7 +80,7 @@ export function calculateDamage(
   const steps: CalcStep[] = [];
   const skillType = inferSkillType(skill.id);
   const opBonuses = getOperatorCumulativeBonuses(operator, operatorPotentialLevel);
-  const opStats = applyOperatorPotentialStats(operator.stats, opBonuses);
+  const opStats = applyOperatorPotentialStats(operator.stats, opBonuses, weapon);
 
   const lowHpBonus = sumOperatorPotentialValue(opBonuses, 'skillDmgBonus', b => b.level !== 1 || enemy.hpPercent <= 50);
   const potentialPhys = sumOperatorPotentialValue(opBonuses, 'physDmgBonus');

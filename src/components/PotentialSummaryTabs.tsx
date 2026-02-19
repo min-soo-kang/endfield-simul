@@ -78,7 +78,14 @@ const PotentialSummaryTabs: React.FC<Props> = ({
         ) : (
           <>
             <div className="text-text font-medium">{weapon?.nameKo || '선택 없음'} · 잠재 {weaponPotentialLevel}</div>
-            {weaponBonus?.title && <div className="text-accent text-xs mt-1">{weaponBonus.title}</div>}
+            {weapon && (
+              <div className="mt-2 text-text-muted text-xs space-y-1">
+                <div>• 주요 능력치 옵션 Lv.{weapon.mainStatBonusLevel || 9} (고정): +{weapon.mainStatFlatBonus || 0}</div>
+                <div>• 치명타 확률 옵션 Lv.{weapon.critRateLevel || 9} (고정): +{((weapon.critRate || 0) * 100).toFixed(1)}%</div>
+                <div>• 3옵 기본 레벨: Lv.{weapon.thirdOptionBaseLevel || 4}</div>
+              </div>
+            )}
+            {weaponBonus?.title && <div className="text-accent text-xs mt-2">{weaponBonus.title}</div>}
             <div className="text-text-dim text-xs mt-1">{weaponBonus?.description || '잠재 효과 없음'}</div>
             <div className="mt-2 space-y-1">
               {formatBonusList(weaponBonus).map((line, i) => <div key={i} className="text-text-muted text-xs">• {line}</div>)}
