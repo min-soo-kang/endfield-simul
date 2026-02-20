@@ -7,6 +7,7 @@ import type { SkillType } from '../data/constants';
 
 export interface EffectsResult {
   dmgBonusFromEffects: number;
+  comboFinalBonus: number;
   steps: CalcStep[];
 }
 
@@ -17,15 +18,16 @@ export function calculateSpecialEffects(
 ): EffectsResult {
   const steps: CalcStep[] = [];
   let dmgBonusFromEffects = 0;
+  let comboFinalBonus = 0;
 
   if (effects.comboStack > 0) {
     if (skillType === 'battle') {
       const v = (effects.comboStack + 1) * effects.comboBattlePerStack;
-      dmgBonusFromEffects += v;
+      comboFinalBonus = v;
       steps.push({ label: '연타 보정(배틀 스킬)', formula: `(${effects.comboStack}+1) × ${(effects.comboBattlePerStack * 100).toFixed(0)}% = ${(v * 100).toFixed(1)}%`, value: v });
     } else if (skillType === 'ultimate') {
       const v = (effects.comboStack + 1) * effects.comboUltimatePerStack;
-      dmgBonusFromEffects += v;
+      comboFinalBonus = v;
       steps.push({ label: '연타 보정(궁극기)', formula: `(${effects.comboStack}+1) × ${(effects.comboUltimatePerStack * 100).toFixed(0)}% = ${(v * 100).toFixed(1)}%`, value: v });
     }
   }
@@ -44,5 +46,5 @@ export function calculateSpecialEffects(
     steps.push({ label: '상태 효과', formula: '적용 없음', value: 0 });
   }
 
-  return { dmgBonusFromEffects, steps };
+  return { dmgBonusFromEffects, comboFinalBonus, steps };
 }

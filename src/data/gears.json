@@ -1,43 +1,127 @@
 [
   {
-    "id": "hongsan_heavy_armor",
-    "nameKo": "홍산 중장갑",
-    "type": "Armor",
-    "setId": "hongsan_tactical",
+    "id": "gear_0",
+    "nameKo": "식양의 숨결 보조 견갑",
+    "type": "Part",
+    "setId": "breath_of_nourish",
     "options": [
       {
         "kind": "main",
         "nameKo": "주옵션",
         "stats": {
-          "agi": 87
+          "wil": 32
         }
       },
       {
         "kind": "sub",
         "nameKo": "부옵션",
         "stats": {
-          "str": 58
+          "int": 21
         }
       },
       {
         "kind": "extra",
         "nameKo": "추가옵션",
         "stats": {},
-        "customText": "오리지늄 아츠 강도 +20"
+        "customText": "궁극기 충전 +24.6%"
       }
     ]
   },
   {
-    "id": "hongsan_gauntlet",
-    "nameKo": "홍산 전술 건틀릿",
-    "type": "Gloves",
-    "setId": "hongsan_tactical",
+    "id": "gear_1",
+    "nameKo": "식양의 숨결 충전 코어 · I",
+    "type": "Part",
+    "setId": "breath_of_nourish",
     "options": [
       {
         "kind": "main",
         "nameKo": "주옵션",
         "stats": {
-          "agi": 65
+          "int": 32
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "wil": 21
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {},
+        "customText": "치유 효율 +20.7%"
+      }
+    ]
+  },
+  {
+    "id": "gear_2",
+    "nameKo": "식양의 숨결 충전 코어",
+    "type": "Part",
+    "setId": "breath_of_nourish",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "int": 32
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "str": 21
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {},
+        "customText": "궁극기 충전 +24.6%"
+      }
+    ]
+  },
+  {
+    "id": "gear_3",
+    "nameKo": "식양의 숨결 글러브 · I",
+    "type": "Gloves",
+    "setId": "breath_of_nourish",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "int": 65
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "wil": 43
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {},
+        "customText": "궁극기 충전 +20.5%"
+      }
+    ]
+  },
+  {
+    "id": "gear_4",
+    "nameKo": "식양의 숨결 글러브",
+    "type": "Gloves",
+    "setId": "breath_of_nourish",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "int": 65
         }
       },
       {
@@ -50,18 +134,100 @@
       {
         "kind": "extra",
         "nameKo": "추가옵션",
-        "stats": {
-          "ultimateSkillDmgBonus": 0.431
-        },
-        "customText": "궁극기 피해 +43.1%"
+        "stats": {},
+        "customText": "궁극기 충전 +20.5%"
       }
     ]
   },
   {
-    "id": "hongsan_tactical_gloves",
-    "nameKo": "홍산 전술 장갑",
+    "id": "gear_5",
+    "nameKo": "식양의 숨결 장갑",
+    "type": "Armor",
+    "setId": "breath_of_nourish",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "wil": 87
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "int": 58
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {},
+        "customText": "오리지늄 아츠 강도 +20"
+      }
+    ]
+  },
+  {
+    "id": "gear_6",
+    "nameKo": "탁류 화염 절단기",
+    "type": "Part",
+    "setId": "tidal_wave",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "int": 32
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "str": 21
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {},
+        "customText": "일반 공격 피해 +27.6%"
+      }
+    ]
+  },
+  {
+    "id": "gear_7",
+    "nameKo": "현하 산소 공급 장치",
+    "type": "Part",
+    "setId": "tidal_wave",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "str": 32
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "wil": 21
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {},
+        "customText": "냉기 피해 +23% / 전기 피해 +23%"
+      }
+    ]
+  },
+  {
+    "id": "gear_8",
+    "nameKo": "조류의 물결 건틀릿",
     "type": "Gloves",
-    "setId": "hongsan_tactical",
+    "setId": "tidal_wave",
     "options": [
       {
         "kind": "main",
@@ -80,45 +246,41 @@
       {
         "kind": "extra",
         "nameKo": "추가옵션",
-        "stats": {
-          "physDmgBonus": 0.192
-        },
-        "customText": "물리 피해 +19.2%"
+        "stats": {},
+        "customText": "냉기 피해 +19.2% / 전기 피해 +19.2%"
       }
     ]
   },
   {
-    "id": "hongsan_flint",
-    "nameKo": "홍산 부싯돌",
-    "type": "Part",
-    "setId": "hongsan_tactical",
+    "id": "gear_9",
+    "nameKo": "낙조 경갑",
+    "type": "Armor",
+    "setId": "tidal_wave",
     "options": [
       {
         "kind": "main",
         "nameKo": "주옵션",
         "stats": {
-          "agi": 32
+          "int": 87
         }
       },
       {
         "kind": "sub",
         "nameKo": "부옵션",
         "stats": {
-          "str": 21
+          "str": 58
         }
       },
       {
         "kind": "extra",
         "nameKo": "추가옵션",
-        "stats": {
-          "physDmgBonus": 0.23
-        },
-        "customText": "물리 피해 +23%"
+        "stats": {},
+        "customText": "궁극기 충전 +12.3%"
       }
     ]
   },
   {
-    "id": "yinglong_detector",
+    "id": "gear_10",
     "nameKo": "응룡 50식 탐지기",
     "type": "Part",
     "setId": "yinglong_50",
@@ -148,7 +310,37 @@
     ]
   },
   {
-    "id": "yinglong_dagger",
+    "id": "gear_11",
+    "nameKo": "응룡 50식 단검 · I",
+    "type": "Part",
+    "setId": "yinglong_50",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "int": 32
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "str": 21
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {
+          "skillDmgBonus": 0.276
+        },
+        "customText": "모든 스킬 피해 +27.6%"
+      }
+    ]
+  },
+  {
+    "id": "gear_12",
     "nameKo": "응룡 50식 단검",
     "type": "Part",
     "setId": "yinglong_50",
@@ -178,7 +370,97 @@
     ]
   },
   {
-    "id": "yinglong_armor",
+    "id": "gear_13",
+    "nameKo": "응룡 50식 글러브 · I",
+    "type": "Gloves",
+    "setId": "yinglong_50",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "wil": 65
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "agi": 43
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {
+          "comboSkillDmgBonus": 0.345
+        },
+        "customText": "연계 스킬 피해 +34.5%"
+      }
+    ]
+  },
+  {
+    "id": "gear_14",
+    "nameKo": "응룡 50식 글러브",
+    "type": "Gloves",
+    "setId": "yinglong_50",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "agi": 65
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "int": 43
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {
+          "comboSkillDmgBonus": 0.345
+        },
+        "customText": "연계 스킬 피해 +34.5%"
+      }
+    ]
+  },
+  {
+    "id": "gear_15",
+    "nameKo": "응룡 50식 경갑",
+    "type": "Armor",
+    "setId": "yinglong_50",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "wil": 87
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "str": 58
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {
+          "skillDmgBonus": 0.138
+        },
+        "customText": "모든 스킬 피해 +13.8%"
+      }
+    ]
+  },
+  {
+    "id": "gear_16",
     "nameKo": "응룡 50식 중갑",
     "type": "Armor",
     "setId": "yinglong_50",
@@ -204,6 +486,1636 @@
           "physDmgBonus": 0.115
         },
         "customText": "물리 피해 +11.5%"
+      }
+    ]
+  },
+  {
+    "id": "gear_17",
+    "nameKo": "M. I. 경찰용 단검 · I",
+    "type": "Part",
+    "setId": "mi_police",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "wil": 32
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "agi": 21
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {
+          "battleSkillDmgBonus": 0.414
+        },
+        "customText": "배틀 스킬 피해 +41.4%"
+      }
+    ]
+  },
+  {
+    "id": "gear_18",
+    "nameKo": "M. I. 경찰용 단검",
+    "type": "Part",
+    "setId": "mi_police",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "wil": 32
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "int": 21
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {},
+        "customText": "열기 피해 +23% / 자연 피해 +23%"
+      }
+    ]
+  },
+  {
+    "id": "gear_19",
+    "nameKo": "M. I. 경찰용 도구 세트",
+    "type": "Part",
+    "setId": "mi_police",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "int": 32
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "agi": 21
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {
+          "critRate": 0.10400000000000001
+        },
+        "customText": "치명타 확률 +10.4%"
+      }
+    ]
+  },
+  {
+    "id": "gear_20",
+    "nameKo": "M. I. 경찰용 조준기",
+    "type": "Part",
+    "setId": "mi_police",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "agi": 32
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "str": 21
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {
+          "battleSkillDmgBonus": 0.414
+        },
+        "customText": "배틀 스킬 피해 +41.4%"
+      }
+    ]
+  },
+  {
+    "id": "gear_21",
+    "nameKo": "M. I. 경찰용 수갑",
+    "type": "Part",
+    "setId": "mi_police",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "str": 32
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "wil": 21
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {},
+        "customText": "냉기 피해 +41.4% / 전기 피해 +41.4%"
+      }
+    ]
+  },
+  {
+    "id": "gear_22",
+    "nameKo": "M. I. 경찰용 팔찌 · I",
+    "type": "Gloves",
+    "setId": "mi_police",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "int": 65
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "wil": 43
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {
+          "critRate": 0.086
+        },
+        "customText": "치명타 확률 +8.6%"
+      }
+    ]
+  },
+  {
+    "id": "gear_23",
+    "nameKo": "M. I. 경찰용 팔찌",
+    "type": "Gloves",
+    "setId": "mi_police",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "int": 65
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "agi": 43
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {},
+        "customText": "일반 공격 피해 +23%"
+      }
+    ]
+  },
+  {
+    "id": "gear_24",
+    "nameKo": "M. I. 경찰용 장갑",
+    "type": "Gloves",
+    "setId": "mi_police",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "agi": 65
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "str": 43
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {
+          "battleSkillDmgBonus": 0.345
+        },
+        "customText": "배틀 스킬 피해 +34.5%"
+      }
+    ]
+  },
+  {
+    "id": "gear_25",
+    "nameKo": "M. I. 경찰용 망토 · II",
+    "type": "Armor",
+    "setId": "mi_police",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "wil": 87
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "agi": 58
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {
+          "battleSkillDmgBonus": 0.207
+        },
+        "customText": "배틀 스킬 피해 +20.7%"
+      }
+    ]
+  },
+  {
+    "id": "gear_26",
+    "nameKo": "M. I. 경찰용 망토 · I",
+    "type": "Armor",
+    "setId": "mi_police",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "int": 87
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "wil": 58
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {
+          "critRate": 0.052000000000000005
+        },
+        "customText": "치명타 확률 +5.2%"
+      }
+    ]
+  },
+  {
+    "id": "gear_27",
+    "nameKo": "M. I. 경찰용 망토",
+    "type": "Armor",
+    "setId": "mi_police",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "int": 87
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "agi": 58
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {},
+        "customText": "일반 공격 피해 +13.8%"
+      }
+    ]
+  },
+  {
+    "id": "gear_28",
+    "nameKo": "M. I. 경찰용 방어구",
+    "type": "Armor",
+    "setId": "mi_police",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "agi": 87
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "str": 58
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {},
+        "customText": "오리지늄 아츠 강도 +20"
+      }
+    ]
+  },
+  {
+    "id": "gear_29",
+    "nameKo": "열 작업용 전력 상자",
+    "type": "Part",
+    "setId": "heat_work",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "wil": 32
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "int": 21
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {},
+        "customText": "오리지늄 아츠 강도 +41"
+      }
+    ]
+  },
+  {
+    "id": "gear_30",
+    "nameKo": "열 작업용 에너지 저장함",
+    "type": "Part",
+    "setId": "heat_work",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "str": 32
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "agi": 21
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {},
+        "customText": "오리지늄 아츠 강도 +41"
+      }
+    ]
+  },
+  {
+    "id": "gear_31",
+    "nameKo": "열 작업용 온도 측정기",
+    "type": "Part",
+    "setId": "heat_work",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "int": 41
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {}
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {
+          "battleSkillDmgBonus": 0.414
+        },
+        "customText": "배틀 스킬 피해 +41.4%"
+      }
+    ]
+  },
+  {
+    "id": "gear_32",
+    "nameKo": "열 작업용 건틀릿 · I",
+    "type": "Gloves",
+    "setId": "heat_work",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "wil": 65
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "int": 43
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {},
+        "customText": "열기 피해 +19.2% / 자연 피해 +19.2%"
+      }
+    ]
+  },
+  {
+    "id": "gear_33",
+    "nameKo": "열 작업용 건틀릿",
+    "type": "Gloves",
+    "setId": "heat_work",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "int": 65
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "str": 43
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {},
+        "customText": "열기 피해 +19.2% / 자연 피해 +19.2%"
+      }
+    ]
+  },
+  {
+    "id": "gear_34",
+    "nameKo": "열 작업용 강화 골격",
+    "type": "Armor",
+    "setId": "heat_work",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "str": 87
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "agi": 58
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {},
+        "customText": "열기 피해 +11.5% / 자연 피해 +11.5%"
+      }
+    ]
+  },
+  {
+    "id": "gear_35",
+    "nameKo": "개척자 증량 산소 공급 장치",
+    "type": "Part",
+    "setId": "pioneer",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "agi": 32
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "int": 21
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {},
+        "customText": "부스탯 +20.7%"
+      }
+    ]
+  },
+  {
+    "id": "gear_36",
+    "nameKo": "개척자 통신기 · I",
+    "type": "Part",
+    "setId": "pioneer",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "str": 32
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "int": 21
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {},
+        "customText": "냉기 피해 +23% / 전기 피해 +23%"
+      }
+    ]
+  },
+  {
+    "id": "gear_37",
+    "nameKo": "개척자 통신기",
+    "type": "Part",
+    "setId": "pioneer",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "str": 32
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "agi": 21
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {
+          "comboSkillDmgBonus": 0.414
+        },
+        "customText": "연계 스킬 피해 +41.4%"
+      }
+    ]
+  },
+  {
+    "id": "gear_38",
+    "nameKo": "개척자 내부식성 장갑",
+    "type": "Gloves",
+    "setId": "pioneer",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "agi": 65
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "int": 43
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {
+          "battleSkillDmgBonus": 0.345
+        },
+        "customText": "배틀 스킬 피해 +34.5%"
+      }
+    ]
+  },
+  {
+    "id": "gear_39",
+    "nameKo": "개척자 방어구 · III",
+    "type": "Armor",
+    "setId": "pioneer",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "agi": 87
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "int": 58
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {},
+        "customText": "부스탯 +10.4%"
+      }
+    ]
+  },
+  {
+    "id": "gear_40",
+    "nameKo": "개척자 방어구 · II",
+    "type": "Armor",
+    "setId": "pioneer",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "agi": 87
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "int": 58
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {
+          "battleSkillDmgBonus": 0.207
+        },
+        "customText": "배틀 스킬 피해 +20.7%"
+      }
+    ]
+  },
+  {
+    "id": "gear_41",
+    "nameKo": "개척자 방어구 · I",
+    "type": "Armor",
+    "setId": "pioneer",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "str": 87
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "agi": 58
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {
+          "battleSkillDmgBonus": 0.207
+        },
+        "customText": "배틀 스킬 피해 +20.7%"
+      }
+    ]
+  },
+  {
+    "id": "gear_42",
+    "nameKo": "개척자 방어구",
+    "type": "Armor",
+    "setId": "pioneer",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "str": 87
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "int": 58
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {
+          "ultimateSkillDmgBonus": 0.259
+        },
+        "customText": "궁극기 피해 +25.9%"
+      }
+    ]
+  },
+  {
+    "id": "gear_43",
+    "nameKo": "펄스식 교정기",
+    "type": "Part",
+    "setId": "pulse",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "int": 41
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {}
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {},
+        "customText": "오리지늄 아츠 강도 +41"
+      }
+    ]
+  },
+  {
+    "id": "gear_44",
+    "nameKo": "펄스식 장갑",
+    "type": "Gloves",
+    "setId": "pulse",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "wil": 65
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "int": 43
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {},
+        "customText": "냉기 피해 +19.2% / 전기 피해 +19.2%"
+      }
+    ]
+  },
+  {
+    "id": "gear_45",
+    "nameKo": "펄스식 방해 슈트",
+    "type": "Armor",
+    "setId": "pulse",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "int": 87
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "wil": 58
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {},
+        "customText": "오리지늄 아츠 강도 +20"
+      }
+    ]
+  },
+  {
+    "id": "gear_46",
+    "nameKo": "본 크러셔 조각상 · I",
+    "type": "Part",
+    "setId": "bone_crusher",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "wil": 32
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "int": 21
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {
+          "comboSkillDmgBonus": 0.414
+        },
+        "customText": "연계 스킬 피해 +41.4%"
+      }
+    ]
+  },
+  {
+    "id": "gear_47",
+    "nameKo": "본 크러셔 조각상",
+    "type": "Part",
+    "setId": "bone_crusher",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "wil": 32
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "agi": 21
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {
+          "battleSkillDmgBonus": 0.414
+        },
+        "customText": "배틀 스킬 피해 +41.4%"
+      }
+    ]
+  },
+  {
+    "id": "gear_48",
+    "nameKo": "본 크러셔 마스크 · I",
+    "type": "Part",
+    "setId": "bone_crusher",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "agi": 32
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "str": 21
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {
+          "critRate": 0.10400000000000001
+        },
+        "customText": "치명타 확률 +10.4%"
+      }
+    ]
+  },
+  {
+    "id": "gear_49",
+    "nameKo": "본 크러셔 마스크",
+    "type": "Part",
+    "setId": "bone_crusher",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "agi": 32
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "str": 21
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {},
+        "customText": "불균형 목표에 주는 피해 +41.4%"
+      }
+    ]
+  },
+  {
+    "id": "gear_50",
+    "nameKo": "본 크러셔 머플러 · I",
+    "type": "Armor",
+    "setId": "bone_crusher",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "wil": 87
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "agi": 58
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {},
+        "customText": "궁극기 충전 +12.3%"
+      }
+    ]
+  },
+  {
+    "id": "gear_51",
+    "nameKo": "본 크러셔 머플러",
+    "type": "Armor",
+    "setId": "bone_crusher",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "wil": 87
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "str": 58
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {
+          "comboSkillDmgBonus": 0.207
+        },
+        "customText": "연계 스킬 피해 +20.7%"
+      }
+    ]
+  },
+  {
+    "id": "gear_52",
+    "nameKo": "본 크러셔 중갑 방어구 · I",
+    "type": "Armor",
+    "setId": "bone_crusher",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "agi": 87
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "str": 58
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {
+          "comboSkillDmgBonus": 0.207
+        },
+        "customText": "연계 스킬 피해 +20.7%"
+      }
+    ]
+  },
+  {
+    "id": "gear_53",
+    "nameKo": "본 크러셔 중갑 방어구",
+    "type": "Armor",
+    "setId": "bone_crusher",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "agi": 87
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "int": 58
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {},
+        "customText": "궁극기 충전 +12.3%"
+      }
+    ]
+  },
+  {
+    "id": "gear_54",
+    "nameKo": "경량 초자연 안정판",
+    "type": "Part",
+    "setId": "light_super",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "agi": 32
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "str": 21
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {},
+        "customText": "오리지늄 아츠 강도 +41"
+      }
+    ]
+  },
+  {
+    "id": "gear_55",
+    "nameKo": "경량 초자연 분석 반지",
+    "type": "Part",
+    "setId": "light_super",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "str": 32
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "wil": 21
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {
+          "physDmgBonus": 0.23
+        },
+        "customText": "물리 피해 +23%"
+      }
+    ]
+  },
+  {
+    "id": "gear_56",
+    "nameKo": "경량 초자연 글러브",
+    "type": "Gloves",
+    "setId": "light_super",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "agi": 65
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "str": 43
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {},
+        "customText": "오리지늄 아츠 강도 +34"
+      }
+    ]
+  },
+  {
+    "id": "gear_57",
+    "nameKo": "경량 초자연 보호판",
+    "type": "Armor",
+    "setId": "light_super",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "str": 87
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "wil": 58
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {},
+        "customText": "불균형 목표에 주는 피해 +20.7%"
+      }
+    ]
+  },
+  {
+    "id": "gear_58",
+    "nameKo": "생체 보조 보호 주사기",
+    "type": "Part",
+    "setId": "bio_support",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "wil": 41
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {}
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {},
+        "customText": "치유 효율 +20.7%"
+      }
+    ]
+  },
+  {
+    "id": "gear_59",
+    "nameKo": "생체 보조 보호판",
+    "type": "Part",
+    "setId": "bio_support",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "wil": 32
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "int": 21
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {},
+        "customText": "주스탯 +20.7%"
+      }
+    ]
+  },
+  {
+    "id": "gear_60",
+    "nameKo": "생체 보조 접속기 · I",
+    "type": "Part",
+    "setId": "bio_support",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "str": 32
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "wil": 21
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {},
+        "customText": "최대 체력 +41.4%"
+      }
+    ]
+  },
+  {
+    "id": "gear_61",
+    "nameKo": "생체 보조 접속기",
+    "type": "Part",
+    "setId": "bio_support",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "str": 32
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "wil": 21
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {},
+        "customText": "모든 피해 감소 +17.2%"
+      }
+    ]
+  },
+  {
+    "id": "gear_62",
+    "nameKo": "생체 보조 건틀릿",
+    "type": "Gloves",
+    "setId": "bio_support",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "wil": 65
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "str": 43
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {},
+        "customText": "치유 효율 +17.3%"
+      }
+    ]
+  },
+  {
+    "id": "gear_63",
+    "nameKo": "생체 보조 견갑",
+    "type": "Gloves",
+    "setId": "bio_support",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "str": 65
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "wil": 43
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {},
+        "customText": "궁극기 충전 +20.5%"
+      }
+    ]
+  },
+  {
+    "id": "gear_64",
+    "nameKo": "생체 보조 흉갑",
+    "type": "Armor",
+    "setId": "bio_support",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "wil": 87
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "int": 58
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {},
+        "customText": "치유 효율 +10.4%"
+      }
+    ]
+  },
+  {
+    "id": "gear_65",
+    "nameKo": "생체 보조 중갑",
+    "type": "Armor",
+    "setId": "bio_support",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "str": 87
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "wil": 58
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {},
+        "customText": "치유 효율 +10.4%"
+      }
+    ]
+  },
+  {
+    "id": "gear_66",
+    "nameKo": "홍산 부싯돌",
+    "type": "Part",
+    "setId": "hongsan_tactical",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "agi": 32
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "str": 21
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {
+          "physDmgBonus": 0.23
+        },
+        "customText": "물리 피해 +23%"
+      }
+    ]
+  },
+  {
+    "id": "gear_67",
+    "nameKo": "홍산 전술 건틀릿",
+    "type": "Gloves",
+    "setId": "hongsan_tactical",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "agi": 65
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "str": 43
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {
+          "ultimateSkillDmgBonus": 0.431
+        },
+        "customText": "궁극기 피해 +43.1%"
+      }
+    ]
+  },
+  {
+    "id": "gear_68",
+    "nameKo": "홍산 전술 장갑",
+    "type": "Gloves",
+    "setId": "hongsan_tactical",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "str": 65
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "wil": 43
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {
+          "physDmgBonus": 0.192
+        },
+        "customText": "물리 피해 +19.2%"
+      }
+    ]
+  },
+  {
+    "id": "gear_69",
+    "nameKo": "홍산 중장갑",
+    "type": "Armor",
+    "setId": "hongsan_tactical",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "agi": 87
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "str": 58
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {},
+        "customText": "오리지늄 아츠 강도 +20"
+      }
+    ]
+  },
+  {
+    "id": "gear_70",
+    "nameKo": "위기 탈출 도장 · I",
+    "type": "Part",
+    "setId": "crisis_escape",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "wil": 43
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {}
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {
+          "critRate": 0.10800000000000001
+        },
+        "customText": "치명타 확률 +10.8%"
+      }
+    ]
+  },
+  {
+    "id": "gear_71",
+    "nameKo": "위기 탈출 도장",
+    "type": "Part",
+    "setId": "crisis_escape",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "int": 43
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {}
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {},
+        "customText": "궁극기 충전 +25.7%"
+      }
+    ]
+  },
+  {
+    "id": "gear_72",
+    "nameKo": "위기 탈출 식별 패널 · I",
+    "type": "Part",
+    "setId": "crisis_escape",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "agi": 43
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {}
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {
+          "comboSkillDmgBonus": 0.43200000000000005
+        },
+        "customText": "연계 스킬 피해 +43.2%"
+      }
+    ]
+  },
+  {
+    "id": "gear_73",
+    "nameKo": "위기 탈출 식별 패널",
+    "type": "Part",
+    "setId": "crisis_escape",
+    "options": [
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "str": 43
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {}
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {},
+        "customText": "모든 피해 감소 +17.8%"
       }
     ]
   }

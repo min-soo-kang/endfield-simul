@@ -197,11 +197,22 @@ export function calculateDamage(
   }
   if (dmgSourceLines.length === 0) dmgSourceLines.push('피해 증가 없음');
 
-  const amp = mergedBuffs.ampBonus;
-  const vuln = mergedBuffs.vulnBonus;
+  const typeAmp = skill.damageType === 'Physical'
+    ? mergedBuffs.physAmpBonus
+    : skill.damageType === 'Arts'
+      ? mergedBuffs.artsAmpBonus
+      : 0;
+  const amp = mergedBuffs.ampBonus + typeAmp;
+  const typeVuln = skill.damageType === 'Physical'
+    ? mergedBuffs.physVulnBonus
+    : skill.damageType === 'Arts'
+      ? mergedBuffs.artsVulnBonus
+      : 0;
+  const vuln = mergedBuffs.vulnBonus + typeVuln;
   const takenDmg = mergedBuffs.takenDmgBonus;
 
-  const totalBeforeCrit = afterDefense * (1 + additionalDmg) * (1 + amp) * (1 + vuln) * (1 + takenDmg) * (1 + unbalancedTaken);
+  const comboFinal = effectsResult.comboFinalBonus;
+  const totalBeforeCrit = afterDefense * (1 + additionalDmg) * (1 + amp) * (1 + vuln) * (1 + takenDmg) * (1 + unbalancedTaken) * (1 + comboFinal);
 
   const critRate = Math.min(1, 0.05 + (weapon?.critRate || 0) + mergedBuffs.critRate);
   const critDmg = 0.5 + (weapon?.critDmg || 0) + mergedBuffs.critDmg;
@@ -263,24 +274,47 @@ export function calculateDamage(
     {
       key: 'taken_dmg',
       title: '받는 피해 증가 (받피증)',
-      valueText: `+${(((1 + takenDmg) * (1 + unbalancedTaken) - 1) * 100).toFixed(1)}%`,
+      valueText: `+${(takenDmg * 100).toFixed(1)}%`,
+      details: [`배율 ×${(1 + takenDmg).toFixed(4)}`],
+    },
+    {
+      key: 'unbalanced_taken',
+      title: '불균형 받피증',
+      valueText: `+${(unbalancedTaken * 100).toFixed(1)}%`,
       details: [
-        `받피증 +${(takenDmg * 100).toFixed(1)}%`,
-        `불균형 +${(unbalancedTaken * 100).toFixed(1)}% ${enemy.isUnbalanced ? '(활성)' : '(비활성)'}`,
-        `합산 배율 ×${((1 + takenDmg) * (1 + unbalancedTaken)).toFixed(4)}`,
+        enemy.isUnbalanced ? '활성' : '비활성',
+        `배율 ×${(1 + unbalancedTaken).toFixed(4)}`,
       ],
     },
     {
       key: 'amp',
-      title: '증폭',
+      title: `${dmgTypeLabel} 증폭`,
       valueText: `+${(amp * 100).toFixed(1)}%`,
-      details: [`배율 ×${(1 + amp).toFixed(4)}`],
+      details: [
+        `공통 +${(mergedBuffs.ampBonus * 100).toFixed(1)}%`,
+        `${dmgTypeLabel} +${(typeAmp * 100).toFixed(1)}%`,
+        `배율 ×${(1 + amp).toFixed(4)}`,
+      ],
     },
     {
       key: 'vuln',
-      title: '취약',
+      title: `${dmgTypeLabel} 취약`,
       valueText: `+${(vuln * 100).toFixed(1)}%`,
-      details: [`배율 ×${(1 + vuln).toFixed(4)}`],
+      details: [
+        `공통 +${(mergedBuffs.vulnBonus * 100).toFixed(1)}%`,
+        `${dmgTypeLabel} +${(typeVuln * 100).toFixed(1)}%`,
+        `배율 ×${(1 + vuln).toFixed(4)}`,
+      ],
+    },
+    {
+      key: 'combo',
+      title: '연타',
+      valueText: `+${(comboFinal * 100).toFixed(1)}%`,
+      details: [
+        comboFinal > 0
+          ? `배율 ×${(1 + comboFinal).toFixed(4)}`
+          : '적용 없음',
+      ],
     },
   ];
 
@@ -291,8 +325,9 @@ export function calculateDamage(
   steps.push({ label: skill.damageType === 'Physical' ? '방어 감소' : skill.damageType === 'Arts' ? '저항 감소' : '방어/저항', formula: `×${defMult.toFixed(4)}`, value: Math.round(afterDefense) });
   steps.push({ label: '받는 피해 증가 (받피증)', formula: `+${(takenDmg * 100).toFixed(1)}% → ×${(1 + takenDmg).toFixed(4)}`, value: parseFloat((1 + takenDmg).toFixed(4)) });
   steps.push({ label: '불균형 받피증', formula: enemy.isUnbalanced ? '+30.0% → ×1.3000' : '+0.0% (비활성)', value: parseFloat((1 + unbalancedTaken).toFixed(4)) });
-  if (amp > 0) steps.push({ label: '증폭', formula: `+${(amp * 100).toFixed(1)}% → ×${(1 + amp).toFixed(4)}`, value: parseFloat((1 + amp).toFixed(4)) });
-  if (vuln > 0) steps.push({ label: '취약', formula: `+${(vuln * 100).toFixed(1)}% → ×${(1 + vuln).toFixed(4)}`, value: parseFloat((1 + vuln).toFixed(4)) });
+  if (amp > 0) steps.push({ label: `${dmgTypeLabel} 증폭`, formula: `공통 +${(mergedBuffs.ampBonus * 100).toFixed(1)}% + ${dmgTypeLabel} +${(typeAmp * 100).toFixed(1)}% → ×${(1 + amp).toFixed(4)}`, value: parseFloat((1 + amp).toFixed(4)) });
+  if (vuln > 0) steps.push({ label: `${dmgTypeLabel} 취약`, formula: `공통 +${(mergedBuffs.vulnBonus * 100).toFixed(1)}% + ${dmgTypeLabel} +${(typeVuln * 100).toFixed(1)}% → ×${(1 + vuln).toFixed(4)}`, value: parseFloat((1 + vuln).toFixed(4)) });
+  if (comboFinal > 0) steps.push({ label: '연타', formula: `+${(comboFinal * 100).toFixed(1)}% → ×${(1 + comboFinal).toFixed(4)}`, value: parseFloat((1 + comboFinal).toFixed(4)) });
   steps.push({ label: '치명타 기댓값', formula: `1 + (${fmtPct(critRate)}×${fmtPct(critDmg)}) = ×${critExpectedMult.toFixed(4)}`, value: parseFloat(critExpectedMult.toFixed(4)) });
 
   const finalDamage = effects.isCrit ? critDamage : nonCritDamage;

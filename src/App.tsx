@@ -25,6 +25,20 @@ const operators = loadAllOperators();
 const gearSets = getAllGearSets();
 const gearItems = getAllGearItems();
 
+function extractElementalArtsBonus(customText?: string): number {
+  if (!customText) return 0;
+  const isElemental = /(냉기|전기|열기|자연)\s*피해/.test(customText);
+  if (!isElemental) return 0;
+  const re = /([0-9]+(?:\.[0-9]+)?)%/g;
+  let m: RegExpExecArray | null;
+  let max = 0;
+  while ((m = re.exec(customText)) !== null) {
+    const v = parseFloat(m[1]) / 100;
+    if (v > max) max = v;
+  }
+  return max;
+}
+
 function App() {
   const [selectedOperator, setSelectedOperator] = useState<Operator | null>(null);
   const [selectedWeapon, setSelectedWeapon] = useState<Weapon | null>(null);
@@ -60,12 +74,12 @@ function App() {
     const selected = Object.values(gearLoadout).filter(Boolean) as GearItem[];
     const gearBuffs: Partial<BuffSet> = {
       atkPercent: 0, atkFlat: 0, critRate: 0, critDmg: 0, defPenFlat: 0, defPenPercent: 0,
-      resPen: 0, physDmgBonus: 0, artsDmgBonus: 0, skillDmgBonus: 0, battleSkillDmgBonus: 0, comboSkillDmgBonus: 0, ultimateSkillDmgBonus: 0, ampBonus: 0, vulnBonus: 0, takenDmgBonus: 0, extraDmgBonus: 0,
+      resPen: 0, physDmgBonus: 0, artsDmgBonus: 0, skillDmgBonus: 0, battleSkillDmgBonus: 0, comboSkillDmgBonus: 0, ultimateSkillDmgBonus: 0, ampBonus: 0, physAmpBonus: 0, artsAmpBonus: 0, vulnBonus: 0, physVulnBonus: 0, artsVulnBonus: 0, takenDmgBonus: 0, extraDmgBonus: 0,
       strFlat: 0, agiFlat: 0, intFlat: 0, wilFlat: 0,
     };
 
     selected.forEach(g => {
-      g.options.forEach(({ stats }) => {
+      g.options.forEach(({ stats, customText }) => {
         gearBuffs.strFlat! += stats.str || 0;
         gearBuffs.agiFlat! += stats.agi || 0;
         gearBuffs.intFlat! += stats.int || 0;
@@ -74,7 +88,7 @@ function App() {
         gearBuffs.atkFlat! += stats.atkFlat || 0;
         gearBuffs.critRate! += stats.critRate || 0;
         gearBuffs.physDmgBonus! += stats.physDmgBonus || 0;
-        gearBuffs.artsDmgBonus! += stats.artsDmgBonus || 0;
+        gearBuffs.artsDmgBonus! += (stats.artsDmgBonus || 0) + extractElementalArtsBonus(customText);
         gearBuffs.skillDmgBonus! += stats.skillDmgBonus || 0;
         gearBuffs.battleSkillDmgBonus! += stats.battleSkillDmgBonus || 0;
         gearBuffs.comboSkillDmgBonus! += stats.comboSkillDmgBonus || 0;
@@ -116,7 +130,11 @@ function App() {
     comboSkillDmgBonus: buffs.comboSkillDmgBonus + derivedGear.gearBuffs.comboSkillDmgBonus,
     ultimateSkillDmgBonus: buffs.ultimateSkillDmgBonus + derivedGear.gearBuffs.ultimateSkillDmgBonus,
     ampBonus: buffs.ampBonus + derivedGear.gearBuffs.ampBonus,
+    physAmpBonus: buffs.physAmpBonus + derivedGear.gearBuffs.physAmpBonus,
+    artsAmpBonus: buffs.artsAmpBonus + derivedGear.gearBuffs.artsAmpBonus,
     vulnBonus: buffs.vulnBonus + derivedGear.gearBuffs.vulnBonus,
+    physVulnBonus: buffs.physVulnBonus + derivedGear.gearBuffs.physVulnBonus,
+    artsVulnBonus: buffs.artsVulnBonus + derivedGear.gearBuffs.artsVulnBonus,
     takenDmgBonus: buffs.takenDmgBonus + derivedGear.gearBuffs.takenDmgBonus,
     extraDmgBonus: buffs.extraDmgBonus + derivedGear.gearBuffs.extraDmgBonus,
     strFlat: buffs.strFlat + derivedGear.gearBuffs.strFlat,
@@ -237,12 +255,28 @@ function App() {
                 </div>
 
                 <div>
-                  <label className="block text-text-dim text-xs mb-0.5">증폭 %</label>
+                  <label className="block text-text-dim text-xs mb-0.5">증폭(공통) %</label>
                   <input type="number" min={0} step={1} className="w-full bg-bg border border-border rounded px-2 py-1.5 text-text text-sm font-mono focus:border-accent focus:outline-none" value={Math.round(buffs.ampBonus * 100)} onChange={(e) => setBuffs(b => ({ ...b, ampBonus: (parseInt(e.target.value) || 0) / 100 }))} />
                 </div>
                 <div>
-                  <label className="block text-text-dim text-xs mb-0.5">취약 %</label>
+                  <label className="block text-text-dim text-xs mb-0.5">증폭(물리) %</label>
+                  <input type="number" min={0} step={1} className="w-full bg-bg border border-border rounded px-2 py-1.5 text-text text-sm font-mono focus:border-accent focus:outline-none" value={Math.round(buffs.physAmpBonus * 100)} onChange={(e) => setBuffs(b => ({ ...b, physAmpBonus: (parseInt(e.target.value) || 0) / 100 }))} />
+                </div>
+                <div>
+                  <label className="block text-text-dim text-xs mb-0.5">증폭(아츠) %</label>
+                  <input type="number" min={0} step={1} className="w-full bg-bg border border-border rounded px-2 py-1.5 text-text text-sm font-mono focus:border-accent focus:outline-none" value={Math.round(buffs.artsAmpBonus * 100)} onChange={(e) => setBuffs(b => ({ ...b, artsAmpBonus: (parseInt(e.target.value) || 0) / 100 }))} />
+                </div>
+                <div>
+                  <label className="block text-text-dim text-xs mb-0.5">취약(공통) %</label>
                   <input type="number" min={0} step={1} className="w-full bg-bg border border-border rounded px-2 py-1.5 text-text text-sm font-mono focus:border-accent focus:outline-none" value={Math.round(buffs.vulnBonus * 100)} onChange={(e) => setBuffs(b => ({ ...b, vulnBonus: (parseInt(e.target.value) || 0) / 100 }))} />
+                </div>
+                <div>
+                  <label className="block text-text-dim text-xs mb-0.5">취약(물리) %</label>
+                  <input type="number" min={0} step={1} className="w-full bg-bg border border-border rounded px-2 py-1.5 text-text text-sm font-mono focus:border-accent focus:outline-none" value={Math.round(buffs.physVulnBonus * 100)} onChange={(e) => setBuffs(b => ({ ...b, physVulnBonus: (parseInt(e.target.value) || 0) / 100 }))} />
+                </div>
+                <div>
+                  <label className="block text-text-dim text-xs mb-0.5">취약(아츠) %</label>
+                  <input type="number" min={0} step={1} className="w-full bg-bg border border-border rounded px-2 py-1.5 text-text text-sm font-mono focus:border-accent focus:outline-none" value={Math.round(buffs.artsVulnBonus * 100)} onChange={(e) => setBuffs(b => ({ ...b, artsVulnBonus: (parseInt(e.target.value) || 0) / 100 }))} />
                 </div>
                 <div>
                   <label className="block text-text-dim text-xs mb-0.5">받는 피해 증가 %</label>
