@@ -65,16 +65,18 @@ function App() {
     };
 
     selected.forEach(g => {
-      gearBuffs.strFlat! += g.str || 0;
-      gearBuffs.agiFlat! += g.agi || 0;
-      gearBuffs.intFlat! += g.int || 0;
-      gearBuffs.wilFlat! += g.wil || 0;
-      gearBuffs.atkPercent! += g.atkPercent || 0;
-      gearBuffs.atkFlat! += g.atkFlat || 0;
-      gearBuffs.critRate! += g.critRate || 0;
-      gearBuffs.physDmgBonus! += g.physDmgBonus || 0;
-      gearBuffs.artsDmgBonus! += g.artsDmgBonus || 0;
-      gearBuffs.skillDmgBonus! += g.skillDmgBonus || 0;
+      g.options.forEach(({ stats }) => {
+        gearBuffs.strFlat! += stats.str || 0;
+        gearBuffs.agiFlat! += stats.agi || 0;
+        gearBuffs.intFlat! += stats.int || 0;
+        gearBuffs.wilFlat! += stats.wil || 0;
+        gearBuffs.atkPercent! += stats.atkPercent || 0;
+        gearBuffs.atkFlat! += stats.atkFlat || 0;
+        gearBuffs.critRate! += stats.critRate || 0;
+        gearBuffs.physDmgBonus! += stats.physDmgBonus || 0;
+        gearBuffs.artsDmgBonus! += stats.artsDmgBonus || 0;
+        gearBuffs.skillDmgBonus! += stats.skillDmgBonus || 0;
+      });
     });
 
     const countMap: Record<string, number> = {};

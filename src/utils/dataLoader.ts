@@ -1,4 +1,4 @@
-import type { Operator, Weapon, GearSet, Enemy, BuffSet, SpecialEffects, WeaponCategory, GearItem, GearSlot } from '../types';
+import type { Operator, Weapon, GearSet, Enemy, BuffSet, SpecialEffects, WeaponCategory, GearItem, GearType } from '../types';
 import chenData from '../data/operators/chen.json';
 import weaponsData from '../data/weapons/weapons.json';
 import gearsetsData from '../data/gearsets.json';
@@ -92,6 +92,6 @@ export function getAllGearItems(): GearItem[] {
   return allGearItems;
 }
 
-export function getGearItemsBySlot(slot: GearSlot): GearItem[] {
-  return allGearItems.filter(g => g.slot === slot);
+export function getGearItemsByType(type: GearType): GearItem[] {
+  return allGearItems.filter(g => g.type === type);
 }

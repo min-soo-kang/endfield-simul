@@ -168,13 +168,10 @@ export interface GearSet {
   bonuses: GearSetBonus[];
 }
 
+export type GearType = 'Armor' | 'Gloves' | 'Part';
 export type GearSlot = 'Armor' | 'Gloves' | 'Part1' | 'Part2';
 
-export interface GearItem {
-  id: string;
-  nameKo: string;
-  slot: GearSlot;
-  setId: string;
+export interface GearStats {
   str?: number;
   agi?: number;
   int?: number;
@@ -185,6 +182,20 @@ export interface GearItem {
   physDmgBonus?: number;
   artsDmgBonus?: number;
   skillDmgBonus?: number;
+}
+
+export interface GearOption {
+  kind: 'main' | 'sub' | 'extra';
+  nameKo: string;
+  stats: GearStats;
+}
+
+export interface GearItem {
+  id: string;
+  nameKo: string;
+  type: GearType;
+  setId: string;
+  options: [GearOption, GearOption, GearOption];
 }
 
 /** 적 스탯 */
