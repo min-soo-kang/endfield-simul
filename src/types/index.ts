@@ -253,10 +253,18 @@ export interface BuffSet {
   comboSkillDmgBonus: number;
   /** 궁극기 데미지 보너스 */
   ultimateSkillDmgBonus: number;
-  /** 증폭 수치 */
+  /** 공통 증폭 수치 */
   ampBonus: number;
-  /** 취약 수치 */
+  /** 물리 증폭 수치 */
+  physAmpBonus: number;
+  /** 아츠 증폭 수치 */
+  artsAmpBonus: number;
+  /** 공통 취약 수치 */
   vulnBonus: number;
+  /** 물리 취약 수치 */
+  physVulnBonus: number;
+  /** 아츠 취약 수치 */
+  artsVulnBonus: number;
   /** 받는 피해 증가 수치 */
   takenDmgBonus: number;
   /** 기타 추가 데미지 */
