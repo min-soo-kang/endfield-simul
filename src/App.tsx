@@ -61,9 +61,14 @@ function App() {
     const gearBuffs: Partial<BuffSet> = {
       atkPercent: 0, atkFlat: 0, critRate: 0, critDmg: 0, defPenFlat: 0, defPenPercent: 0,
       resPen: 0, physDmgBonus: 0, artsDmgBonus: 0, skillDmgBonus: 0, ampBonus: 0, vulnBonus: 0, takenDmgBonus: 0, extraDmgBonus: 0,
+      strFlat: 0, agiFlat: 0, intFlat: 0, wilFlat: 0,
     };
 
     selected.forEach(g => {
+      gearBuffs.strFlat! += g.str || 0;
+      gearBuffs.agiFlat! += g.agi || 0;
+      gearBuffs.intFlat! += g.int || 0;
+      gearBuffs.wilFlat! += g.wil || 0;
       gearBuffs.atkPercent! += g.atkPercent || 0;
       gearBuffs.atkFlat! += g.atkFlat || 0;
       gearBuffs.critRate! += g.critRate || 0;
@@ -81,7 +86,7 @@ function App() {
 
     let activeSet: GearSet | null = null;
     if (active?.set) {
-      const activeBonuses = active.set.bonuses.filter(b => active.count >= b.pieces);
+      const activeBonuses = active.set.bonuses.filter(b => active.count >= b.pieces && active.count >= 3);
       if (activeBonuses.length > 0) {
         activeSet = { ...active.set, bonuses: activeBonuses };
       }
@@ -106,6 +111,10 @@ function App() {
     vulnBonus: buffs.vulnBonus + derivedGear.gearBuffs.vulnBonus,
     takenDmgBonus: buffs.takenDmgBonus + derivedGear.gearBuffs.takenDmgBonus,
     extraDmgBonus: buffs.extraDmgBonus + derivedGear.gearBuffs.extraDmgBonus,
+    strFlat: buffs.strFlat + derivedGear.gearBuffs.strFlat,
+    agiFlat: buffs.agiFlat + derivedGear.gearBuffs.agiFlat,
+    intFlat: buffs.intFlat + derivedGear.gearBuffs.intFlat,
+    wilFlat: buffs.wilFlat + derivedGear.gearBuffs.wilFlat,
   }), [buffs, derivedGear]);
 
   const result = useCalculation(

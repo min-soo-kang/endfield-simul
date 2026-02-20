@@ -24,6 +24,10 @@ const slotLabel: Record<GearSlot, string> = {
 
 function renderGearStat(item: GearItem): string[] {
   const rows: string[] = [];
+  if (item.str) rows.push(`힘 +${item.str}`);
+  if (item.agi) rows.push(`민첩 +${item.agi}`);
+  if (item.int) rows.push(`지능 +${item.int}`);
+  if (item.wil) rows.push(`의지 +${item.wil}`);
   if (item.atkFlat) rows.push(`고정 공격력 +${item.atkFlat}`);
   if (item.atkPercent) rows.push(`공격력 +${(item.atkPercent * 100).toFixed(1)}%`);
   if (item.critRate) rows.push(`치명타 확률 +${(item.critRate * 100).toFixed(1)}%`);

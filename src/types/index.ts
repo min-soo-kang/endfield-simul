@@ -175,6 +175,10 @@ export interface GearItem {
   nameKo: string;
   slot: GearSlot;
   setId: string;
+  str?: number;
+  agi?: number;
+  int?: number;
+  wil?: number;
   atkPercent?: number;
   atkFlat?: number;
   critRate?: number;
@@ -229,6 +233,14 @@ export interface BuffSet {
   takenDmgBonus: number;
   /** 기타 추가 데미지 */
   extraDmgBonus: number;
+  /** 장비 등으로 추가되는 힘 */
+  strFlat: number;
+  /** 장비 등으로 추가되는 민첩 */
+  agiFlat: number;
+  /** 장비 등으로 추가되는 지능 */
+  intFlat: number;
+  /** 장비 등으로 추가되는 의지 */
+  wilFlat: number;
 }
 
 /** 특수 효과 상태 */

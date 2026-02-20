@@ -4,6 +4,8 @@
     "nameKo": "홍산 전술 건틀릿 방어구",
     "slot": "Armor",
     "setId": "hongsan_tactical",
+    "str": 18,
+    "agi": 22,
     "atkFlat": 60,
     "critRate": 0.02
   },
@@ -12,6 +14,7 @@
     "nameKo": "홍산 전술 건틀릿 장갑",
     "slot": "Gloves",
     "setId": "hongsan_tactical",
+    "agi": 26,
     "atkPercent": 0.05
   },
   {
@@ -19,6 +22,8 @@
     "nameKo": "홍산 전술 건틀릿 부품1",
     "slot": "Part1",
     "setId": "hongsan_tactical",
+    "str": 14,
+    "wil": 10,
     "physDmgBonus": 0.06
   },
   {
@@ -26,6 +31,8 @@
     "nameKo": "홍산 전술 건틀릿 부품2",
     "slot": "Part2",
     "setId": "hongsan_tactical",
+    "agi": 16,
+    "int": 8,
     "skillDmgBonus": 0.05
   },
   {
@@ -33,6 +40,8 @@
     "nameKo": "응룡 50식 방어구",
     "slot": "Armor",
     "setId": "yinglong_50",
+    "str": 16,
+    "wil": 18,
     "atkFlat": 45
   },
   {
@@ -40,6 +49,8 @@
     "nameKo": "응룡 50식 장갑",
     "slot": "Gloves",
     "setId": "yinglong_50",
+    "agi": 14,
+    "int": 14,
     "atkPercent": 0.04
   },
   {
@@ -47,6 +58,7 @@
     "nameKo": "응룡 50식 부품1",
     "slot": "Part1",
     "setId": "yinglong_50",
+    "int": 22,
     "critRate": 0.015
   },
   {
@@ -54,6 +66,7 @@
     "nameKo": "응룡 50식 부품2",
     "slot": "Part2",
     "setId": "yinglong_50",
+    "wil": 20,
     "skillDmgBonus": 0.04
   }
 ]

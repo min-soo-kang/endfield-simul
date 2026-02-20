@@ -67,6 +67,10 @@ export function createDefaultBuffs(): BuffSet {
     vulnBonus: 0,
     takenDmgBonus: 0,
     extraDmgBonus: 0,
+    strFlat: 0,
+    agiFlat: 0,
+    intFlat: 0,
+    wilFlat: 0,
   };
 }
 
