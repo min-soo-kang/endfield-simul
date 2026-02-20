@@ -31,11 +31,11 @@ export const SHOCK_ARTS_BONUS_MAX = 0.24;
 /** 감전 - 시뮬레이터 기본값 (18% 중간값) */
 export const SHOCK_ARTS_BONUS = 0.18;
 
-/** 능력치 → ATK 변환: 주능력치 1pt = ATK 1% */
-export const MAIN_ATTR_ATK_RATIO = 0.01;
+/** 능력치 → ATK 변환: 주능력치 2pt = ATK 1% */
+export const MAIN_ATTR_ATK_RATIO = 0.005;
 
-/** 능력치 → ATK 변환: 부능력치 1pt = ATK 0.4% */
-export const SUB_ATTR_ATK_RATIO = 0.004;
+/** 능력치 → ATK 변환: 부능력치 5pt = ATK 1% */
+export const SUB_ATTR_ATK_RATIO = 0.002;
 
 /** 스킬 타입 식별용 */
 export type SkillType = 'basic' | 'battle' | 'combo' | 'ultimate';

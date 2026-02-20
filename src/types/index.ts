@@ -33,6 +33,27 @@ export interface Attributes {
 /** 주/보조 능력치 */
 export type MainAttribute = 'str' | 'agi' | 'int' | 'wil';
 
+/** 잠재 단계 효과 */
+export interface PotentialBonus {
+  level: number;
+  title?: string;
+  description: string;
+  notes?: string[];
+  atkPercent?: number;
+  atkFlat?: number;
+  critRate?: number;
+  critDmg?: number;
+  physDmgBonus?: number;
+  artsDmgBonus?: number;
+  skillDmgBonus?: number;
+  defPenFlat?: number;
+  defPenPercent?: number;
+  agiFlat?: number;
+  battleSkillMultiplierBonus?: number;
+  comboSkillMultiplierBonus?: number;
+  ultimateSkillMultiplierBonus?: number;
+}
+
 /** 스킬 레벨별 배율 */
 export interface SkillLevel {
   level: number;
@@ -84,6 +105,8 @@ export interface Operator {
   skills: Skill[];
   /** 재능/패시브 설명 */
   talents: string[];
+  /** 잠재 단계 효과 (0~5) */
+  potentialBonuses?: PotentialBonus[];
 }
 
 /** 무기 */
@@ -110,6 +133,16 @@ export interface Weapon {
   artsDmgBonus: number;
   /** 패시브 효과 설명 */
   passive: string;
+  /** 주요 능력치 고정 증가량 (예: 부요 Lv9 = +132) */
+  mainStatFlatBonus?: number;
+  /** 주요 능력치 옵션 레벨 */
+  mainStatBonusLevel?: number;
+  /** 치명타 확률 옵션 레벨 */
+  critRateLevel?: number;
+  /** 3옵 기본 레벨 */
+  thirdOptionBaseLevel?: number;
+  /** 잠재 단계 효과 (0~5) */
+  potentialBonuses?: PotentialBonus[];
 }
 
 /** 장비 세트 효과 */
@@ -123,6 +156,9 @@ export interface GearSetBonus {
   physDmgBonus?: number;
   artsDmgBonus?: number;
   skillDmgBonus?: number;
+  battleSkillDmgBonus?: number;
+  comboSkillDmgBonus?: number;
+  ultimateSkillDmgBonus?: number;
 }
 
 /** 장비 세트 */
@@ -135,6 +171,40 @@ export interface GearSet {
   bonuses: GearSetBonus[];
 }
 
+export type GearType = 'Armor' | 'Gloves' | 'Part';
+export type GearSlot = 'Armor' | 'Gloves' | 'Part1' | 'Part2';
+
+export interface GearStats {
+  str?: number;
+  agi?: number;
+  int?: number;
+  wil?: number;
+  atkPercent?: number;
+  atkFlat?: number;
+  critRate?: number;
+  physDmgBonus?: number;
+  artsDmgBonus?: number;
+  skillDmgBonus?: number;
+  battleSkillDmgBonus?: number;
+  comboSkillDmgBonus?: number;
+  ultimateSkillDmgBonus?: number;
+}
+
+export interface GearOption {
+  kind: 'main' | 'sub' | 'extra';
+  nameKo: string;
+  stats: GearStats;
+  customText?: string;
+}
+
+export interface GearItem {
+  id: string;
+  nameKo: string;
+  type: GearType;
+  setId: string;
+  options: [GearOption, GearOption, GearOption];
+}
+
 /** 적 스탯 */
 export interface Enemy {
   id: string;
@@ -145,6 +215,10 @@ export interface Enemy {
   elementRes: Partial<Record<ElementType, number>>;
   /** 방어 불능(Vulnerable) 상태 여부 */
   isVulnerable: boolean;
+  /** 현재 적 체력 비율 (0~100) */
+  hpPercent: number;
+  /** 불균형 상태 여부 */
+  isUnbalanced: boolean;
 }
 
 /** 버프/보너스 집계 */
@@ -169,6 +243,28 @@ export interface BuffSet {
   artsDmgBonus: number;
   /** 스킬 데미지 보너스 */
   skillDmgBonus: number;
+  /** 배틀 스킬 데미지 보너스 */
+  battleSkillDmgBonus: number;
+  /** 연계 스킬 데미지 보너스 */
+  comboSkillDmgBonus: number;
+  /** 궁극기 데미지 보너스 */
+  ultimateSkillDmgBonus: number;
+  /** 증폭 수치 */
+  ampBonus: number;
+  /** 취약 수치 */
+  vulnBonus: number;
+  /** 받는 피해 증가 수치 */
+  takenDmgBonus: number;
+  /** 기타 추가 데미지 */
+  extraDmgBonus: number;
+  /** 장비 등으로 추가되는 힘 */
+  strFlat: number;
+  /** 장비 등으로 추가되는 민첩 */
+  agiFlat: number;
+  /** 장비 등으로 추가되는 지능 */
+  intFlat: number;
+  /** 장비 등으로 추가되는 의지 */
+  wilFlat: number;
 }
 
 /** 특수 효과 상태 */
@@ -178,12 +274,16 @@ export interface SpecialEffects {
   isVulnerable: boolean;
   /** 갑옷 파괴 (물리 피해 증가) */
   armorBreak: boolean;
-  /** 연타 (배틀 스킬 피해 +30%, 궁극기 피해 +20%) */
-  comboHit: boolean;
+  /** 연타 스택 (0~4) */
+  comboStack: 0 | 1 | 2 | 3 | 4;
   /** 연소 상태 */
   isBurning: boolean;
   /** 감전 상태 (아츠 피해 증가) */
   isShocked: boolean;
+  /** 연타 1스택당 배틀 스킬 피해 증가율 */
+  comboBattlePerStack: number;
+  /** 연타 1스택당 궁극기 피해 증가율 */
+  comboUltimatePerStack: number;
 }
 
 /** 계산 단계 하나 */
@@ -193,16 +293,27 @@ export interface CalcStep {
   value: number;
 }
 
+
+export interface SummaryCardItem {
+  key: string;
+  title: string;
+  valueText: string;
+  details: string[];
+}
+
 /** 최종 데미지 결과 */
 export interface DamageResult {
   finalDamage: number;
   isCrit: boolean;
+  hitCount: number;
+  perHitDamage: number;
   steps: CalcStep[];
   nonCritDamage: number;
   critDamage: number;
   expectedDamage: number;
   critRate: number;
   critMultiplier: number;
+  summaryCards: SummaryCardItem[];
 }
 
 /** 전체 시뮬레이터 입력 상태 */

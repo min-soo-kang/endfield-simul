@@ -1,8 +1,9 @@
-import type { Operator, Weapon, GearSet, Enemy, BuffSet, SpecialEffects, WeaponCategory } from '../types';
+import type { Operator, Weapon, GearSet, Enemy, BuffSet, SpecialEffects, WeaponCategory, GearItem, GearType } from '../types';
 import chenData from '../data/operators/chen.json';
 import weaponsData from '../data/weapons/weapons.json';
 import gearsetsData from '../data/gearsets.json';
 import enemiesData from '../data/enemies.json';
+import gearsData from '../data/gears.json';
 
 const allOperators: Operator[] = [
   chenData as unknown as Operator,
@@ -11,6 +12,7 @@ const allOperators: Operator[] = [
 const allWeapons: Weapon[] = weaponsData as unknown as Weapon[];
 const allGearSets: GearSet[] = gearsetsData as unknown as GearSet[];
 const allEnemies: Enemy[] = enemiesData as unknown as Enemy[];
+const allGearItems: GearItem[] = gearsData as unknown as GearItem[];
 
 export function loadAllOperators(): Operator[] {
   return allOperators;
@@ -33,7 +35,7 @@ export function getAllGearSets(): GearSet[] {
 }
 
 export function getEnemyPresets(): Enemy[] {
-  return allEnemies;
+  return allEnemies.map(e => ({ ...e, hpPercent: e.hpPercent ?? 100, isUnbalanced: e.isUnbalanced ?? false }));
 }
 
 export function createDefaultEnemy(): Enemy {
@@ -44,6 +46,8 @@ export function createDefaultEnemy(): Enemy {
     res: 15,
     elementRes: {},
     isVulnerable: false,
+    hpPercent: 100,
+    isUnbalanced: false,
   };
 }
 
@@ -59,6 +63,17 @@ export function createDefaultBuffs(): BuffSet {
     physDmgBonus: 0,
     artsDmgBonus: 0,
     skillDmgBonus: 0,
+    battleSkillDmgBonus: 0,
+    comboSkillDmgBonus: 0,
+    ultimateSkillDmgBonus: 0,
+    ampBonus: 0,
+    vulnBonus: 0,
+    takenDmgBonus: 0,
+    extraDmgBonus: 0,
+    strFlat: 0,
+    agiFlat: 0,
+    intFlat: 0,
+    wilFlat: 0,
   };
 }
 
@@ -67,8 +82,19 @@ export function createDefaultEffects(): SpecialEffects {
     isCrit: false,
     isVulnerable: false,
     armorBreak: false,
-    comboHit: false,
+    comboStack: 0,
     isBurning: false,
     isShocked: false,
+    comboBattlePerStack: 0.3,
+    comboUltimatePerStack: 0.2,
   };
+}
+
+
+export function getAllGearItems(): GearItem[] {
+  return allGearItems;
+}
+
+export function getGearItemsByType(type: GearType): GearItem[] {
+  return allGearItems.filter(g => g.type === type);
 }
