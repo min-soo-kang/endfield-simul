@@ -7,11 +7,6 @@ export interface CritResult {
   steps: CalcStep[];
 }
 
-/**
- * 크리티컬 계산
- * CritRate = BASE_CRIT_RATE + weapon.critRate + buffs.critRate (최대 100%)
- * CritMult = 1 + BASE_CRIT_DMG + buffs.critDmg
- */
 export function calculateCrit(
   weapon: Weapon | null,
   buffs: BuffSet
@@ -21,14 +16,14 @@ export function calculateCrit(
   const wpnCritRate = weapon ? weapon.critRate : 0;
   const totalCritRate = Math.min(1, BASE_CRIT_RATE + wpnCritRate + buffs.critRate);
   steps.push({
-    label: 'Crit Rate',
+    label: '치명타 확률',
     formula: `${(BASE_CRIT_RATE * 100).toFixed(0)}% + ${(wpnCritRate * 100).toFixed(1)}% + ${(buffs.critRate * 100).toFixed(0)}%`,
     value: parseFloat(totalCritRate.toFixed(4)),
   });
 
   const critMultiplier = 1 + BASE_CRIT_DMG + buffs.critDmg;
   steps.push({
-    label: 'Crit Multiplier',
+    label: '치명타 배율',
     formula: `1 + ${(BASE_CRIT_DMG * 100).toFixed(0)}% + ${(buffs.critDmg * 100).toFixed(0)}%`,
     value: parseFloat(critMultiplier.toFixed(4)),
   });

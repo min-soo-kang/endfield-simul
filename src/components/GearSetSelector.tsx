@@ -10,34 +10,48 @@ interface Props {
 const GearSetSelector: React.FC<Props> = ({ gearSets, selected, onSelect }) => {
   return (
     <div>
-      <label className="block text-text-muted text-xs uppercase tracking-wider mb-1.5">
-        Gear Set
+      <label className="block text-text-muted text-xs uppercase tracking-wider mb-2">
+        장비 세트 선택
       </label>
-      <select
-        className="w-full bg-bg border border-border rounded px-3 py-2 text-text focus:border-accent focus:outline-none"
-        value={selected?.id || ''}
-        onChange={(e) => {
-          if (e.target.value === '') {
-            onSelect(null);
-          } else {
-            const set = gearSets.find(g => g.id === e.target.value);
-            if (set) onSelect(set);
-          }
-        }}
-      >
-        <option value="">None</option>
-        {gearSets.map(set => (
-          <option key={set.id} value={set.id}>
-            {set.nameKo} ({set.name}) - {set.recommendedFor}
-          </option>
-        ))}
-      </select>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+        <button
+          onClick={() => onSelect(null)}
+          className={`text-left p-3 rounded border transition-colors ${
+            !selected
+              ? 'border-accent bg-accent/10 text-text'
+              : 'border-border bg-bg hover:border-border-light text-text-muted hover:text-text'
+          }`}
+        >
+          <div className="font-medium text-sm">미장착</div>
+          <div className="text-[11px] text-text-dim mt-1">세트 효과 없음</div>
+        </button>
+
+        {gearSets.map(set => {
+          const isSelected = selected?.id === set.id;
+          return (
+            <button
+              key={set.id}
+              onClick={() => onSelect(set)}
+              className={`text-left p-3 rounded border transition-colors ${
+                isSelected
+                  ? 'border-accent bg-accent/10 text-text'
+                  : 'border-border bg-bg hover:border-border-light text-text-muted hover:text-text'
+              }`}
+            >
+              <div className="font-medium text-sm">{set.nameKo}</div>
+              <div className="text-[11px] text-text-dim mt-1">추천: {set.recommendedFor}</div>
+            </button>
+          );
+        })}
+      </div>
+
       {selected && (
         <div className="mt-2 text-xs space-y-1">
-          <div className="text-text-dim">Recommended: {selected.recommendedFor}</div>
+          <div className="text-text-dim">추천 직군: {selected.recommendedFor}</div>
           {selected.bonuses.map((b, i) => (
             <div key={i} className="text-text-muted bg-bg rounded px-2 py-1.5 text-[11px] leading-tight">
-              <span className="text-accent">{b.pieces}pc:</span> {b.description}
+              <span className="text-accent">{b.pieces}세트:</span> {b.description}
             </div>
           ))}
         </div>
