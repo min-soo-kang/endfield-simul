@@ -80,7 +80,12 @@ function App() {
       .sort((a, b) => b.count - a.count)[0];
 
     let activeSet: GearSet | null = null;
-    if (active?.set && active.count >= Math.min(...active.set.bonuses.map(b => b.pieces))) activeSet = active.set;
+    if (active?.set) {
+      const activeBonuses = active.set.bonuses.filter(b => active.count >= b.pieces);
+      if (activeBonuses.length > 0) {
+        activeSet = { ...active.set, bonuses: activeBonuses };
+      }
+    }
 
     return { gearBuffs: gearBuffs as BuffSet, activeSet };
   }, [gearLoadout]);

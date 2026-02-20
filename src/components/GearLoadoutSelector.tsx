@@ -22,6 +22,17 @@ const slotLabel: Record<GearSlot, string> = {
   Part2: '부품2',
 };
 
+function renderGearStat(item: GearItem): string[] {
+  const rows: string[] = [];
+  if (item.atkFlat) rows.push(`고정 공격력 +${item.atkFlat}`);
+  if (item.atkPercent) rows.push(`공격력 +${(item.atkPercent * 100).toFixed(1)}%`);
+  if (item.critRate) rows.push(`치명타 확률 +${(item.critRate * 100).toFixed(1)}%`);
+  if (item.physDmgBonus) rows.push(`물리 피해 +${(item.physDmgBonus * 100).toFixed(1)}%`);
+  if (item.artsDmgBonus) rows.push(`아츠 피해 +${(item.artsDmgBonus * 100).toFixed(1)}%`);
+  if (item.skillDmgBonus) rows.push(`스킬 피해 +${(item.skillDmgBonus * 100).toFixed(1)}%`);
+  return rows;
+}
+
 const GearLoadoutSelector: React.FC<Props> = ({ gearItems, gearSets, loadout, onChange }) => {
   const setSummary = useMemo(() => {
     const countMap: Record<string, number> = {};
@@ -61,6 +72,13 @@ const GearLoadoutSelector: React.FC<Props> = ({ gearItems, gearSets, loadout, on
                   <option key={item.id} value={item.id}>{item.nameKo}</option>
                 ))}
               </select>
+              {loadout[slot] && (
+                <div className="mt-1 space-y-0.5">
+                  {renderGearStat(loadout[slot]!).map((st, idx) => (
+                    <div key={idx} className="text-[11px] text-text-muted">• {st}</div>
+                  ))}
+                </div>
+              )}
             </div>
           );
         })}

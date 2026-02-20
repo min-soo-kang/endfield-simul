@@ -1,15 +1,21 @@
 [
   {
-    "id": "mi_police",
-    "name": "M.I. Police Set",
-    "nameKo": "M.I. 경찰용",
+    "id": "hongsan_tactical",
+    "name": "Hongsan Tactical Gauntlet",
+    "nameKo": "홍산 전술 건틀릿",
     "recommendedFor": "물리 딜러",
     "bonuses": [
       {
-        "pieces": 3,
-        "description": "치명타 확률 +5%, 치명타 적중 후 공격력 +5% (최대 5스택)",
-        "critRate": 0.05,
-        "atkPercent": 0.25
+        "pieces": 2,
+        "description": "공격력 +10%, 물리 피해 +8%",
+        "atkPercent": 0.10,
+        "physDmgBonus": 0.08
+      },
+      {
+        "pieces": 4,
+        "description": "스킬 피해 +12%, 치명타 확률 +5%",
+        "skillDmgBonus": 0.12,
+        "critRate": 0.05
       }
     ]
   },
@@ -20,10 +26,28 @@
     "recommendedFor": "연계 스킬 딜러",
     "bonuses": [
       {
+        "pieces": 2,
+        "description": "공격력 +8%",
+        "atkPercent": 0.08
+      },
+      {
+        "pieces": 4,
+        "description": "연계/스킬 피해 +20%",
+        "skillDmgBonus": 0.20
+      }
+    ]
+  },
+  {
+    "id": "mi_police",
+    "name": "M.I. Police Set",
+    "nameKo": "M.I. 경찰용",
+    "recommendedFor": "물리 딜러",
+    "bonuses": [
+      {
         "pieces": 3,
-        "description": "공격력 +15%. 팀원 배틀 스킬 사용 시 연계 스킬 피해 +20% (최대 3스택)",
-        "atkPercent": 0.15,
-        "skillDmgBonus": 0.6
+        "description": "치명타 확률 +5%, 치명타 적중 후 공격력 +5% (최대 5스택)",
+        "critRate": 0.05,
+        "atkPercent": 0.25
       }
     ]
   },
