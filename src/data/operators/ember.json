@@ -1,0 +1,156 @@
+{
+  "id": "ember",
+  "name": "Ember",
+  "nameKo": "엠버",
+  "operatorClass": "Guard",
+  "weaponType": "TwoHandSword",
+  "element": "Fire",
+  "rarity": 6,
+  "stats": {
+    "hp": 6800,
+    "baseAtk": 323,
+    "def": 0,
+    "res": 0,
+    "attributes": {
+      "str": 236,
+      "agi": 96,
+      "int": 86,
+      "wil": 120
+    },
+    "mainAttr": "str",
+    "subAttr": "wil"
+  },
+  "skills": [
+    {
+      "id": "ember_basic",
+      "name": "Basic Attack",
+      "nameKo": "기본공격",
+      "damageType": "Arts",
+      "element": "Fire",
+      "levels": [
+        {
+          "level": 1,
+          "multiplier": 2
+        },
+        {
+          "level": 6,
+          "multiplier": 2.8
+        },
+        {
+          "level": 12,
+          "multiplier": 3.5
+        }
+      ],
+      "hits": 1,
+      "description": "기본 공격"
+    },
+    {
+      "id": "ember_battle",
+      "name": "Battle Skill",
+      "nameKo": "배틀 스킬",
+      "damageType": "Arts",
+      "element": "Fire",
+      "levels": [
+        {
+          "level": 1,
+          "multiplier": 2
+        },
+        {
+          "level": 6,
+          "multiplier": 3
+        },
+        {
+          "level": 12,
+          "multiplier": 4
+        }
+      ],
+      "hits": 1,
+      "description": "방어 불능 부여 (배율 미확인)"
+    },
+    {
+      "id": "ember_combo",
+      "name": "Combo Skill",
+      "nameKo": "연계 스킬",
+      "damageType": "Arts",
+      "element": "Fire",
+      "levels": [
+        {
+          "level": 1,
+          "multiplier": 2
+        },
+        {
+          "level": 6,
+          "multiplier": 3
+        },
+        {
+          "level": 12,
+          "multiplier": 4
+        }
+      ],
+      "hits": 1,
+      "description": "치유 + 방어 불능 부여 (배율 미확인)"
+    },
+    {
+      "id": "ember_ultimate",
+      "name": "Ultimate",
+      "nameKo": "궁극기",
+      "damageType": "Arts",
+      "element": "Fire",
+      "levels": [
+        {
+          "level": 1,
+          "multiplier": 5
+        },
+        {
+          "level": 6,
+          "multiplier": 7.5
+        },
+        {
+          "level": 12,
+          "multiplier": 10
+        }
+      ],
+      "hits": 4,
+      "description": "보호 (배율 미확인)"
+    }
+  ],
+  "talents": [
+    "비호",
+    "공격력 +27%"
+  ],
+  "talentBuffs": {
+    "atkPercent": 0.27
+  },
+  "potentialBonuses": [
+    {
+      "level": 0,
+      "title": "잠재 0",
+      "description": "잠재 미개방"
+    },
+    {
+      "level": 1,
+      "title": "잠재 1",
+      "description": "힘 +20, 의지 +20"
+    },
+    {
+      "level": 2,
+      "title": "잠재 2",
+      "description": "미확인"
+    },
+    {
+      "level": 3,
+      "title": "잠재 3",
+      "description": "미확인"
+    },
+    {
+      "level": 4,
+      "title": "잠재 4",
+      "description": "미확인"
+    },
+    {
+      "level": 5,
+      "title": "잠재 5",
+      "description": "팀 공격력 +10%"
+    }
+  ]
+}

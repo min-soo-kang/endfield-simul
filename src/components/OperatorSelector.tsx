@@ -21,10 +21,19 @@ const classLabel: Record<Operator['operatorClass'], string> = {
 const weaponLabel: Record<Operator['weaponType'], string> = {
   OneHandSword: '한손검',
   TwoHandSword: '양손검',
+  Polearm: '창',
+  HandCannon: '핸드캐논',
   Bow: '활',
   Staff: '지팡이',
   Pistol: '권총',
   Shield: '방패',
+};
+
+const attrLabel: Record<string, string> = {
+  str: '힘',
+  agi: '민첩',
+  int: '지능',
+  wil: '의지',
 };
 
 const OperatorSelector: React.FC<Props> = ({ operators, selected, onSelect, potentialLevel, onPotentialChange }) => {
@@ -76,6 +85,15 @@ const OperatorSelector: React.FC<Props> = ({ operators, selected, onSelect, pote
             <div>체력: <span className="text-text font-mono">{selected.stats.hp}</span></div>
             <div>직군: <span className="text-text">{classLabel[selected.operatorClass]}</span></div>
             <div>무기: <span className="text-text">{weaponLabel[selected.weaponType]}</span></div>
+            {(['str', 'agi', 'int', 'wil'] as const).map(attr => (
+              <div key={attr}>
+                {attrLabel[attr]}
+                {selected.stats.mainAttr === attr && <span className="text-accent ml-0.5">(주)</span>}
+                {selected.stats.subAttr === attr && <span className="text-text-dim ml-0.5">(보)</span>}
+                {': '}
+                <span className="text-text font-mono">{selected.stats.attributes[attr]}</span>
+              </div>
+            ))}
           </div>
         </>
       )}

@@ -38,11 +38,11 @@ const EffectToggles: React.FC<Props> = ({ effects, onChange }) => {
           </select>
         </div>
         <div>
-          <label className="block text-text-dim text-xs mb-0.5">배틀 스킬 스택당 %</label>
+          <label className="block text-text-dim text-xs mb-0.5">배틀 스킬 기본% (×스택+1)</label>
           <input type="number" min={0} step={1} className="w-full bg-bg border border-border rounded px-2 py-1.5 text-text text-sm font-mono" value={Math.round(effects.comboBattlePerStack * 100)} onChange={(e) => onChange({ ...effects, comboBattlePerStack: (parseInt(e.target.value) || 0) / 100 })} />
         </div>
         <div>
-          <label className="block text-text-dim text-xs mb-0.5">궁극기 스택당 %</label>
+          <label className="block text-text-dim text-xs mb-0.5">궁극기 기본% (×스택+1)</label>
           <input type="number" min={0} step={1} className="w-full bg-bg border border-border rounded px-2 py-1.5 text-text text-sm font-mono" value={Math.round(effects.comboUltimatePerStack * 100)} onChange={(e) => onChange({ ...effects, comboUltimatePerStack: (parseInt(e.target.value) || 0) / 100 })} />
         </div>
       </div>

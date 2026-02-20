@@ -13,7 +13,7 @@
     "res": 0,
     "attributes": {
       "str": 106,
-      "agi": 171,
+      "agi": 231,
       "int": 85,
       "wil": 93
     },
@@ -179,9 +179,12 @@
     }
   ],
   "talents": [
-    "참격의 칼날: 스킬 적중 시 ATK +4% (최대 5스택, 10초 지속)",
+    "참격의 칼날: 공격력 +40%",
     "기세 꺾기: 적 돌진 공격 중단 시 스태거 +5"
   ],
+  "talentBuffs": {
+    "atkPercent": 0.4
+  },
   "potentialBonuses": [
     {
       "level": 0,
@@ -191,7 +194,7 @@
     {
       "level": 1,
       "title": "절영",
-      "description": "생명력이 50% 이하인 적에게 주는 피해 +20%",
+      "description": "주는 피해 +20%",
       "skillDmgBonus": 0.2
     },
     {
@@ -204,10 +207,7 @@
     {
       "level": 3,
       "title": "쌍검의 협객",
-      "description": "배틀 스킬 귀궁우, 연계 스킬 견천하, 궁극기 예풍상의 피해 배율 1.1배",
-      "battleSkillMultiplierBonus": 0.1,
-      "comboSkillMultiplierBonus": 0.1,
-      "ultimateSkillMultiplierBonus": 0.1
+      "description": "데미지 계산에 반영되지 않음"
     },
     {
       "level": 4,

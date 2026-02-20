@@ -64,11 +64,32 @@ const WeaponSelector: React.FC<Props> = ({ weapons, selected, onSelect, potentia
           </div>
 
           <div className="mt-2 text-xs text-text-muted space-y-0.5">
-            <div>공격력: <span className="text-text font-mono">{selected.atk}</span></div>
-            <div>주요 능력치 옵션: <span className="text-text font-mono">Lv.{selected.mainStatBonusLevel || 9} (+{selected.mainStatFlatBonus || 0})</span></div>
-            <div>치명타 옵션: <span className="text-text font-mono">Lv.{selected.critRateLevel || 9} (+{(selected.critRate * 100).toFixed(1)}%)</span></div>
-            <div>3옵 기본: <span className="text-text font-mono">Lv.{selected.thirdOptionBaseLevel || 4}</span></div>
-            <div className="text-text-dim italic text-[11px]">{selected.passive}</div>
+            <div>기본 공격력: <span className="text-text font-mono">{selected.atk}</span></div>
+            {selected.atkPercent > 0 && (
+              <div>공격력 %: <span className="text-text font-mono">+{(selected.atkPercent * 100).toFixed(1)}%</span></div>
+            )}
+            {selected.critRate > 0 && (
+              <div>치명타 확률: <span className="text-text font-mono">+{(selected.critRate * 100).toFixed(1)}%</span></div>
+            )}
+            {selected.critDmg > 0 && (
+              <div>치명타 피해: <span className="text-text font-mono">+{(selected.critDmg * 100).toFixed(1)}%</span></div>
+            )}
+            {selected.physDmgBonus > 0 && (
+              <div>물리 피해: <span className="text-text font-mono">+{(selected.physDmgBonus * 100).toFixed(1)}%</span></div>
+            )}
+            {selected.artsDmgBonus > 0 && (
+              <div>아츠 피해: <span className="text-text font-mono">+{(selected.artsDmgBonus * 100).toFixed(1)}%</span></div>
+            )}
+            {selected.mainStatFlatBonus != null && selected.mainStatFlatBonus > 0 && (
+              <div>주요 능력치: <span className="text-text font-mono">+{selected.mainStatFlatBonus}</span></div>
+            )}
+            {selected.thirdOptionBaseLevel !== undefined && (() => {
+              const pb = selected.potentialBonuses?.find(p => p.level === potentialLevel);
+              return pb ? (
+                <div>3옵 ({pb.title}): <span className="text-text font-mono">{pb.description}</span></div>
+              ) : null;
+            })()}
+            <div className="text-text-dim italic text-[11px] pt-0.5">{selected.passive}</div>
           </div>
         </>
       )}

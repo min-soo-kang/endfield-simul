@@ -70,7 +70,7 @@ function getBuyoThirdOptionBonus(weapon: Weapon | null, lv: number, skillType: S
   const wp = weapon.potentialBonuses?.find(p => p.level === lv);
   if (!wp) return 0;
   let bonus = 0;
-  if (skillType === 'battle' || skillType === 'ultimate') bonus += wp.physDmgBonus || 0;
+  bonus += wp.physDmgBonus || 0;
   if (enemy.isUnbalanced) {
     const unbalancedByLevel = [0.8, 0.9, 1.0, 1.1, 1.2, 1.4];
     bonus += unbalancedByLevel[lv] || 0;
@@ -95,19 +95,36 @@ export function calculateDamage(
   const opBonuses = getOperatorCumulativeBonuses(operator, operatorPotentialLevel);
   const opStats = applyOperatorPotentialStats(operator.stats, opBonuses, weapon);
 
-  const lowHpBonus = sumOperatorPotentialValue(opBonuses, 'skillDmgBonus', b => b.level !== 1 || enemy.hpPercent <= 50);
+  const potentialSkillDmg = sumOperatorPotentialValue(opBonuses, 'skillDmgBonus');
   const potentialPhys = sumOperatorPotentialValue(opBonuses, 'physDmgBonus');
   const potentialArts = sumOperatorPotentialValue(opBonuses, 'artsDmgBonus');
+  const talentBuffs = operator.talentBuffs || {};
+
+  // 세트 효과 전체 추출 (mergedBuffs 이전에 수행해야 ATK/크리율에 반영됨)
+  let gearPhys = 0, gearArts = 0, gearSkill = 0, gearBattle = 0, gearCombo = 0, gearUltimate = 0;
+  let gearSetAtkPercent = 0, gearSetCritRate = 0;
+  if (gearSet) {
+    for (const b of gearSet.bonuses) {
+      gearSetAtkPercent += b.atkPercent || 0;
+      gearSetCritRate += b.critRate || 0;
+      gearPhys += b.physDmgBonus || 0;
+      gearArts += b.artsDmgBonus || 0;
+      gearSkill += b.skillDmgBonus || 0;
+      gearBattle += b.battleSkillDmgBonus || 0;
+      gearCombo += b.comboSkillDmgBonus || 0;
+      gearUltimate += b.ultimateSkillDmgBonus || 0;
+    }
+  }
 
   const mergedBuffs: BuffSet = {
     ...buffs,
-    atkPercent: buffs.atkPercent + sumOperatorPotentialValue(opBonuses, 'atkPercent'),
-    atkFlat: buffs.atkFlat + sumOperatorPotentialValue(opBonuses, 'atkFlat'),
-    critRate: buffs.critRate + sumOperatorPotentialValue(opBonuses, 'critRate'),
-    critDmg: buffs.critDmg + sumOperatorPotentialValue(opBonuses, 'critDmg'),
-    physDmgBonus: buffs.physDmgBonus + potentialPhys,
-    artsDmgBonus: buffs.artsDmgBonus + potentialArts,
-    skillDmgBonus: buffs.skillDmgBonus + lowHpBonus,
+    atkPercent: buffs.atkPercent + sumOperatorPotentialValue(opBonuses, 'atkPercent') + (talentBuffs.atkPercent || 0) + gearSetAtkPercent,
+    atkFlat: buffs.atkFlat + sumOperatorPotentialValue(opBonuses, 'atkFlat') + (talentBuffs.atkFlat || 0),
+    critRate: buffs.critRate + sumOperatorPotentialValue(opBonuses, 'critRate') + (talentBuffs.critRate || 0) + gearSetCritRate,
+    critDmg: buffs.critDmg + sumOperatorPotentialValue(opBonuses, 'critDmg') + (talentBuffs.critDmg || 0),
+    physDmgBonus: buffs.physDmgBonus + potentialPhys + (talentBuffs.physDmgBonus || 0),
+    artsDmgBonus: buffs.artsDmgBonus + potentialArts + (talentBuffs.artsDmgBonus || 0),
+    skillDmgBonus: buffs.skillDmgBonus + potentialSkillDmg + (talentBuffs.skillDmgBonus || 0),
   };
 
   const atkResult = calculateAtk(opStats, weapon, mergedBuffs);
@@ -119,18 +136,6 @@ export function calculateDamage(
   const defense = calculateDefense(enemy, mergedBuffs, skill.damageType, skill.element);
   const defMult = skill.damageType === 'Physical' ? defense.defMultiplier : skill.damageType === 'Arts' ? defense.resMultiplier : 1;
   const afterDefense = preDefenseDamage * defMult;
-
-  let gearPhys = 0, gearArts = 0, gearSkill = 0, gearBattle = 0, gearCombo = 0, gearUltimate = 0;
-  if (gearSet) {
-    for (const b of gearSet.bonuses) {
-      gearPhys += b.physDmgBonus || 0;
-      gearArts += b.artsDmgBonus || 0;
-      gearSkill += b.skillDmgBonus || 0;
-      gearBattle += b.battleSkillDmgBonus || 0;
-      gearCombo += b.comboSkillDmgBonus || 0;
-      gearUltimate += b.ultimateSkillDmgBonus || 0;
-    }
-  }
 
   const effectsResult = calculateSpecialEffects(effects, skill.damageType, skillType);
   const attributeBonus = skill.damageType === 'Physical'
@@ -149,6 +154,49 @@ export function calculateDamage(
   const unbalancedTaken = enemy.isUnbalanced ? 0.3 : 0;
   const additionalDmg = attributeBonus + mergedBuffs.skillDmgBonus + skillTypeBonus + buyoBonus + mergedBuffs.extraDmgBonus + gearSkill + effectsResult.dmgBonusFromEffects;
 
+  const skillTypeLabel = getSkillTypeLabel(skillType);
+  const dmgTypeLabel = skill.damageType === 'Physical' ? '물리' : skill.damageType === 'Arts' ? '아츠' : '진실';
+
+  // 피해 증가 출처별 분류
+  const weaponAttrBonus = skill.damageType === 'Physical' ? (weapon?.physDmgBonus || 0)
+    : skill.damageType === 'Arts' ? (weapon?.artsDmgBonus || 0) : 0;
+  const potentialAttrBonus = skill.damageType === 'Physical' ? potentialPhys
+    : skill.damageType === 'Arts' ? potentialArts : 0;
+  const talentAttrBonus = skill.damageType === 'Physical' ? (talentBuffs.physDmgBonus || 0)
+    : skill.damageType === 'Arts' ? (talentBuffs.artsDmgBonus || 0) : 0;
+  const externalAttrBonus = skill.damageType === 'Physical' ? buffs.physDmgBonus
+    : skill.damageType === 'Arts' ? buffs.artsDmgBonus : 0;
+  const gearAttrBonus = skill.damageType === 'Physical' ? gearPhys
+    : skill.damageType === 'Arts' ? gearArts : 0;
+  const talentSkillDmg = talentBuffs.skillDmgBonus || 0;
+  const externalSkillBonus = buffs.skillDmgBonus;
+  const externalSkillTypeBonus = skillType === 'battle' ? buffs.battleSkillDmgBonus
+    : skillType === 'combo' ? buffs.comboSkillDmgBonus
+    : skillType === 'ultimate' ? buffs.ultimateSkillDmgBonus : 0;
+  const gearSkillTypeBonus = skillType === 'battle' ? gearBattle
+    : skillType === 'combo' ? gearCombo
+    : skillType === 'ultimate' ? gearUltimate : 0;
+  const setName = gearSet?.nameKo || '';
+
+  const dmgSourceLines: string[] = [];
+  if (weaponAttrBonus > 0) dmgSourceLines.push(`[무기] ${dmgTypeLabel} 피해 +${fmtPct(weaponAttrBonus)}`);
+  if (potentialAttrBonus > 0) dmgSourceLines.push(`[잠재] ${dmgTypeLabel} 피해 +${fmtPct(potentialAttrBonus)}`);
+  if (talentAttrBonus > 0) dmgSourceLines.push(`[재능] ${dmgTypeLabel} 피해 +${fmtPct(talentAttrBonus)}`);
+  if (externalAttrBonus > 0) dmgSourceLines.push(`[버프] ${dmgTypeLabel} 피해 +${fmtPct(externalAttrBonus)}`);
+  if (gearAttrBonus > 0) dmgSourceLines.push(`[세트·${setName}] ${dmgTypeLabel} 피해 +${fmtPct(gearAttrBonus)}`);
+  if (potentialSkillDmg > 0) dmgSourceLines.push(`[잠재] 스킬 피해 +${fmtPct(potentialSkillDmg)}`);
+  if (talentSkillDmg > 0) dmgSourceLines.push(`[재능] 스킬 피해 +${fmtPct(talentSkillDmg)}`);
+  if (externalSkillBonus > 0) dmgSourceLines.push(`[버프] 스킬 피해 +${fmtPct(externalSkillBonus)}`);
+  if (gearSkill > 0) dmgSourceLines.push(`[세트·${setName}] 스킬 피해 +${fmtPct(gearSkill)}`);
+  if (externalSkillTypeBonus > 0) dmgSourceLines.push(`[버프] ${skillTypeLabel} 피해 +${fmtPct(externalSkillTypeBonus)}`);
+  if (gearSkillTypeBonus > 0) dmgSourceLines.push(`[세트·${setName}] ${skillTypeLabel} 피해 +${fmtPct(gearSkillTypeBonus)}`);
+  if (buyoBonus > 0) dmgSourceLines.push(`[부요 3옵] +${fmtPct(buyoBonus)}`);
+  if (mergedBuffs.extraDmgBonus > 0) dmgSourceLines.push(`[기타] +${fmtPct(mergedBuffs.extraDmgBonus)}`);
+  for (const st of effectsResult.steps) {
+    if (st.value > 0) dmgSourceLines.push(`[상태효과] ${st.label} +${fmtPct(st.value)}`);
+  }
+  if (dmgSourceLines.length === 0) dmgSourceLines.push('피해 증가 없음');
+
   const amp = mergedBuffs.ampBonus;
   const vuln = mergedBuffs.vulnBonus;
   const takenDmg = mergedBuffs.takenDmgBonus;
@@ -165,68 +213,87 @@ export function calculateDamage(
 
   const atkPct = mergedBuffs.atkPercent + (weapon?.atkPercent || 0);
   const statBonus = opStats.attributes[opStats.mainAttr] * 0.005 + opStats.attributes[opStats.subAttr] * 0.002;
-  const atkIncreasePct = (1 + atkPct) * (1 + statBonus) - 1;
-
-  const skillTypeLabel = getSkillTypeLabel(skillType);
 
   const summaryCards: SummaryCardItem[] = [
     {
       key: 'atk',
-      title: '공격력 증가',
-      valueText: fmtPct(atkIncreasePct),
+      title: '공격력',
+      valueText: atkResult.totalAtk.toLocaleString(),
       details: [
-        `최종 공격력 ${atkResult.totalAtk.toLocaleString()}`,
-        `공퍼 합산 ${fmtPct(atkPct)}`,
-        `스탯 보너스 ${fmtPct(statBonus)} (주:${opStats.mainAttr} ${opStats.attributes[opStats.mainAttr]}, 부:${opStats.subAttr} ${opStats.attributes[opStats.subAttr]})`,
-        `장비/버프로 추가된 스탯 힘+${mergedBuffs.strFlat} · 민첩+${mergedBuffs.agiFlat} · 지능+${mergedBuffs.intFlat} · 의지+${mergedBuffs.wilFlat}`,
+        `기초공 (${opStats.baseAtk} + 무기 ${weapon?.atk || 0}) = ${opStats.baseAtk + (weapon?.atk || 0)}`,
+        `공격력% ${fmtPct(atkPct)}${talentBuffs.atkPercent ? ` (재능 ${fmtPct(talentBuffs.atkPercent)} 포함)` : ''}${gearSetAtkPercent > 0 ? ` (세트 ${fmtPct(gearSetAtkPercent)} 포함)` : ''}`,
+        `스탯 보너스 ${fmtPct(statBonus)} (${opStats.mainAttr} ${opStats.attributes[opStats.mainAttr]}×0.5% + ${opStats.subAttr} ${opStats.attributes[opStats.subAttr]}×0.2%)`,
+        ...(mergedBuffs.strFlat || mergedBuffs.agiFlat || mergedBuffs.intFlat || mergedBuffs.wilFlat
+          ? [`장비 스탯 힘+${mergedBuffs.strFlat} 민+${mergedBuffs.agiFlat} 지+${mergedBuffs.intFlat} 의+${mergedBuffs.wilFlat}`]
+          : []),
       ],
     },
     {
-      key: 'damage_add',
-      title: '피해 증가 합산',
-      valueText: fmtPct(additionalDmg),
+      key: 'dmg_increase',
+      title: `${dmgTypeLabel} 피해 증가 (피증)`,
+      valueText: `+${(additionalDmg * 100).toFixed(1)}%`,
+      details: dmgSourceLines,
+    },
+    {
+      key: 'def_res',
+      title: skill.damageType === 'Physical' ? '방어 감소' : skill.damageType === 'Arts' ? '저항 감소' : '방어/저항',
+      valueText: skill.damageType === 'True' ? '×1.000' : `×${defMult.toFixed(3)}`,
+      details: skill.damageType === 'Physical'
+        ? [
+            `적 방어력 ${enemy.def}${mergedBuffs.defPenFlat > 0 ? ` · 고정 관통 -${mergedBuffs.defPenFlat}` : ''}${mergedBuffs.defPenPercent > 0 ? ` · % 관통 ${fmtPct(mergedBuffs.defPenPercent)}` : ''}`,
+            `배율 = 100 / (실효방어력+100) = ×${defMult.toFixed(4)}`,
+          ]
+        : skill.damageType === 'Arts'
+        ? [
+            `적 저항 ${enemy.res}%${mergedBuffs.resPen > 0 ? ` · 저항 관통 ${fmtPct(mergedBuffs.resPen)}` : ''}`,
+            `배율 = 1 - 실효저항/100 = ×${defMult.toFixed(4)}`,
+          ]
+        : ['진실 피해 — 방어/저항 무시'],
+    },
+    {
+      key: 'crit',
+      title: '치명타',
+      valueText: `×${critExpectedMult.toFixed(3)}`,
       details: [
-        `속성 피해 보너스 ${fmtPct(attributeBonus)}${skill.damageType === 'Physical' ? ` (무기 ${fmtPct(weapon?.physDmgBonus || 0)} + 버프 ${fmtPct(mergedBuffs.physDmgBonus)} + 세트 ${fmtPct(gearPhys)})` : skill.damageType === 'Arts' ? ` (무기 ${fmtPct(weapon?.artsDmgBonus || 0)} + 버프 ${fmtPct(mergedBuffs.artsDmgBonus)} + 세트 ${fmtPct(gearArts)})` : ''}`,
-        `공통 스킬 피해 ${fmtPct(mergedBuffs.skillDmgBonus + gearSkill)} (버프 ${fmtPct(mergedBuffs.skillDmgBonus)} + 세트 ${fmtPct(gearSkill)})`,
-        `${skillTypeLabel} 피해 ${fmtPct(skillTypeBonus)}${gearSet ? ` (활성 세트: ${gearSet.nameKo})` : ''}`,
-        `추가 데미지 ${fmtPct(mergedBuffs.extraDmgBonus)} · 부요 보너스 ${fmtPct(buyoBonus)} · 상태 보너스 ${fmtPct(effectsResult.dmgBonusFromEffects)}`,
+        `치명타 확률 ${fmtPct(critRate)} (기본 5% + 무기 ${fmtPct(weapon?.critRate || 0)} + 버프 ${fmtPct(mergedBuffs.critRate)}${gearSetCritRate > 0 ? ` (세트 ${fmtPct(gearSetCritRate)} 포함)` : ''})`,
+        `치명타 피해 +${fmtPct(critDmg)} (기본 50% + 무기 ${fmtPct(weapon?.critDmg || 0)} + 버프 ${fmtPct(mergedBuffs.critDmg)})`,
+        `기댓값 배율 = 1 + (치확×치피) = ×${critExpectedMult.toFixed(3)}`,
       ],
     },
     {
-      key: 'crit_expected',
-      title: '치명타 기댓값',
-      valueText: fmtPct(critExpectedMult),
+      key: 'taken_dmg',
+      title: '받는 피해 증가 (받피증)',
+      valueText: `+${(((1 + takenDmg) * (1 + unbalancedTaken) - 1) * 100).toFixed(1)}%`,
       details: [
-        `치명타 확률 ${fmtPct(critRate)}`,
-        `치명타 피해 ${fmtPct(critDmg)}`,
-        `기댓 배율 = 1 + (치확×치피)`,
+        `받피증 +${(takenDmg * 100).toFixed(1)}%`,
+        `불균형 +${(unbalancedTaken * 100).toFixed(1)}% ${enemy.isUnbalanced ? '(활성)' : '(비활성)'}`,
+        `합산 배율 ×${((1 + takenDmg) * (1 + unbalancedTaken)).toFixed(4)}`,
       ],
     },
     {
       key: 'amp',
-      title: '증폭/취약/받피증',
-      valueText: fmtPct((1 + amp) * (1 + vuln) * (1 + takenDmg) - 1),
-      details: [
-        `증폭 ${fmtPct(amp)}`,
-        `취약 ${fmtPct(vuln)}`,
-        `받피증 ${fmtPct(takenDmg)}`,
-        `불균형 ${enemy.isUnbalanced ? '+30.0%' : '+0.0%'}`,
-      ],
+      title: '증폭',
+      valueText: `+${(amp * 100).toFixed(1)}%`,
+      details: [`배율 ×${(1 + amp).toFixed(4)}`],
     },
     {
-      key: 'status',
-      title: '상태',
-      valueText: fmtPct(effectsResult.dmgBonusFromEffects),
-      details: effectsResult.steps.map(st => `${st.label} ${st.formula}`),
+      key: 'vuln',
+      title: '취약',
+      valueText: `+${(vuln * 100).toFixed(1)}%`,
+      details: [`배율 ×${(1 + vuln).toFixed(4)}`],
     },
   ];
 
-  steps.push({ label: '공격력 계산', formula: atkResult.steps[0].formula, value: atkResult.totalAtk });
-  steps.push({ label: '스킬 배율', formula: `${(levelData.multiplier * 100).toFixed(0)}%${multBonus > 0 ? ` × ${(1 + multBonus).toFixed(2)}` : ''}`, value: parseFloat(finalMultiplier.toFixed(4)) });
-  steps.push({ label: '방어/저항 적용', formula: `× ${defMult.toFixed(4)}`, value: Math.round(afterDefense) });
-  steps.push({ label: '데미지 추가 수치', formula: `속성 ${fmtPct(attributeBonus)} + 공통스킬 ${fmtPct(mergedBuffs.skillDmgBonus + gearSkill)} + ${skillTypeLabel} ${fmtPct(skillTypeBonus)} + 상태 ${fmtPct(effectsResult.dmgBonusFromEffects)}`, value: parseFloat((1 + additionalDmg).toFixed(4)) });
-  steps.push({ label: '증폭/취약/받피증/불균형', formula: `증폭 ${(amp * 100).toFixed(1)}% · 취약 ${(vuln * 100).toFixed(1)}% · 받피증 ${(takenDmg * 100).toFixed(1)}% · 불균형 ${(unbalancedTaken * 100).toFixed(1)}%`, value: parseFloat(((1 + amp) * (1 + vuln) * (1 + takenDmg) * (1 + unbalancedTaken)).toFixed(4)) });
-  steps.push({ label: '치명타 기댓값 배율', formula: `1 + (치확×치피) = ${critExpectedMult.toFixed(4)}`, value: parseFloat(critExpectedMult.toFixed(4)) });
+  // 피해 계산 단계 (정보.md 공식 순서: ATK × 계수 × 피증 × 방어 × 받피증 × 불균형 × 증폭 × 취약 × 치명타)
+  steps.push({ label: '공격력', formula: atkResult.steps[0].formula, value: atkResult.totalAtk });
+  steps.push({ label: '스킬 계수', formula: `${(levelData.multiplier * 100).toFixed(0)}%${multBonus > 0 ? ` × (1+${(multBonus * 100).toFixed(1)}% 잠재)` : ''}`, value: parseFloat(finalMultiplier.toFixed(4)) });
+  steps.push({ label: `${dmgTypeLabel} 피해 증가 (피증)`, formula: `+${(additionalDmg * 100).toFixed(1)}% → ×${(1 + additionalDmg).toFixed(4)}`, value: parseFloat((1 + additionalDmg).toFixed(4)) });
+  steps.push({ label: skill.damageType === 'Physical' ? '방어 감소' : skill.damageType === 'Arts' ? '저항 감소' : '방어/저항', formula: `×${defMult.toFixed(4)}`, value: Math.round(afterDefense) });
+  steps.push({ label: '받는 피해 증가 (받피증)', formula: `+${(takenDmg * 100).toFixed(1)}% → ×${(1 + takenDmg).toFixed(4)}`, value: parseFloat((1 + takenDmg).toFixed(4)) });
+  steps.push({ label: '불균형 받피증', formula: enemy.isUnbalanced ? '+30.0% → ×1.3000' : '+0.0% (비활성)', value: parseFloat((1 + unbalancedTaken).toFixed(4)) });
+  if (amp > 0) steps.push({ label: '증폭', formula: `+${(amp * 100).toFixed(1)}% → ×${(1 + amp).toFixed(4)}`, value: parseFloat((1 + amp).toFixed(4)) });
+  if (vuln > 0) steps.push({ label: '취약', formula: `+${(vuln * 100).toFixed(1)}% → ×${(1 + vuln).toFixed(4)}`, value: parseFloat((1 + vuln).toFixed(4)) });
+  steps.push({ label: '치명타 기댓값', formula: `1 + (${fmtPct(critRate)}×${fmtPct(critDmg)}) = ×${critExpectedMult.toFixed(4)}`, value: parseFloat(critExpectedMult.toFixed(4)) });
 
   const finalDamage = effects.isCrit ? critDamage : nonCritDamage;
   const hitCount = Math.max(skill.hits || 1, 1);

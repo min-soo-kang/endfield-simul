@@ -11,6 +11,8 @@ export type OperatorClass =
 export type WeaponCategory =
   | 'OneHandSword'   // 한손검
   | 'TwoHandSword'   // 양손검
+  | 'Polearm'        // 창
+  | 'HandCannon'     // 핸드캐논
   | 'Bow'            // 활
   | 'Staff'          // 지팡이
   | 'Pistol'         // 권총
@@ -105,6 +107,8 @@ export interface Operator {
   skills: Skill[];
   /** 재능/패시브 설명 */
   talents: string[];
+  /** 재능에서 오는 상시 버프 (계산에 자동 반영) */
+  talentBuffs?: Partial<BuffSet>;
   /** 잠재 단계 효과 (0~5) */
   potentialBonuses?: PotentialBonus[];
 }

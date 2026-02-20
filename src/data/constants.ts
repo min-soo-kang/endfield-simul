@@ -7,11 +7,11 @@ export const BASE_CRIT_DMG = 0.5;
 /** 방어 계산 기준 상수 */
 export const DEF_CONSTANT = 100;
 
-/** 연타 - 배틀 스킬 피해 증가 (30%) */
-export const COMBO_HIT_BATTLE_SKILL_BONUS = 0.3;
+/** 연타 - 배틀 스킬 기본 배율 ((스택+1)×15% → 30/45/60/75%) */
+export const COMBO_HIT_BATTLE_SKILL_BONUS = 0.15;
 
-/** 연타 - 궁극기 피해 증가 (20%) */
-export const COMBO_HIT_ULTIMATE_BONUS = 0.2;
+/** 연타 - 궁극기 기본 배율 ((스택+1)×10% → 20/30/40/50%) */
+export const COMBO_HIT_ULTIMATE_BONUS = 0.1;
 
 /** 갑옷 파괴 - 물리 피해 증가 최소 (12%) */
 export const ARMOR_BREAK_PHYS_BONUS_MIN = 0.12;
