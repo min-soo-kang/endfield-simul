@@ -79,6 +79,19 @@ const GearLoadoutSelector: React.FC<Props> = ({ gearItems, gearSets, loadout, on
               .map(([, item]) => item!.id)
           );
           const items = gearItems.filter(g => g.type === slotToType[slot] && !selectedIds.has(g.id));
+          const groupedItems = items.reduce<Record<string, GearItem[]>>((acc, item) => {
+            const key = item.setId;
+            if (!acc[key]) acc[key] = [];
+            acc[key].push(item);
+            return acc;
+          }, {});
+          const sortedGroups = Object.entries(groupedItems)
+            .map(([setId, grouped]) => ({
+              setId,
+              setName: gearSets.find(s => s.id === setId)?.nameKo || setId,
+              items: grouped.sort((a, b) => a.nameKo.localeCompare(b.nameKo, 'ko')),
+            }))
+            .sort((a, b) => a.setName.localeCompare(b.setName, 'ko'));
           return (
             <div key={slot} className="bg-bg rounded border border-border p-2">
               <div className="text-xs text-text-dim mb-1">{slotLabel[slot]}</div>
@@ -91,8 +104,12 @@ const GearLoadoutSelector: React.FC<Props> = ({ gearItems, gearSets, loadout, on
                 }}
               >
                 <option value="">미장착</option>
-                {items.map(item => (
-                  <option key={item.id} value={item.id}>{item.nameKo}</option>
+                {sortedGroups.map(group => (
+                  <optgroup key={group.setId} label={group.setName}>
+                    {group.items.map(item => (
+                      <option key={item.id} value={item.id}>{item.nameKo}</option>
+                    ))}
+                  </optgroup>
                 ))}
               </select>
 

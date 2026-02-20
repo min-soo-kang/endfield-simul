@@ -1,42 +1,19 @@
 [
   {
-    "id": "hongsan_tactical",
-    "name": "Swordsman Set",
-    "nameKo": "검술사",
-    "recommendedFor": "물리 딜러",
-    "bonuses": []
-  },
-  {
-    "id": "yinglong_50",
-    "name": "Yinglong Type 50",
-    "nameKo": "응룡 50식",
-    "recommendedFor": "연계 스킬 딜러",
+    "id": "breath_of_nourish",
+    "name": "식양의 숨결",
+    "nameKo": "식양의 숨결",
+    "recommendedFor": "서포터",
     "bonuses": [
       {
         "pieces": 3,
-        "description": "공격력 +15%, 연계 스킬 피해 +60%",
-        "atkPercent": 0.15,
-        "comboSkillDmgBonus": 0.6
-      }
-    ]
-  },
-  {
-    "id": "mi_police",
-    "name": "M.I. Police Set",
-    "nameKo": "M.I. 경찰용",
-    "recommendedFor": "물리 딜러",
-    "bonuses": [
-      {
-        "pieces": 3,
-        "description": "치명타 확률 +10%, 공격력 +25%",
-        "critRate": 0.1,
-        "atkPercent": 0.25
+        "description": "스탯 +1000, 주는 피해 +16%"
       }
     ]
   },
   {
     "id": "tidal_wave",
-    "name": "Tidal Wave",
+    "name": "조류의 물결",
     "nameKo": "조류의 물결",
     "recommendedFor": "아츠 딜러",
     "bonuses": [
@@ -49,26 +26,130 @@
     ]
   },
   {
+    "id": "yinglong_50",
+    "name": "응룡 50식",
+    "nameKo": "응룡 50식",
+    "recommendedFor": "연계 스킬 딜러",
+    "bonuses": [
+      {
+        "pieces": 3,
+        "description": "공격력 증가 +15%, 연계 스킬 피해 +60%",
+        "atkPercent": 0.15,
+        "comboSkillDmgBonus": 0.6
+      }
+    ]
+  },
+  {
+    "id": "mi_police",
+    "name": "M. I. 경찰용",
+    "nameKo": "M. I. 경찰용",
+    "recommendedFor": "물리 딜러",
+    "bonuses": [
+      {
+        "pieces": 3,
+        "description": "치명타 확률 +10%, 공격력 증가 +25%",
+        "critRate": 0.1,
+        "atkPercent": 0.25
+      }
+    ]
+  },
+  {
     "id": "heat_work",
-    "name": "Heat Work Set",
+    "name": "열 작업용",
     "nameKo": "열 작업용",
     "recommendedFor": "엘리멘탈 딜러",
     "bonuses": [
       {
         "pieces": 3,
-        "description": "오리지늄 아츠 강도 +30, 연소/부식 상태 대상 피해 +50%"
+        "description": "오리지늄 아츠 강도 +30, 열기 피해 +50%, 자연 피해 +50%"
       }
     ]
   },
   {
-    "id": "breath_of_nourish",
-    "name": "Breath of Nourishment",
-    "nameKo": "식양의 숨결",
+    "id": "pioneer",
+    "name": "개척",
+    "nameKo": "개척",
     "recommendedFor": "서포터",
     "bonuses": [
       {
         "pieces": 3,
-        "description": "최대 생명력 +1000, 증폭/비호/취약/허약 부여 시 다른 팀원 피해 +16%"
+        "description": "주는 피해 +16%"
+      }
+    ]
+  },
+  {
+    "id": "pulse",
+    "name": "펄스식",
+    "nameKo": "펄스식",
+    "recommendedFor": "엘리멘탈 딜러",
+    "bonuses": [
+      {
+        "pieces": 3,
+        "description": "오리지늄 아츠 강도 +30, 전기 피해 +50%, 냉기 피해 +50%"
+      }
+    ]
+  },
+  {
+    "id": "bone_crusher",
+    "name": "본 크러셔",
+    "nameKo": "본 크러셔",
+    "recommendedFor": "배틀 스킬 딜러",
+    "bonuses": [
+      {
+        "pieces": 3,
+        "description": "공격력 증가 +15%, 배틀 스킬 피해 +60%",
+        "atkPercent": 0.15,
+        "battleSkillDmgBonus": 0.6
+      }
+    ]
+  },
+  {
+    "id": "light_super",
+    "name": "경량 초자연",
+    "nameKo": "경량 초자연",
+    "recommendedFor": "물리 딜러",
+    "bonuses": [
+      {
+        "pieces": 3,
+        "description": "공격력 증가 +8%, 물리 피해 +48%",
+        "atkPercent": 0.08,
+        "physDmgBonus": 0.48
+      }
+    ]
+  },
+  {
+    "id": "bio_support",
+    "name": "생체 보조",
+    "nameKo": "생체 보조",
+    "recommendedFor": "힐러",
+    "bonuses": [
+      {
+        "pieces": 3,
+        "description": "치유 효율 +20%"
+      }
+    ]
+  },
+  {
+    "id": "hongsan_tactical",
+    "name": "검술사",
+    "nameKo": "검술사",
+    "recommendedFor": "물리 딜러",
+    "bonuses": [
+      {
+        "pieces": 3,
+        "description": ""
+      }
+    ]
+  },
+  {
+    "id": "crisis_escape",
+    "name": "위기 탈출",
+    "nameKo": "위기 탈출",
+    "recommendedFor": "유틸",
+    "bonuses": [
+      {
+        "pieces": 3,
+        "description": ""
       }
     ]
   }
