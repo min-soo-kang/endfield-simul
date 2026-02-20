@@ -51,7 +51,7 @@
         "kind": "extra",
         "nameKo": "추가옵션",
         "stats": {
-          "skillDmgBonus": 0.431
+          "ultimateSkillDmgBonus": 0.431
         },
         "customText": "궁극기 피해 +43.1%"
       }
@@ -171,7 +171,7 @@
         "kind": "extra",
         "nameKo": "추가옵션",
         "stats": {
-          "skillDmgBonus": 0.414
+          "comboSkillDmgBonus": 0.414
         },
         "customText": "연계 스킬 피해 +41.4%"
       }

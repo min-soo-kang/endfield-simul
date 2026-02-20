@@ -156,6 +156,9 @@ export interface GearSetBonus {
   physDmgBonus?: number;
   artsDmgBonus?: number;
   skillDmgBonus?: number;
+  battleSkillDmgBonus?: number;
+  comboSkillDmgBonus?: number;
+  ultimateSkillDmgBonus?: number;
 }
 
 /** 장비 세트 */
@@ -182,6 +185,9 @@ export interface GearStats {
   physDmgBonus?: number;
   artsDmgBonus?: number;
   skillDmgBonus?: number;
+  battleSkillDmgBonus?: number;
+  comboSkillDmgBonus?: number;
+  ultimateSkillDmgBonus?: number;
 }
 
 export interface GearOption {
@@ -237,6 +243,12 @@ export interface BuffSet {
   artsDmgBonus: number;
   /** 스킬 데미지 보너스 */
   skillDmgBonus: number;
+  /** 배틀 스킬 데미지 보너스 */
+  battleSkillDmgBonus: number;
+  /** 연계 스킬 데미지 보너스 */
+  comboSkillDmgBonus: number;
+  /** 궁극기 데미지 보너스 */
+  ultimateSkillDmgBonus: number;
   /** 증폭 수치 */
   ampBonus: number;
   /** 취약 수치 */

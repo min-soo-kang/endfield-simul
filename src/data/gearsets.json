@@ -16,7 +16,7 @@
         "pieces": 3,
         "description": "공격력 +15%, 연계 스킬 피해 +60%",
         "atkPercent": 0.15,
-        "skillDmgBonus": 0.6
+        "comboSkillDmgBonus": 0.6
       }
     ]
   },

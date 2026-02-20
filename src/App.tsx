@@ -60,7 +60,7 @@ function App() {
     const selected = Object.values(gearLoadout).filter(Boolean) as GearItem[];
     const gearBuffs: Partial<BuffSet> = {
       atkPercent: 0, atkFlat: 0, critRate: 0, critDmg: 0, defPenFlat: 0, defPenPercent: 0,
-      resPen: 0, physDmgBonus: 0, artsDmgBonus: 0, skillDmgBonus: 0, ampBonus: 0, vulnBonus: 0, takenDmgBonus: 0, extraDmgBonus: 0,
+      resPen: 0, physDmgBonus: 0, artsDmgBonus: 0, skillDmgBonus: 0, battleSkillDmgBonus: 0, comboSkillDmgBonus: 0, ultimateSkillDmgBonus: 0, ampBonus: 0, vulnBonus: 0, takenDmgBonus: 0, extraDmgBonus: 0,
       strFlat: 0, agiFlat: 0, intFlat: 0, wilFlat: 0,
     };
 
@@ -76,6 +76,9 @@ function App() {
         gearBuffs.physDmgBonus! += stats.physDmgBonus || 0;
         gearBuffs.artsDmgBonus! += stats.artsDmgBonus || 0;
         gearBuffs.skillDmgBonus! += stats.skillDmgBonus || 0;
+        gearBuffs.battleSkillDmgBonus! += stats.battleSkillDmgBonus || 0;
+        gearBuffs.comboSkillDmgBonus! += stats.comboSkillDmgBonus || 0;
+        gearBuffs.ultimateSkillDmgBonus! += stats.ultimateSkillDmgBonus || 0;
       });
     });
 
@@ -109,6 +112,9 @@ function App() {
     physDmgBonus: buffs.physDmgBonus + derivedGear.gearBuffs.physDmgBonus,
     artsDmgBonus: buffs.artsDmgBonus + derivedGear.gearBuffs.artsDmgBonus,
     skillDmgBonus: buffs.skillDmgBonus + derivedGear.gearBuffs.skillDmgBonus,
+    battleSkillDmgBonus: buffs.battleSkillDmgBonus + derivedGear.gearBuffs.battleSkillDmgBonus,
+    comboSkillDmgBonus: buffs.comboSkillDmgBonus + derivedGear.gearBuffs.comboSkillDmgBonus,
+    ultimateSkillDmgBonus: buffs.ultimateSkillDmgBonus + derivedGear.gearBuffs.ultimateSkillDmgBonus,
     ampBonus: buffs.ampBonus + derivedGear.gearBuffs.ampBonus,
     vulnBonus: buffs.vulnBonus + derivedGear.gearBuffs.vulnBonus,
     takenDmgBonus: buffs.takenDmgBonus + derivedGear.gearBuffs.takenDmgBonus,

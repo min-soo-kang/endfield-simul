@@ -108,12 +108,15 @@ export function calculateDamage(
   const defMult = skill.damageType === 'Physical' ? defense.defMultiplier : skill.damageType === 'Arts' ? defense.resMultiplier : 1;
   const afterDefense = preDefenseDamage * defMult;
 
-  let gearPhys = 0, gearArts = 0, gearSkill = 0;
+  let gearPhys = 0, gearArts = 0, gearSkill = 0, gearBattle = 0, gearCombo = 0, gearUltimate = 0;
   if (gearSet) {
     for (const b of gearSet.bonuses) {
       gearPhys += b.physDmgBonus || 0;
       gearArts += b.artsDmgBonus || 0;
       gearSkill += b.skillDmgBonus || 0;
+      gearBattle += b.battleSkillDmgBonus || 0;
+      gearCombo += b.comboSkillDmgBonus || 0;
+      gearUltimate += b.ultimateSkillDmgBonus || 0;
     }
   }
 
@@ -124,9 +127,15 @@ export function calculateDamage(
       ? (weapon?.artsDmgBonus || 0) + mergedBuffs.artsDmgBonus + gearArts
       : 0;
 
+
+  const skillTypeBonus =
+    (skillType === 'battle' ? (mergedBuffs.battleSkillDmgBonus + gearBattle) : 0)
+    + (skillType === 'combo' ? (mergedBuffs.comboSkillDmgBonus + gearCombo) : 0)
+    + (skillType === 'ultimate' ? (mergedBuffs.ultimateSkillDmgBonus + gearUltimate) : 0);
+
   const buyoBonus = getBuyoThirdOptionBonus(weapon, weaponPotentialLevel, skillType, enemy);
   const unbalancedTaken = enemy.isUnbalanced ? 0.3 : 0;
-  const additionalDmg = attributeBonus + mergedBuffs.skillDmgBonus + buyoBonus + mergedBuffs.extraDmgBonus + gearSkill + effectsResult.dmgBonusFromEffects;
+  const additionalDmg = attributeBonus + mergedBuffs.skillDmgBonus + skillTypeBonus + buyoBonus + mergedBuffs.extraDmgBonus + gearSkill + effectsResult.dmgBonusFromEffects;
 
   const amp = mergedBuffs.ampBonus;
   const vuln = mergedBuffs.vulnBonus;
@@ -136,7 +145,7 @@ export function calculateDamage(
 
   const critRate = Math.min(1, 0.05 + (weapon?.critRate || 0) + mergedBuffs.critRate);
   const critDmg = 0.5 + (weapon?.critDmg || 0) + mergedBuffs.critDmg;
-  const critExpectedMult = (1 + critRate) * (1 + critDmg);
+  const critExpectedMult = 1 + (critRate * critDmg);
 
   const nonCritDamage = Math.round(totalBeforeCrit);
   const critDamage = Math.round(totalBeforeCrit * (1 + critDmg));
@@ -211,7 +220,7 @@ export function calculateDamage(
   steps.push({ label: '방어/저항 적용', formula: `× ${defMult.toFixed(4)}`, value: Math.round(afterDefense) });
   steps.push({ label: '데미지 추가 수치', formula: `${(additionalDmg * 100).toFixed(1)}%`, value: parseFloat((1 + additionalDmg).toFixed(4)) });
   steps.push({ label: '증폭/취약/받피증/불균형', formula: `증폭 ${(amp * 100).toFixed(1)}% · 취약 ${(vuln * 100).toFixed(1)}% · 받피증 ${(takenDmg * 100).toFixed(1)}% · 불균형 ${(unbalancedTaken * 100).toFixed(1)}%`, value: parseFloat(((1 + amp) * (1 + vuln) * (1 + takenDmg) * (1 + unbalancedTaken)).toFixed(4)) });
-  steps.push({ label: '치명타 기댓값 배율', formula: `(1+치확)×(1+치피) = ${critExpectedMult.toFixed(4)}`, value: parseFloat(critExpectedMult.toFixed(4)) });
+  steps.push({ label: '치명타 기댓값 배율', formula: `1 + (치확×치피) = ${critExpectedMult.toFixed(4)}`, value: parseFloat(critExpectedMult.toFixed(4)) });
 
   const finalDamage = effects.isCrit ? critDamage : nonCritDamage;
   const hitCount = Math.max(skill.hits || 1, 1);

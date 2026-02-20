@@ -41,6 +41,9 @@ function renderStatRows(stats: GearStats): string[] {
   if (stats.physDmgBonus) rows.push(`물리 피해 +${(stats.physDmgBonus * 100).toFixed(1)}%`);
   if (stats.artsDmgBonus) rows.push(`아츠 피해 +${(stats.artsDmgBonus * 100).toFixed(1)}%`);
   if (stats.skillDmgBonus) rows.push(`스킬 피해 +${(stats.skillDmgBonus * 100).toFixed(1)}%`);
+  if (stats.battleSkillDmgBonus) rows.push(`배틀 스킬 피해 +${(stats.battleSkillDmgBonus * 100).toFixed(1)}%`);
+  if (stats.comboSkillDmgBonus) rows.push(`연계 스킬 피해 +${(stats.comboSkillDmgBonus * 100).toFixed(1)}%`);
+  if (stats.ultimateSkillDmgBonus) rows.push(`궁극기 피해 +${(stats.ultimateSkillDmgBonus * 100).toFixed(1)}%`);
   return rows;
 }
 
