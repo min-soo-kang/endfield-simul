@@ -264,11 +264,16 @@ export function calculateDamage(
     {
       key: 'taken_dmg',
       title: '받는 피해 증가 (받피증)',
-      valueText: `+${(((1 + takenDmg) * (1 + unbalancedTaken) - 1) * 100).toFixed(1)}%`,
+      valueText: `+${(takenDmg * 100).toFixed(1)}%`,
+      details: [`배율 ×${(1 + takenDmg).toFixed(4)}`],
+    },
+    {
+      key: 'unbalanced_taken',
+      title: '불균형 받피증',
+      valueText: `+${(unbalancedTaken * 100).toFixed(1)}%`,
       details: [
-        `받피증 +${(takenDmg * 100).toFixed(1)}%`,
-        `불균형 +${(unbalancedTaken * 100).toFixed(1)}% ${enemy.isUnbalanced ? '(활성)' : '(비활성)'}`,
-        `합산 배율 ×${((1 + takenDmg) * (1 + unbalancedTaken)).toFixed(4)}`,
+        enemy.isUnbalanced ? '활성' : '비활성',
+        `배율 ×${(1 + unbalancedTaken).toFixed(4)}`,
       ],
     },
     {
