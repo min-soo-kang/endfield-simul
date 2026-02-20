@@ -5,9 +5,9 @@
     "type": "Armor",
     "setId": "hongsan_tactical",
     "options": [
-      { "kind": "main", "nameKo": "주옵션", "stats": { "str": 22, "atkFlat": 58 } },
-      { "kind": "sub", "nameKo": "부옵션", "stats": { "agi": 12, "critRate": 0.015 } },
-      { "kind": "extra", "nameKo": "추가옵션", "stats": { "physDmgBonus": 0.04 } }
+      { "kind": "main", "nameKo": "주옵션", "stats": { "agi": 87 } },
+      { "kind": "sub", "nameKo": "부옵션", "stats": { "str": 58 } },
+      { "kind": "extra", "nameKo": "추가옵션", "stats": { "atkFlat": 20 } }
     ]
   },
   {
@@ -16,9 +16,9 @@
     "type": "Gloves",
     "setId": "hongsan_tactical",
     "options": [
-      { "kind": "main", "nameKo": "주옵션", "stats": { "agi": 20, "atkPercent": 0.04 } },
-      { "kind": "sub", "nameKo": "부옵션", "stats": { "str": 8, "critRate": 0.01 } },
-      { "kind": "extra", "nameKo": "추가옵션", "stats": { "skillDmgBonus": 0.03 } }
+      { "kind": "main", "nameKo": "주옵션", "stats": { "agi": 65 } },
+      { "kind": "sub", "nameKo": "부옵션", "stats": { "str": 43 } },
+      { "kind": "extra", "nameKo": "추가옵션", "stats": { "skillDmgBonus": 0.431 } }
     ]
   },
   {
@@ -27,9 +27,9 @@
     "type": "Gloves",
     "setId": "hongsan_tactical",
     "options": [
-      { "kind": "main", "nameKo": "주옵션", "stats": { "agi": 16, "atkFlat": 35 } },
-      { "kind": "sub", "nameKo": "부옵션", "stats": { "int": 10, "wil": 10 } },
-      { "kind": "extra", "nameKo": "추가옵션", "stats": { "atkPercent": 0.03, "skillDmgBonus": 0.02 } }
+      { "kind": "main", "nameKo": "주옵션", "stats": { "str": 65 } },
+      { "kind": "sub", "nameKo": "부옵션", "stats": { "wil": 43 } },
+      { "kind": "extra", "nameKo": "추가옵션", "stats": { "physDmgBonus": 0.192 } }
     ]
   },
   {
@@ -38,31 +38,42 @@
     "type": "Part",
     "setId": "hongsan_tactical",
     "options": [
-      { "kind": "main", "nameKo": "주옵션", "stats": { "str": 14, "wil": 12 } },
-      { "kind": "sub", "nameKo": "부옵션", "stats": { "atkPercent": 0.03, "critRate": 0.01 } },
-      { "kind": "extra", "nameKo": "추가옵션", "stats": { "physDmgBonus": 0.05 } }
+      { "kind": "main", "nameKo": "주옵션", "stats": { "agi": 32 } },
+      { "kind": "sub", "nameKo": "부옵션", "stats": { "str": 21 } },
+      { "kind": "extra", "nameKo": "추가옵션", "stats": { "physDmgBonus": 0.23 } }
+    ]
+  },
+  {
+    "id": "yinglong_detector",
+    "nameKo": "응룡 50식 탐지기",
+    "type": "Part",
+    "setId": "yinglong_50",
+    "options": [
+      { "kind": "main", "nameKo": "주옵션", "stats": { "str": 32 } },
+      { "kind": "sub", "nameKo": "부옵션", "stats": { "wil": 21 } },
+      { "kind": "extra", "nameKo": "추가옵션", "stats": { "physDmgBonus": 0.23 } }
+    ]
+  },
+  {
+    "id": "yinglong_dagger",
+    "nameKo": "응룡 50식 단검",
+    "type": "Part",
+    "setId": "yinglong_50",
+    "options": [
+      { "kind": "main", "nameKo": "주옵션", "stats": { "wil": 32 } },
+      { "kind": "sub", "nameKo": "부옵션", "stats": { "agi": 21 } },
+      { "kind": "extra", "nameKo": "추가옵션", "stats": { "skillDmgBonus": 0.414 } }
     ]
   },
   {
     "id": "yinglong_armor",
-    "nameKo": "응룡 50식 방어구",
+    "nameKo": "응룡 50식 중장갑",
     "type": "Armor",
     "setId": "yinglong_50",
     "options": [
-      { "kind": "main", "nameKo": "주옵션", "stats": { "wil": 22, "atkFlat": 45 } },
-      { "kind": "sub", "nameKo": "부옵션", "stats": { "int": 14 } },
-      { "kind": "extra", "nameKo": "추가옵션", "stats": { "artsDmgBonus": 0.04 } }
-    ]
-  },
-  {
-    "id": "yinglong_part",
-    "nameKo": "응룡 50식 부품",
-    "type": "Part",
-    "setId": "yinglong_50",
-    "options": [
-      { "kind": "main", "nameKo": "주옵션", "stats": { "int": 20 } },
-      { "kind": "sub", "nameKo": "부옵션", "stats": { "agi": 8, "critRate": 0.015 } },
-      { "kind": "extra", "nameKo": "추가옵션", "stats": { "skillDmgBonus": 0.04 } }
+      { "kind": "main", "nameKo": "주옵션", "stats": { "str": 87 } },
+      { "kind": "sub", "nameKo": "부옵션", "stats": { "agi": 58 } },
+      { "kind": "extra", "nameKo": "추가옵션", "stats": { "critRate": 0.108 } }
     ]
   }
 ]

@@ -61,10 +61,12 @@ const GearLoadoutSelector: React.FC<Props> = ({ gearItems, gearSets, loadout, on
   return (
     <div>
       <label className="block text-text-muted text-xs uppercase tracking-wider mb-2">장비 선택 (방어구/글러브/부품2개)</label>
+      <div className="text-[11px] text-text-dim mb-2">동일 장비는 중복 착용할 수 없습니다.</div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
         {(Object.keys(slotLabel) as GearSlot[]).map((slot) => {
-          const items = gearItems.filter(g => g.type === slotToType[slot]);
+          const selectedIds = new Set(Object.entries(loadout).filter(([otherSlot, item]) => otherSlot !== slot && item).map(([, item]) => item!.id));
+          const items = gearItems.filter(g => g.type === slotToType[slot] && !selectedIds.has(g.id));
           return (
             <div key={slot} className="bg-bg rounded border border-border p-2">
               <div className="text-xs text-text-dim mb-1">{slotLabel[slot]}</div>
