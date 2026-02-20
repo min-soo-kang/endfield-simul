@@ -61,11 +61,20 @@ const GearLoadoutSelector: React.FC<Props> = ({ gearItems, gearSets, loadout, on
   return (
     <div>
       <label className="block text-text-muted text-xs uppercase tracking-wider mb-2">장비 선택 (방어구/글러브/부품2개)</label>
-      <div className="text-[11px] text-text-dim mb-2">동일 장비는 중복 착용할 수 없습니다.</div>
+      <div className="text-[11px] text-text-dim mb-2">부품은 동일 장비를 중복 착용할 수 있습니다.</div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
         {(Object.keys(slotLabel) as GearSlot[]).map((slot) => {
-          const selectedIds = new Set(Object.entries(loadout).filter(([otherSlot, item]) => otherSlot !== slot && item).map(([, item]) => item!.id));
+          const isPartSlot = slot === 'Part1' || slot === 'Part2';
+          const selectedIds = new Set(
+            Object.entries(loadout)
+              .filter(([otherSlot, item]) => {
+                if (!item || otherSlot === slot) return false;
+                if (isPartSlot) return false;
+                return true;
+              })
+              .map(([, item]) => item!.id)
+          );
           const items = gearItems.filter(g => g.type === slotToType[slot] && !selectedIds.has(g.id));
           return (
             <div key={slot} className="bg-bg rounded border border-border p-2">
@@ -92,6 +101,7 @@ const GearLoadoutSelector: React.FC<Props> = ({ gearItems, gearSets, loadout, on
                       {renderStatRows(opt.stats).map((st) => (
                         <div key={`${opt.kind}-${st}`} className="pl-2">- {st}</div>
                       ))}
+                      {opt.customText && <div className="pl-2">- {opt.customText}</div>}
                     </div>
                   ))}
                 </div>

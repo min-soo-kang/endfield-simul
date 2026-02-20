@@ -5,20 +5,56 @@
     "type": "Armor",
     "setId": "hongsan_tactical",
     "options": [
-      { "kind": "main", "nameKo": "주옵션", "stats": { "agi": 87 } },
-      { "kind": "sub", "nameKo": "부옵션", "stats": { "str": 58 } },
-      { "kind": "extra", "nameKo": "추가옵션", "stats": { "atkFlat": 20 } }
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "agi": 87
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "str": 58
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {},
+        "customText": "오리지늄 아츠 강도 +20"
+      }
     ]
   },
   {
     "id": "hongsan_gauntlet",
-    "nameKo": "홍산 건틀릿",
+    "nameKo": "홍산 전술 건틀릿",
     "type": "Gloves",
     "setId": "hongsan_tactical",
     "options": [
-      { "kind": "main", "nameKo": "주옵션", "stats": { "agi": 65 } },
-      { "kind": "sub", "nameKo": "부옵션", "stats": { "str": 43 } },
-      { "kind": "extra", "nameKo": "추가옵션", "stats": { "skillDmgBonus": 0.431 } }
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "agi": 65
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "str": 43
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {
+          "skillDmgBonus": 0.431
+        },
+        "customText": "궁극기 피해 +43.1%"
+      }
     ]
   },
   {
@@ -27,9 +63,28 @@
     "type": "Gloves",
     "setId": "hongsan_tactical",
     "options": [
-      { "kind": "main", "nameKo": "주옵션", "stats": { "str": 65 } },
-      { "kind": "sub", "nameKo": "부옵션", "stats": { "wil": 43 } },
-      { "kind": "extra", "nameKo": "추가옵션", "stats": { "physDmgBonus": 0.192 } }
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "str": 65
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "wil": 43
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {
+          "physDmgBonus": 0.192
+        },
+        "customText": "물리 피해 +19.2%"
+      }
     ]
   },
   {
@@ -38,9 +93,28 @@
     "type": "Part",
     "setId": "hongsan_tactical",
     "options": [
-      { "kind": "main", "nameKo": "주옵션", "stats": { "agi": 32 } },
-      { "kind": "sub", "nameKo": "부옵션", "stats": { "str": 21 } },
-      { "kind": "extra", "nameKo": "추가옵션", "stats": { "physDmgBonus": 0.23 } }
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "agi": 32
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "str": 21
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {
+          "physDmgBonus": 0.23
+        },
+        "customText": "물리 피해 +23%"
+      }
     ]
   },
   {
@@ -49,9 +123,28 @@
     "type": "Part",
     "setId": "yinglong_50",
     "options": [
-      { "kind": "main", "nameKo": "주옵션", "stats": { "str": 32 } },
-      { "kind": "sub", "nameKo": "부옵션", "stats": { "wil": 21 } },
-      { "kind": "extra", "nameKo": "추가옵션", "stats": { "physDmgBonus": 0.23 } }
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "str": 32
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "wil": 21
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {
+          "physDmgBonus": 0.23
+        },
+        "customText": "물리 피해 +23%"
+      }
     ]
   },
   {
@@ -60,20 +153,58 @@
     "type": "Part",
     "setId": "yinglong_50",
     "options": [
-      { "kind": "main", "nameKo": "주옵션", "stats": { "wil": 32 } },
-      { "kind": "sub", "nameKo": "부옵션", "stats": { "agi": 21 } },
-      { "kind": "extra", "nameKo": "추가옵션", "stats": { "skillDmgBonus": 0.414 } }
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "wil": 32
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "agi": 21
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {
+          "skillDmgBonus": 0.414
+        },
+        "customText": "연계 스킬 피해 +41.4%"
+      }
     ]
   },
   {
     "id": "yinglong_armor",
-    "nameKo": "응룡 50식 중장갑",
+    "nameKo": "응룡 50식 중갑",
     "type": "Armor",
     "setId": "yinglong_50",
     "options": [
-      { "kind": "main", "nameKo": "주옵션", "stats": { "str": 87 } },
-      { "kind": "sub", "nameKo": "부옵션", "stats": { "agi": 58 } },
-      { "kind": "extra", "nameKo": "추가옵션", "stats": { "critRate": 0.108 } }
+      {
+        "kind": "main",
+        "nameKo": "주옵션",
+        "stats": {
+          "str": 87
+        }
+      },
+      {
+        "kind": "sub",
+        "nameKo": "부옵션",
+        "stats": {
+          "wil": 58
+        }
+      },
+      {
+        "kind": "extra",
+        "nameKo": "추가옵션",
+        "stats": {
+          "physDmgBonus": 0.115
+        },
+        "customText": "물리 피해 +11.5%"
+      }
     ]
   }
 ]

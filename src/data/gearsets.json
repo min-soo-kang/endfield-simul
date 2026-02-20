@@ -4,13 +4,7 @@
     "name": "Swordsman Set",
     "nameKo": "검술사",
     "recommendedFor": "물리 딜러",
-    "bonuses": [
-      {
-        "pieces": 3,
-        "description": "세트 효과 없음 (개별 장비 옵션 중심)",
-        "atkPercent": 0
-      }
-    ]
+    "bonuses": []
   },
   {
     "id": "yinglong_50",
@@ -20,7 +14,7 @@
     "bonuses": [
       {
         "pieces": 3,
-        "description": "공격력 +15%, 연계/스킬 피해 +60%",
+        "description": "공격력 +15%, 연계 스킬 피해 +60%",
         "atkPercent": 0.15,
         "skillDmgBonus": 0.6
       }
@@ -48,7 +42,7 @@
     "bonuses": [
       {
         "pieces": 3,
-        "description": "스킬 피해 +20%, 아츠 피해 +35%",
+        "description": "모든 스킬 피해 +20%, 아츠 피해 +35%",
         "skillDmgBonus": 0.2,
         "artsDmgBonus": 0.35
       }
@@ -62,8 +56,7 @@
     "bonuses": [
       {
         "pieces": 3,
-        "description": "연소/부식 대상 추가 피해 +50%",
-        "artsDmgBonus": 0.5
+        "description": "오리지늄 아츠 강도 +30, 연소/부식 상태 대상 피해 +50%"
       }
     ]
   },
@@ -75,8 +68,7 @@
     "bonuses": [
       {
         "pieces": 3,
-        "description": "증폭/비호 부여 시 팀 피해 +16%",
-        "skillDmgBonus": 0.16
+        "description": "최대 생명력 +1000, 증폭/비호/취약/허약 부여 시 다른 팀원 피해 +16%"
       }
     ]
   }

@@ -188,6 +188,7 @@ export interface GearOption {
   kind: 'main' | 'sub' | 'extra';
   nameKo: string;
   stats: GearStats;
+  customText?: string;
 }
 
 export interface GearItem {
