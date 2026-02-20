@@ -98,10 +98,13 @@ const GearLoadoutSelector: React.FC<Props> = ({ gearItems, gearSets, loadout, on
                   {loadout[slot]!.options.map((opt) => (
                     <div key={opt.kind} className="text-[11px] text-text-muted">
                       <div className="text-text-dim">• {opt.nameKo}</div>
-                      {renderStatRows(opt.stats).map((st) => (
-                        <div key={`${opt.kind}-${st}`} className="pl-2">- {st}</div>
-                      ))}
-                      {opt.customText && <div className="pl-2">- {opt.customText}</div>}
+                      {opt.customText ? (
+                        <div className="pl-2">- {opt.customText}</div>
+                      ) : (
+                        renderStatRows(opt.stats).map((st) => (
+                          <div key={`${opt.kind}-${st}`} className="pl-2">- {st}</div>
+                        ))
+                      )}
                     </div>
                   ))}
                 </div>
