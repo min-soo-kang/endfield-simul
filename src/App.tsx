@@ -25,6 +25,20 @@ const operators = loadAllOperators();
 const gearSets = getAllGearSets();
 const gearItems = getAllGearItems();
 
+function extractElementalArtsBonus(customText?: string): number {
+  if (!customText) return 0;
+  const isElemental = /(냉기|전기|열기|자연)\s*피해/.test(customText);
+  if (!isElemental) return 0;
+  const re = /([0-9]+(?:\.[0-9]+)?)%/g;
+  let m: RegExpExecArray | null;
+  let max = 0;
+  while ((m = re.exec(customText)) !== null) {
+    const v = parseFloat(m[1]) / 100;
+    if (v > max) max = v;
+  }
+  return max;
+}
+
 function App() {
   const [selectedOperator, setSelectedOperator] = useState<Operator | null>(null);
   const [selectedWeapon, setSelectedWeapon] = useState<Weapon | null>(null);
@@ -65,7 +79,7 @@ function App() {
     };
 
     selected.forEach(g => {
-      g.options.forEach(({ stats }) => {
+      g.options.forEach(({ stats, customText }) => {
         gearBuffs.strFlat! += stats.str || 0;
         gearBuffs.agiFlat! += stats.agi || 0;
         gearBuffs.intFlat! += stats.int || 0;
@@ -74,7 +88,7 @@ function App() {
         gearBuffs.atkFlat! += stats.atkFlat || 0;
         gearBuffs.critRate! += stats.critRate || 0;
         gearBuffs.physDmgBonus! += stats.physDmgBonus || 0;
-        gearBuffs.artsDmgBonus! += stats.artsDmgBonus || 0;
+        gearBuffs.artsDmgBonus! += (stats.artsDmgBonus || 0) + extractElementalArtsBonus(customText);
         gearBuffs.skillDmgBonus! += stats.skillDmgBonus || 0;
         gearBuffs.battleSkillDmgBonus! += stats.battleSkillDmgBonus || 0;
         gearBuffs.comboSkillDmgBonus! += stats.comboSkillDmgBonus || 0;

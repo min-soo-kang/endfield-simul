@@ -61,7 +61,8 @@
     "bonuses": [
       {
         "pieces": 3,
-        "description": "오리지늄 아츠 강도 +30, 열기 피해 +50%, 자연 피해 +50%"
+        "description": "오리지늄 아츠 강도 +30, 열기 피해 +50%, 자연 피해 +50%",
+        "artsDmgBonus": 0.5
       }
     ]
   },
@@ -85,7 +86,8 @@
     "bonuses": [
       {
         "pieces": 3,
-        "description": "오리지늄 아츠 강도 +30, 전기 피해 +50%, 냉기 피해 +50%"
+        "description": "오리지늄 아츠 강도 +30, 전기 피해 +50%, 냉기 피해 +50%",
+        "artsDmgBonus": 0.5
       }
     ]
   },
