@@ -1,8 +1,9 @@
-import type { Operator, Weapon, GearSet, Enemy, BuffSet, SpecialEffects, WeaponCategory } from '../types';
+import type { Operator, Weapon, GearSet, Enemy, BuffSet, SpecialEffects, WeaponCategory, GearItem, GearSlot } from '../types';
 import chenData from '../data/operators/chen.json';
 import weaponsData from '../data/weapons/weapons.json';
 import gearsetsData from '../data/gearsets.json';
 import enemiesData from '../data/enemies.json';
+import gearsData from '../data/gears.json';
 
 const allOperators: Operator[] = [
   chenData as unknown as Operator,
@@ -11,6 +12,7 @@ const allOperators: Operator[] = [
 const allWeapons: Weapon[] = weaponsData as unknown as Weapon[];
 const allGearSets: GearSet[] = gearsetsData as unknown as GearSet[];
 const allEnemies: Enemy[] = enemiesData as unknown as Enemy[];
+const allGearItems: GearItem[] = gearsData as unknown as GearItem[];
 
 export function loadAllOperators(): Operator[] {
   return allOperators;
@@ -79,4 +81,13 @@ export function createDefaultEffects(): SpecialEffects {
     comboBattlePerStack: 0.3,
     comboUltimatePerStack: 0.2,
   };
+}
+
+
+export function getAllGearItems(): GearItem[] {
+  return allGearItems;
+}
+
+export function getGearItemsBySlot(slot: GearSlot): GearItem[] {
+  return allGearItems.filter(g => g.slot === slot);
 }

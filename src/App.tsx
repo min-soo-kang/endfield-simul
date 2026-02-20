@@ -1,9 +1,10 @@
 import React, { useState, useCallback } from 'react';
-import type { Operator, Weapon, Skill, Enemy, BuffSet, GearSet, SpecialEffects } from './types';
+import type { Operator, Weapon, Skill, Enemy, BuffSet, GearSet, SpecialEffects, GearItem, GearSlot } from './types';
 import {
   loadAllOperators,
   getWeaponsForType,
   getAllGearSets,
+  getAllGearItems,
   createDefaultEnemy,
   createDefaultBuffs,
   createDefaultEffects,
@@ -14,7 +15,7 @@ import WeaponSelector from './components/WeaponSelector';
 import SkillSelector from './components/SkillSelector';
 import EnemyPanel from './components/EnemyPanel';
 import EffectToggles from './components/EffectToggles';
-import GearSetSelector from './components/GearSetSelector';
+import GearLoadoutSelector from './components/GearLoadoutSelector';
 import ResultCard from './components/ResultCard';
 import DamageBreakdown from './components/DamageBreakdown';
 import DamageSummaryPanel from './components/DamageSummaryPanel';
@@ -22,13 +23,14 @@ import PotentialSummaryTabs from './components/PotentialSummaryTabs';
 
 const operators = loadAllOperators();
 const gearSets = getAllGearSets();
+const gearItems = getAllGearItems();
 
 function App() {
   const [selectedOperator, setSelectedOperator] = useState<Operator | null>(null);
   const [selectedWeapon, setSelectedWeapon] = useState<Weapon | null>(null);
   const [selectedSkill, setSelectedSkill] = useState<Skill | null>(null);
   const [selectedSkillLevel, setSelectedSkillLevel] = useState<number>(1);
-  const [selectedGearSet, setSelectedGearSet] = useState<GearSet | null>(null);
+  const [gearLoadout, setGearLoadout] = useState<{ Armor: GearItem | null; Gloves: GearItem | null; Part1: GearItem | null; Part2: GearItem | null; }>({ Armor: null, Gloves: null, Part1: null, Part2: null });
   const [operatorPotentialLevel, setOperatorPotentialLevel] = useState<number>(0);
   const [weaponPotentialLevel, setWeaponPotentialLevel] = useState<number>(0);
   const [enemy, setEnemy] = useState<Enemy>(createDefaultEnemy());
@@ -53,15 +55,63 @@ function App() {
     setSelectedSkillLevel(skill.levels[skill.levels.length - 1].level);
   }, []);
 
+
+  const derivedGear = React.useMemo(() => {
+    const selected = Object.values(gearLoadout).filter(Boolean) as GearItem[];
+    const gearBuffs: Partial<BuffSet> = {
+      atkPercent: 0, atkFlat: 0, critRate: 0, critDmg: 0, defPenFlat: 0, defPenPercent: 0,
+      resPen: 0, physDmgBonus: 0, artsDmgBonus: 0, skillDmgBonus: 0, ampBonus: 0, vulnBonus: 0, takenDmgBonus: 0, extraDmgBonus: 0,
+    };
+
+    selected.forEach(g => {
+      gearBuffs.atkPercent! += g.atkPercent || 0;
+      gearBuffs.atkFlat! += g.atkFlat || 0;
+      gearBuffs.critRate! += g.critRate || 0;
+      gearBuffs.physDmgBonus! += g.physDmgBonus || 0;
+      gearBuffs.artsDmgBonus! += g.artsDmgBonus || 0;
+      gearBuffs.skillDmgBonus! += g.skillDmgBonus || 0;
+    });
+
+    const countMap: Record<string, number> = {};
+    selected.forEach(g => { countMap[g.setId] = (countMap[g.setId] || 0) + 1; });
+    const active = Object.entries(countMap)
+      .map(([setId, count]) => ({ set: gearSets.find(s => s.id === setId), count }))
+      .filter(v => v.set)
+      .sort((a, b) => b.count - a.count)[0];
+
+    let activeSet: GearSet | null = null;
+    if (active?.set && active.count >= Math.min(...active.set.bonuses.map(b => b.pieces))) activeSet = active.set;
+
+    return { gearBuffs: gearBuffs as BuffSet, activeSet };
+  }, [gearLoadout]);
+
+  const combinedBuffs = React.useMemo(() => ({
+    ...buffs,
+    atkPercent: buffs.atkPercent + derivedGear.gearBuffs.atkPercent,
+    atkFlat: buffs.atkFlat + derivedGear.gearBuffs.atkFlat,
+    critRate: buffs.critRate + derivedGear.gearBuffs.critRate,
+    critDmg: buffs.critDmg + derivedGear.gearBuffs.critDmg,
+    defPenFlat: buffs.defPenFlat + derivedGear.gearBuffs.defPenFlat,
+    defPenPercent: buffs.defPenPercent + derivedGear.gearBuffs.defPenPercent,
+    resPen: buffs.resPen + derivedGear.gearBuffs.resPen,
+    physDmgBonus: buffs.physDmgBonus + derivedGear.gearBuffs.physDmgBonus,
+    artsDmgBonus: buffs.artsDmgBonus + derivedGear.gearBuffs.artsDmgBonus,
+    skillDmgBonus: buffs.skillDmgBonus + derivedGear.gearBuffs.skillDmgBonus,
+    ampBonus: buffs.ampBonus + derivedGear.gearBuffs.ampBonus,
+    vulnBonus: buffs.vulnBonus + derivedGear.gearBuffs.vulnBonus,
+    takenDmgBonus: buffs.takenDmgBonus + derivedGear.gearBuffs.takenDmgBonus,
+    extraDmgBonus: buffs.extraDmgBonus + derivedGear.gearBuffs.extraDmgBonus,
+  }), [buffs, derivedGear]);
+
   const result = useCalculation(
     selectedOperator,
     selectedWeapon,
     selectedSkill,
     selectedSkillLevel,
     enemy,
-    buffs,
+    combinedBuffs,
     effects,
-    selectedGearSet,
+    derivedGear.activeSet,
     operatorPotentialLevel,
     weaponPotentialLevel
   );
@@ -114,10 +164,11 @@ function App() {
             </div>
 
             <div className="bg-bg-panel border border-border rounded-lg p-4">
-              <GearSetSelector
+              <GearLoadoutSelector
+                gearItems={gearItems}
                 gearSets={gearSets}
-                selected={selectedGearSet}
-                onSelect={setSelectedGearSet}
+                loadout={gearLoadout}
+                onChange={(slot: GearSlot, item: GearItem | null) => setGearLoadout(prev => ({ ...prev, [slot]: item }))}
               />
             </div>
 
