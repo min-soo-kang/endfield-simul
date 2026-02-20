@@ -1,0 +1,157 @@
+{
+  "id": "pogranichnik",
+  "name": "Pogranichnik",
+  "nameKo": "포그라니치니크",
+  "operatorClass": "Guard",
+  "weaponType": "OneHandSword",
+  "element": "None",
+  "rarity": 6,
+  "stats": {
+    "hp": 6000,
+    "baseAtk": 321,
+    "def": 0,
+    "res": 0,
+    "attributes": {
+      "str": 101,
+      "agi": 110,
+      "int": 97,
+      "wil": 233
+    },
+    "mainAttr": "wil",
+    "subAttr": "agi"
+  },
+  "skills": [
+    {
+      "id": "pogranichnik_basic",
+      "name": "Basic Attack",
+      "nameKo": "기본공격",
+      "damageType": "Physical",
+      "element": "None",
+      "levels": [
+        {
+          "level": 1,
+          "multiplier": 2
+        },
+        {
+          "level": 6,
+          "multiplier": 2.8
+        },
+        {
+          "level": 12,
+          "multiplier": 3.5
+        }
+      ],
+      "hits": 1,
+      "description": "기본 공격"
+    },
+    {
+      "id": "pogranichnik_battle",
+      "name": "Battle Skill",
+      "nameKo": "배틀 스킬",
+      "damageType": "Physical",
+      "element": "None",
+      "levels": [
+        {
+          "level": 1,
+          "multiplier": 2
+        },
+        {
+          "level": 6,
+          "multiplier": 3
+        },
+        {
+          "level": 12,
+          "multiplier": 4
+        }
+      ],
+      "hits": 1,
+      "description": "방어 불능 부여 + 스킬 게이지 회복 (배율 미확인)"
+    },
+    {
+      "id": "pogranichnik_combo",
+      "name": "Combo Skill",
+      "nameKo": "연계 스킬",
+      "damageType": "Physical",
+      "element": "None",
+      "levels": [
+        {
+          "level": 1,
+          "multiplier": 2
+        },
+        {
+          "level": 6,
+          "multiplier": 3
+        },
+        {
+          "level": 12,
+          "multiplier": 4
+        }
+      ],
+      "hits": 1,
+      "description": "스킬 게이지 회복 (배율 미확인)"
+    },
+    {
+      "id": "pogranichnik_ultimate",
+      "name": "Ultimate",
+      "nameKo": "궁극기",
+      "damageType": "Physical",
+      "element": "None",
+      "levels": [
+        {
+          "level": 1,
+          "multiplier": 5
+        },
+        {
+          "level": 6,
+          "multiplier": 7.5
+        },
+        {
+          "level": 12,
+          "multiplier": 10
+        }
+      ],
+      "hits": 4,
+      "description": "스킬 게이지 회복 (배율 미확인)"
+    }
+  ],
+  "talents": [
+    "공격력 +24%, 오리지늄 아츠 강도 +24",
+    ""
+  ],
+  "talentBuffs": {
+    "atkPercent": 0.24
+  },
+  "potentialBonuses": [
+    {
+      "level": 0,
+      "title": "잠재 0",
+      "description": "잠재 미개방"
+    },
+    {
+      "level": 1,
+      "title": "잠재 1",
+      "description": "의지 +20, 물리 피해 +10%",
+      "physDmgBonus": 0.1
+    },
+    {
+      "level": 2,
+      "title": "잠재 2",
+      "description": "미확인"
+    },
+    {
+      "level": 3,
+      "title": "잠재 3",
+      "description": "미확인"
+    },
+    {
+      "level": 4,
+      "title": "잠재 4",
+      "description": "미확인"
+    },
+    {
+      "level": 5,
+      "title": "잠재 5",
+      "description": "미확인"
+    }
+  ]
+}

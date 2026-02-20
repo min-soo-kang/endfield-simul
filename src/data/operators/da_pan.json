@@ -1,0 +1,158 @@
+{
+  "id": "da_pan",
+  "name": "Da Pan",
+  "nameKo": "판",
+  "operatorClass": "Guard",
+  "weaponType": "TwoHandSword",
+  "element": "None",
+  "rarity": 5,
+  "stats": {
+    "hp": 5800,
+    "baseAtk": 303,
+    "def": 0,
+    "res": 0,
+    "attributes": {
+      "str": 235,
+      "agi": 96,
+      "int": 94,
+      "wil": 102
+    },
+    "mainAttr": "str",
+    "subAttr": "wil"
+  },
+  "skills": [
+    {
+      "id": "da_pan_basic",
+      "name": "Basic Attack",
+      "nameKo": "기본공격",
+      "damageType": "Physical",
+      "element": "None",
+      "levels": [
+        {
+          "level": 1,
+          "multiplier": 2
+        },
+        {
+          "level": 6,
+          "multiplier": 2.8
+        },
+        {
+          "level": 12,
+          "multiplier": 3.5
+        }
+      ],
+      "hits": 1,
+      "description": "기본 공격"
+    },
+    {
+      "id": "da_pan_battle",
+      "name": "Battle Skill",
+      "nameKo": "배틀 스킬",
+      "damageType": "Physical",
+      "element": "None",
+      "levels": [
+        {
+          "level": 1,
+          "multiplier": 2
+        },
+        {
+          "level": 6,
+          "multiplier": 3
+        },
+        {
+          "level": 12,
+          "multiplier": 4
+        }
+      ],
+      "hits": 1,
+      "description": "방어 불능 부여 (배율 미확인)"
+    },
+    {
+      "id": "da_pan_combo",
+      "name": "Combo Skill",
+      "nameKo": "연계 스킬",
+      "damageType": "Physical",
+      "element": "None",
+      "levels": [
+        {
+          "level": 1,
+          "multiplier": 2
+        },
+        {
+          "level": 6,
+          "multiplier": 3
+        },
+        {
+          "level": 12,
+          "multiplier": 4
+        }
+      ],
+      "hits": 1,
+      "description": "방어 불능 부여 (배율 미확인)"
+    },
+    {
+      "id": "da_pan_ultimate",
+      "name": "Ultimate",
+      "nameKo": "궁극기",
+      "damageType": "Physical",
+      "element": "None",
+      "levels": [
+        {
+          "level": 1,
+          "multiplier": 5
+        },
+        {
+          "level": 6,
+          "multiplier": 7.5
+        },
+        {
+          "level": 12,
+          "multiplier": 10
+        }
+      ],
+      "hits": 4,
+      "description": "방어 불능 부여 (배율 미확인)"
+    }
+  ],
+  "talents": [
+    "물리 피해 +24%",
+    ""
+  ],
+  "talentBuffs": {
+    "physDmgBonus": 0.24
+  },
+  "potentialBonuses": [
+    {
+      "level": 0,
+      "title": "잠재 0",
+      "description": "물리 피해 +30%",
+      "physDmgBonus": 0.3
+    },
+    {
+      "level": 1,
+      "title": "잠재 1",
+      "description": "미확인"
+    },
+    {
+      "level": 2,
+      "title": "잠재 2",
+      "description": "힘 +15, 물리 피해 +8%",
+      "physDmgBonus": 0.08
+    },
+    {
+      "level": 3,
+      "title": "잠재 3",
+      "description": "미확인"
+    },
+    {
+      "level": 4,
+      "title": "잠재 4",
+      "description": "미확인"
+    },
+    {
+      "level": 5,
+      "title": "잠재 5",
+      "description": "미확인"
+    }
+  ]
+}

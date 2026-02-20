@@ -10,9 +10,51 @@
     "atkPercent": 0,
     "critRate": 0.195,
     "critDmg": 0,
-    "physDmgBonus": 0.42,
+    "physDmgBonus": 0,
     "artsDmgBonus": 0,
-    "passive": "어둠 · 청운: 배틀스킬/궁극기 물리 피해 +15%~42%, 방어 불능 상태 적에게 +50%~140%"
+    "passive": "어둠 · 청운: 물리 피해 +15%~42%, 불균형 대상에게 주는 피해 +50%~140%",
+    "potentialBonuses": [
+      {
+        "level": 0,
+        "title": "3옵 Lv.4",
+        "description": "물리 피해 +24%, 불균형 대상 피해 +80%",
+        "physDmgBonus": 0.24
+      },
+      {
+        "level": 1,
+        "title": "3옵 Lv.5",
+        "description": "물리 피해 +27%, 불균형 대상 피해 +90%",
+        "physDmgBonus": 0.27
+      },
+      {
+        "level": 2,
+        "title": "3옵 Lv.6",
+        "description": "물리 피해 +30%, 불균형 대상 피해 +100%",
+        "physDmgBonus": 0.3
+      },
+      {
+        "level": 3,
+        "title": "3옵 Lv.7",
+        "description": "물리 피해 +33%, 불균형 대상 피해 +110%",
+        "physDmgBonus": 0.33
+      },
+      {
+        "level": 4,
+        "title": "3옵 Lv.8",
+        "description": "물리 피해 +36%, 불균형 대상 피해 +120%",
+        "physDmgBonus": 0.36
+      },
+      {
+        "level": 5,
+        "title": "3옵 Lv.9",
+        "description": "물리 피해 +42%, 불균형 대상 피해 +140%",
+        "physDmgBonus": 0.42
+      }
+    ],
+    "mainStatFlatBonus": 132,
+    "mainStatBonusLevel": 9,
+    "critRateLevel": 9,
+    "thirdOptionBaseLevel": 4
   },
   {
     "id": "great_name",
@@ -22,12 +64,20 @@
     "weaponType": "OneHandSword",
     "atk": 490,
     "subStat": "주요 능력치 +17~132, 물리 피해 +5.56%~43.33%",
-    "atkPercent": 0,
+    "atkPercent": 0.70,
     "critRate": 0,
     "critDmg": 0,
     "physDmgBonus": 0.4333,
     "artsDmgBonus": 0,
-    "passive": "잔혹 · 엄격한 규율: 방어 불능 소모 시 공격력 증가"
+    "passive": "잔혹 · 엄격한 규율: 공격력 +10%~28% / +15%~42%, 팀 공격력 +7.5%~21%",
+    "potentialBonuses": [
+      {
+        "level": 0,
+        "title": "잠재 미지원",
+        "description": "현재 버전에서는 부요만 잠재 3옵 레벨 연동"
+      }
+    ],
+    "mainStatFlatBonus": 132
   },
   {
     "id": "thermite_cutter",
@@ -36,13 +86,20 @@
     "rarity": 6,
     "weaponType": "OneHandSword",
     "atk": 490,
-    "subStat": "의지 +20~156, 공격력 +5%~39%",
-    "atkPercent": 0.39,
+    "subStat": "의지 +20~156, 공격력 +5%~39% / +10%~28%",
+    "atkPercent": 0.67,
     "critRate": 0,
     "critDmg": 0,
     "physDmgBonus": 0,
     "artsDmgBonus": 0,
-    "passive": "흐름 · 고열 방출: 스킬 게이지 회복/연타 획득 시 팀 공격력 증가 (최대 2스택)"
+    "passive": "흐름 · 고열 방출: 공격력 +5%~39% / +10%~28%, 팀 공격력 +5%~14%",
+    "potentialBonuses": [
+      {
+        "level": 0,
+        "title": "잠재 미지원",
+        "description": "현재 버전에서는 부요만 잠재 3옵 레벨 연동"
+      }
+    ]
   },
   {
     "id": "white_night_star",
@@ -51,13 +108,21 @@
     "rarity": 6,
     "weaponType": "OneHandSword",
     "atk": 505,
-    "subStat": "주요 능력치 +17~132, 오리지늄 아츠 강도 +10~78",
+    "subStat": "주요 능력치 +17~132, 아츠 피해 +12%~33.6% (×2)",
     "atkPercent": 0,
     "critRate": 0,
     "critDmg": 0,
     "physDmgBonus": 0,
-    "artsDmgBonus": 0.336,
-    "passive": "고통 · 백야의 별: 아츠 피해 +12%~33.6%, 연소/감전 부여 시 아츠 피해 추가 상승"
+    "artsDmgBonus": 0.672,
+    "passive": "고통 · 백야의 별: 아츠 피해 +12%~33.6% / +12%~33.6%, 오리지늄 아츠 강도 +10~78 / +25~70",
+    "potentialBonuses": [
+      {
+        "level": 0,
+        "title": "잠재 미지원",
+        "description": "현재 버전에서는 부요만 잠재 3옵 레벨 연동"
+      }
+    ],
+    "mainStatFlatBonus": 132
   },
   {
     "id": "endless_wandering",
@@ -66,27 +131,42 @@
     "rarity": 6,
     "weaponType": "OneHandSword",
     "atk": 500,
-    "subStat": "의지 +20~156, 공격력 +5%~39%",
+    "subStat": "의지 +20~156, 물리 피해 +16%~44.8% / +5%~14%",
     "atkPercent": 0.39,
     "critRate": 0,
     "critDmg": 0,
-    "physDmgBonus": 0.448,
+    "physDmgBonus": 0.588,
     "artsDmgBonus": 0,
-    "passive": "흐름 · 윤회: 물리 피해 +16%~44.8%, 스킬 게이지 회복 시 팀 물리 피해 증가 (최대 5스택)"
+    "passive": "흐름 · 윤회: 공격력 +5%~39%, 물리 피해 +16%~44.8% / +5%~14%, 팀 물리 피해 +2.5%~7%",
+    "potentialBonuses": [
+      {
+        "level": 0,
+        "title": "잠재 미지원",
+        "description": "현재 버전에서는 부요만 잠재 3옵 레벨 연동"
+      }
+    ]
   },
   {
     "id": "grand_wish",
-    "name": "Grand Wish",
+    "name": "Grand Vision",
     "nameKo": "장대한 염원",
     "rarity": 6,
     "weaponType": "OneHandSword",
     "atk": 500,
-    "subStat": "민첩 +20~156, 공격력 +5%~39%",
+    "subStat": "민첩 +20~156, 공격력 +5%~39%, 물리 피해 +36%~100.8%",
     "atkPercent": 0.39,
     "critRate": 0,
     "critDmg": 0,
-    "physDmgBonus": 0,
+    "physDmgBonus": 1.008,
     "artsDmgBonus": 0,
-    "passive": "고통 · 간절한 소망: 오리지늄 결정/동결 부여 시 다음 스킬 물리 피해 +36%~100.8%"
+    "passive": "고통 · 간절한 소망: 물리 피해 +36%~100.8%, 오리지늄 아츠 강도 +30~84",
+    "potentialBonuses": [
+      {
+        "level": 0,
+        "title": "잠재 미지원",
+        "description": "현재 버전에서는 부요만 잠재 3옵 레벨 연동"
+      }
+    ],
+    "mainStatFlatBonus": 156
   }
 ]

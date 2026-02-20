@@ -10,10 +10,23 @@ export function useCalculation(
   enemy: Enemy,
   buffs: BuffSet,
   effects: SpecialEffects,
-  gearSet: GearSet | null
+  gearSet: GearSet | null,
+  operatorPotentialLevel: number,
+  weaponPotentialLevel: number
 ): DamageResult | null {
   return useMemo(() => {
     if (!operator || !skill) return null;
-    return calculateDamage(operator, weapon, skill, skillLevel, enemy, buffs, effects, gearSet);
-  }, [operator, weapon, skill, skillLevel, enemy, buffs, effects, gearSet]);
+    return calculateDamage(
+      operator,
+      weapon,
+      skill,
+      skillLevel,
+      enemy,
+      buffs,
+      effects,
+      gearSet,
+      operatorPotentialLevel,
+      weaponPotentialLevel
+    );
+  }, [operator, weapon, skill, skillLevel, enemy, buffs, effects, gearSet, operatorPotentialLevel, weaponPotentialLevel]);
 }

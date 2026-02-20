@@ -13,7 +13,7 @@ const DamageBreakdown: React.FC<Props> = ({ steps }) => {
   return (
     <div className="bg-bg-panel border border-border rounded-lg overflow-hidden">
       <div className="px-4 py-2.5 border-b border-border">
-        <h3 className="text-text text-sm font-medium">Damage Breakdown</h3>
+        <h3 className="text-text text-sm font-medium">피해 계산 상세</h3>
       </div>
       <div className="divide-y divide-border">
         {steps.map((step, i) => {

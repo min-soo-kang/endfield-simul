@@ -13,7 +13,7 @@
     "res": 0,
     "attributes": {
       "str": 106,
-      "agi": 171,
+      "agi": 231,
       "int": 85,
       "wil": 93
     },
@@ -24,58 +24,80 @@
     {
       "id": "chen_basic_1",
       "name": "Soaring Break SEQ1",
-      "nameKo": "비파 1타",
+      "nameKo": "기본공격",
       "damageType": "Physical",
       "element": "None",
       "levels": [
-        { "level": 1, "multiplier": 0.20 },
-        { "level": 6, "multiplier": 0.30 },
-        { "level": 12, "multiplier": 0.39 }
+        {
+          "level": 1,
+          "multiplier": 0.2
+        },
+        {
+          "level": 6,
+          "multiplier": 0.3
+        },
+        {
+          "level": 12,
+          "multiplier": 0.39
+        }
       ],
       "hits": 1,
-      "description": "기본 공격 1타"
-    },
-    {
-      "id": "chen_basic_5",
-      "name": "Soaring Break SEQ5",
-      "nameKo": "비파 5타",
-      "damageType": "Physical",
-      "element": "None",
-      "levels": [
-        { "level": 1, "multiplier": 0.40 },
-        { "level": 6, "multiplier": 0.59 },
-        { "level": 12, "multiplier": 0.77 }
-      ],
-      "hits": 1,
-      "description": "기본 공격 5타 (마무리)"
+      "description": "기본 공격"
     },
     {
       "id": "chen_basic_finisher",
       "name": "Soaring Break Finisher",
-      "nameKo": "비파 마무리 공격",
+      "nameKo": "강력한 일격",
       "damageType": "Physical",
       "element": "None",
       "levels": [
-        { "level": 1, "multiplier": 4.00 },
-        { "level": 6, "multiplier": 5.85 },
-        { "level": 12, "multiplier": 7.70 }
+        {
+          "level": 1,
+          "multiplier": 4.0
+        },
+        {
+          "level": 6,
+          "multiplier": 5.85
+        },
+        {
+          "level": 12,
+          "multiplier": 7.7
+        }
       ],
       "hits": 1,
-      "description": "기본 공격 마무리 강타"
+      "description": "기본공격 막타"
     },
     {
       "id": "chen_battle",
       "name": "Ascending Strike",
-      "nameKo": "승천의 일격",
+      "nameKo": "배틀 스킬 · 귀궁우",
       "damageType": "Physical",
       "element": "None",
       "levels": [
-        { "level": 1, "multiplier": 1.69 },
-        { "level": 3, "multiplier": 2.10 },
-        { "level": 5, "multiplier": 2.52 },
-        { "level": 7, "multiplier": 2.94 },
-        { "level": 9, "multiplier": 3.36 },
-        { "level": 12, "multiplier": 3.80 }
+        {
+          "level": 1,
+          "multiplier": 1.69
+        },
+        {
+          "level": 3,
+          "multiplier": 2.1
+        },
+        {
+          "level": 5,
+          "multiplier": 2.52
+        },
+        {
+          "level": 7,
+          "multiplier": 2.94
+        },
+        {
+          "level": 9,
+          "multiplier": 3.36
+        },
+        {
+          "level": 12,
+          "multiplier": 3.8
+        }
       ],
       "hits": 1,
       "cost": 100,
@@ -85,16 +107,34 @@
     {
       "id": "chen_combo",
       "name": "Soar to the Stars",
-      "nameKo": "비성탄우",
+      "nameKo": "연계 스킬 · 견천하",
       "damageType": "Physical",
       "element": "None",
       "levels": [
-        { "level": 1, "multiplier": 1.20 },
-        { "level": 3, "multiplier": 1.50 },
-        { "level": 5, "multiplier": 1.80 },
-        { "level": 7, "multiplier": 2.10 },
-        { "level": 9, "multiplier": 2.40 },
-        { "level": 12, "multiplier": 2.70 }
+        {
+          "level": 1,
+          "multiplier": 1.2
+        },
+        {
+          "level": 3,
+          "multiplier": 1.5
+        },
+        {
+          "level": 5,
+          "multiplier": 1.8
+        },
+        {
+          "level": 7,
+          "multiplier": 2.1
+        },
+        {
+          "level": 9,
+          "multiplier": 2.4
+        },
+        {
+          "level": 12,
+          "multiplier": 2.7
+        }
       ],
       "hits": 1,
       "cooldown": 16,
@@ -103,16 +143,34 @@
     {
       "id": "chen_ultimate",
       "name": "Blade Gale",
-      "nameKo": "회풍참",
+      "nameKo": "궁극기 · 예풍상",
       "damageType": "Physical",
       "element": "None",
       "levels": [
-        { "level": 1, "multiplier": 7.07 },
-        { "level": 3, "multiplier": 8.84 },
-        { "level": 5, "multiplier": 10.61 },
-        { "level": 7, "multiplier": 12.37 },
-        { "level": 9, "multiplier": 14.14 },
-        { "level": 12, "multiplier": 15.48 }
+        {
+          "level": 1,
+          "multiplier": 7.07
+        },
+        {
+          "level": 3,
+          "multiplier": 8.84
+        },
+        {
+          "level": 5,
+          "multiplier": 10.61
+        },
+        {
+          "level": 7,
+          "multiplier": 12.37
+        },
+        {
+          "level": 9,
+          "multiplier": 14.14
+        },
+        {
+          "level": 12,
+          "multiplier": 15.48
+        }
       ],
       "hits": 8,
       "cost": 70,
@@ -121,7 +179,51 @@
     }
   ],
   "talents": [
-    "참격의 칼날: 스킬 적중 시 ATK +4% (최대 5스택, 10초 지속)",
+    "참격의 칼날: 공격력 +40%",
     "기세 꺾기: 적 돌진 공격 중단 시 스태거 +5"
+  ],
+  "talentBuffs": {
+    "atkPercent": 0.4
+  },
+  "potentialBonuses": [
+    {
+      "level": 0,
+      "title": "잠재 0",
+      "description": "잠재 미개방"
+    },
+    {
+      "level": 1,
+      "title": "절영",
+      "description": "주는 피해 +20%",
+      "skillDmgBonus": 0.2
+    },
+    {
+      "level": 2,
+      "title": "가문의 무술",
+      "description": "민첩 +15, 주는 물리 피해 +8%",
+      "agiFlat": 15,
+      "physDmgBonus": 0.08
+    },
+    {
+      "level": 3,
+      "title": "쌍검의 협객",
+      "description": "데미지 계산에 반영되지 않음"
+    },
+    {
+      "level": 4,
+      "title": "자체 개발한 적소검",
+      "description": "궁극기 예풍상 사용에 필요한 궁극기 에너지 -15%",
+      "notes": [
+        "데미지 계산에는 직접 반영되지 않음"
+      ]
+    },
+    {
+      "level": 5,
+      "title": "세상을 짊어진 마음",
+      "description": "연계 스킬 견천하 쿨타임 -3초",
+      "notes": [
+        "데미지 계산에는 직접 반영되지 않음"
+      ]
+    }
   ]
 }

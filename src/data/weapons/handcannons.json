@@ -1,0 +1,177 @@
+[
+  {
+    "id": "clannibal",
+    "name": "Clannibal",
+    "nameKo": "클래니벌",
+    "rarity": 6,
+    "weaponType": "HandCannon",
+    "atk": 490,
+    "subStat": "주스탯 +132, 아츠 피해 +76.93%, 적 받는 아츠 피해 +28%",
+    "atkPercent": 0,
+    "critRate": 0,
+    "critDmg": 0,
+    "physDmgBonus": 0,
+    "artsDmgBonus": 0.7693,
+    "skillDmgBonus": 0,
+    "passive": "클래니벌: 주스탯 +132, 아츠 피해 +43.33%+33.6% (합계 +76.93%), 적 받는 아츠 피해 +28%",
+    "mainStatFlatBonus": 132,
+    "mainStatType": "주스탯",
+    "potentialBonuses": [
+      {
+        "level": 0,
+        "title": "잠재 미지원",
+        "description": "현재 버전에서는 잠재 미지원"
+      }
+    ]
+  },
+  {
+    "id": "wedge",
+    "name": "Wedge",
+    "nameKo": "쐐기",
+    "rarity": 6,
+    "weaponType": "HandCannon",
+    "atk": 500,
+    "subStat": "주스탯 +132, 치명타 확률 +19.5%, 아츠 피해 +100.8%",
+    "atkPercent": 0,
+    "critRate": 0.195,
+    "critDmg": 0,
+    "physDmgBonus": 0,
+    "artsDmgBonus": 1.008,
+    "skillDmgBonus": 0,
+    "passive": "쐐기: 주스탯 +132, 치명타 확률 +19.5%, 아츠 피해 +33.6%+22.4%+44.8% (합계 +100.8%)",
+    "mainStatFlatBonus": 132,
+    "mainStatType": "주스탯",
+    "potentialBonuses": [
+      {
+        "level": 0,
+        "title": "잠재 미지원",
+        "description": "현재 버전에서는 잠재 미지원"
+      }
+    ]
+  },
+  {
+    "id": "artzy_tyrannical",
+    "name": "Artzy Tyrannical",
+    "nameKo": "예술의 폭군",
+    "rarity": 6,
+    "weaponType": "HandCannon",
+    "atk": 505,
+    "subStat": "지능 +156, 치명타 확률 +19.5%, 냉기 피해 +145.6%",
+    "atkPercent": 0,
+    "critRate": 0.195,
+    "critDmg": 0,
+    "physDmgBonus": 0,
+    "artsDmgBonus": 1.456,
+    "skillDmgBonus": 0,
+    "passive": "예술의 폭군: 지능 +156, 치명타 확률 +19.5%, 냉기 피해 +44.8%+100.8% (합계 +145.6%)",
+    "mainStatFlatBonus": 156,
+    "mainStatType": "int",
+    "potentialBonuses": [
+      {
+        "level": 0,
+        "title": "잠재 미지원",
+        "description": "현재 버전에서는 잠재 미지원"
+      }
+    ]
+  },
+  {
+    "id": "navigator",
+    "name": "Navigator",
+    "nameKo": "항로의 개척자",
+    "rarity": 6,
+    "weaponType": "HandCannon",
+    "atk": 490,
+    "subStat": "지능 +156, 냉기 피해 +43.33%, 치명타 확률 +15.4%, 적 받는 냉기 피해 +19.6%, 적 받는 자연 피해 +19.6%",
+    "atkPercent": 0,
+    "critRate": 0.154,
+    "critDmg": 0,
+    "physDmgBonus": 0,
+    "artsDmgBonus": 0.4333,
+    "skillDmgBonus": 0,
+    "passive": "항로의 개척자: 지능 +156, 냉기 피해 +43.33%, 치명타 확률 +9.8%+5.6% (합계 +15.4%), 적 받는 냉기 피해 +19.6%, 적 받는 자연 피해 +19.6%",
+    "mainStatFlatBonus": 156,
+    "mainStatType": "int",
+    "potentialBonuses": [
+      {
+        "level": 0,
+        "title": "잠재 미지원",
+        "description": "현재 버전에서는 잠재 미지원"
+      }
+    ]
+  },
+  {
+    "id": "rational_farewell",
+    "name": "Rational Farewell",
+    "nameKo": "이성적인 작별",
+    "rarity": 5,
+    "weaponType": "HandCannon",
+    "atk": 411,
+    "subStat": "힘 +124, 열기 피해 +34.7%, 배틀 스킬 피해 +28%, 공격력 +44.8%",
+    "atkPercent": 0.448,
+    "critRate": 0,
+    "critDmg": 0,
+    "physDmgBonus": 0,
+    "artsDmgBonus": 0.347,
+    "battleSkillDmgBonus": 0.28,
+    "passive": "이성적인 작별: 힘 +124, 열기 피해 +34.7%, 배틀 스킬 피해 +28%, 공격력 +44.8%",
+    "mainStatFlatBonus": 124,
+    "mainStatType": "str",
+    "potentialBonuses": [
+      {
+        "level": 0,
+        "title": "잠재 미지원",
+        "description": "현재 버전에서는 잠재 미지원"
+      }
+    ]
+  },
+  {
+    "id": "obj_velocitous",
+    "name": "O.B.J. Velocitous",
+    "nameKo": "O.B.J. 벨로시투스",
+    "rarity": 5,
+    "weaponType": "HandCannon",
+    "atk": 411,
+    "subStat": "민첩 +124, 궁극기 게이지 회복, 공격력 +14%, 자연 피해 +56%",
+    "atkPercent": 0.14,
+    "critRate": 0,
+    "critDmg": 0,
+    "physDmgBonus": 0,
+    "artsDmgBonus": 0.56,
+    "skillDmgBonus": 0,
+    "passive": "O.B.J. 벨로시투스: 민첩 +124, 궁극기 게이지 회복, 공격력 +14%, 자연 피해 +56%",
+    "mainStatFlatBonus": 124,
+    "mainStatType": "agi",
+    "potentialBonuses": [
+      {
+        "level": 0,
+        "title": "잠재 미지원",
+        "description": "현재 버전에서는 잠재 미지원"
+      }
+    ]
+  },
+  {
+    "id": "opus_living",
+    "name": "Opus: The Living",
+    "nameKo": "작품: 중생",
+    "rarity": 5,
+    "weaponType": "HandCannon",
+    "atk": 411,
+    "subStat": "민첩 +124, 아츠 피해 +34.7%, 치명타 확률 +8.4%, 공격력 +42%",
+    "atkPercent": 0.42,
+    "critRate": 0.084,
+    "critDmg": 0,
+    "physDmgBonus": 0,
+    "artsDmgBonus": 0.347,
+    "skillDmgBonus": 0,
+    "passive": "작품: 중생: 민첩 +124, 아츠 피해 +34.7%, 치명타 확률 +8.4%, 공격력 +42%",
+    "mainStatFlatBonus": 124,
+    "mainStatType": "agi",
+    "potentialBonuses": [
+      {
+        "level": 0,
+        "title": "잠재 미지원",
+        "description": "현재 버전에서는 잠재 미지원"
+      }
+    ]
+  }
+]

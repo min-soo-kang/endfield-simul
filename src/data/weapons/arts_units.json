@@ -1,0 +1,226 @@
+[
+  {
+    "id": "chivalric_virtues",
+    "name": "Chivalric Virtues",
+    "nameKo": "기사도 정신",
+    "rarity": 6,
+    "weaponType": "Staff",
+    "atk": 485,
+    "subStat": "의지 +156, HP +78%, 치유량 +28%, 팀 공격력 +25.2%",
+    "atkPercent": 0,
+    "critRate": 0,
+    "critDmg": 0,
+    "physDmgBonus": 0,
+    "artsDmgBonus": 0,
+    "skillDmgBonus": 0,
+    "passive": "기사도 정신: 의지 +156, HP +78%, 치유량 +28%, 팀 공격력 +25.2% (팀 버프)",
+    "mainStatFlatBonus": 156,
+    "mainStatType": "wil",
+    "potentialBonuses": [
+      {
+        "level": 0,
+        "title": "잠재 미지원",
+        "description": "현재 버전에서는 잠재 미지원"
+      }
+    ]
+  },
+  {
+    "id": "oblivion",
+    "name": "Oblivion",
+    "nameKo": "망각",
+    "rarity": 6,
+    "weaponType": "Staff",
+    "atk": 495,
+    "subStat": "지능 +156, 아츠 피해 +144.13%, 치명타 확률 +14%",
+    "atkPercent": 0,
+    "critRate": 0.14,
+    "critDmg": 0,
+    "physDmgBonus": 0,
+    "artsDmgBonus": 1.4413,
+    "skillDmgBonus": 0,
+    "passive": "망각: 지능 +156, 아츠 피해 +43.33%+67.2%+33.6% (합계 +144.13%), 치명타 확률 +14%",
+    "mainStatFlatBonus": 156,
+    "mainStatType": "int",
+    "potentialBonuses": [
+      {
+        "level": 0,
+        "title": "잠재 미지원",
+        "description": "현재 버전에서는 잠재 미지원"
+      }
+    ]
+  },
+  {
+    "id": "detonation_unit",
+    "name": "Detonation Unit",
+    "nameKo": "폭발 유닛",
+    "rarity": 6,
+    "weaponType": "Staff",
+    "atk": 490,
+    "subStat": "주스탯 +132, 아츠 강도 +78, 부스탯 +28%, 적 받는 아츠 피해 +25.2%",
+    "atkPercent": 0,
+    "critRate": 0,
+    "critDmg": 0,
+    "physDmgBonus": 0,
+    "artsDmgBonus": 0,
+    "skillDmgBonus": 0,
+    "passive": "폭발 유닛: 주스탯 +132, 아츠 강도 +78, 부스탯 +28% (비율 증가, 고정값 아님), 적 받는 아츠 피해 +25.2%",
+    "mainStatFlatBonus": 132,
+    "mainStatType": "주스탯",
+    "potentialBonuses": [
+      {
+        "level": 0,
+        "title": "잠재 미지원",
+        "description": "현재 버전에서는 잠재 미지원"
+      }
+    ]
+  },
+  {
+    "id": "dreams_starry_beach",
+    "name": "Dreams of the Starry Beach",
+    "nameKo": "바다와 별의 꿈",
+    "rarity": 6,
+    "weaponType": "Staff",
+    "atk": 495,
+    "subStat": "지능 +156, 치유량 +46.4%, 부스탯 +44.8%, 적 받는 아츠 피해 +28%",
+    "atkPercent": 0,
+    "critRate": 0,
+    "critDmg": 0,
+    "physDmgBonus": 0,
+    "artsDmgBonus": 0,
+    "skillDmgBonus": 0,
+    "passive": "바다와 별의 꿈: 지능 +156, 치유량 +46.4%, 부스탯 +44.8% (비율 증가, 고정값 아님), 적 받는 아츠 피해 +28%",
+    "mainStatFlatBonus": 156,
+    "mainStatType": "int",
+    "potentialBonuses": [
+      {
+        "level": 0,
+        "title": "잠재 미지원",
+        "description": "현재 버전에서는 잠재 미지원"
+      }
+    ]
+  },
+  {
+    "id": "delivery_guaranteed",
+    "name": "Delivery Guaranteed",
+    "nameKo": "사명의 길",
+    "rarity": 6,
+    "weaponType": "Staff",
+    "atk": 500,
+    "subStat": "의지 +156, 궁극기 게이지 회복, 자연 피해 +44.8%, 팀 아츠 피해 +28%+9.8%",
+    "atkPercent": 0,
+    "critRate": 0,
+    "critDmg": 0,
+    "physDmgBonus": 0,
+    "artsDmgBonus": 0.448,
+    "skillDmgBonus": 0,
+    "passive": "사명의 길: 의지 +156, 궁극기 게이지 회복, 자연 피해 +44.8%, 팀 아츠 피해 +28%+9.8% (팀 버프)",
+    "mainStatFlatBonus": 156,
+    "mainStatType": "wil",
+    "potentialBonuses": [
+      {
+        "level": 0,
+        "title": "잠재 미지원",
+        "description": "현재 버전에서는 잠재 미지원"
+      }
+    ]
+  },
+  {
+    "id": "opus_etch_figure",
+    "name": "Opus: Etch Figure",
+    "nameKo": "작품: 침식 흔적",
+    "rarity": 6,
+    "weaponType": "Staff",
+    "atk": 485,
+    "subStat": "의지 +156, 자연 피해 +43.33%, 공격력 +19.6%, 팀 아츠 피해 +14%+5.6%",
+    "atkPercent": 0.196,
+    "critRate": 0,
+    "critDmg": 0,
+    "physDmgBonus": 0,
+    "artsDmgBonus": 0.4333,
+    "skillDmgBonus": 0,
+    "passive": "작품: 침식 흔적: 의지 +156, 자연 피해 +43.33%, 공격력 +19.6%, 팀 아츠 피해 +14%+5.6% (팀 버프)",
+    "mainStatFlatBonus": 156,
+    "mainStatType": "wil",
+    "potentialBonuses": [
+      {
+        "level": 0,
+        "title": "잠재 미지원",
+        "description": "현재 버전에서는 잠재 미지원"
+      }
+    ]
+  },
+  {
+    "id": "wild_wanderer",
+    "name": "Wild Wanderer",
+    "nameKo": "황무지의 방랑자",
+    "rarity": 5,
+    "weaponType": "Staff",
+    "atk": 411,
+    "subStat": "지능 +124, 전기 피해 +34.7%, 아츠 강도 +28, 팀 전기 피해 +22.4%, 팀 물리 피해 +22.4%",
+    "atkPercent": 0,
+    "critRate": 0,
+    "critDmg": 0,
+    "physDmgBonus": 0,
+    "artsDmgBonus": 0.347,
+    "skillDmgBonus": 0,
+    "passive": "황무지의 방랑자: 지능 +124, 전기 피해 +34.7%, 아츠 강도 +28, 팀 전기 피해 +22.4% (팀 버프), 팀 물리 피해 +22.4% (팀 버프)",
+    "mainStatFlatBonus": 124,
+    "mainStatType": "int",
+    "potentialBonuses": [
+      {
+        "level": 0,
+        "title": "잠재 미지원",
+        "description": "현재 버전에서는 잠재 미지원"
+      }
+    ]
+  },
+  {
+    "id": "monaihe",
+    "name": "Monaihe",
+    "nameKo": "무가내하",
+    "rarity": 5,
+    "weaponType": "Staff",
+    "atk": 411,
+    "subStat": "의지 +124, 궁극기 게이지 회복, 주스탯 +14%, 아츠 강도 +70",
+    "atkPercent": 0,
+    "critRate": 0,
+    "critDmg": 0,
+    "physDmgBonus": 0,
+    "artsDmgBonus": 0,
+    "skillDmgBonus": 0,
+    "passive": "무가내하: 의지 +124, 궁극기 게이지 회복, 주스탯 +14% (비율 증가, 고정값 아님), 아츠 강도 +70",
+    "mainStatFlatBonus": 0,
+    "potentialBonuses": [
+      {
+        "level": 0,
+        "title": "잠재 미지원",
+        "description": "현재 버전에서는 잠재 미지원"
+      }
+    ]
+  },
+  {
+    "id": "stanza_memorials",
+    "name": "Stanza of Memorials",
+    "nameKo": "망자의 노래",
+    "rarity": 5,
+    "weaponType": "Staff",
+    "atk": 411,
+    "subStat": "지능 +124, 공격력 +31.2%, HP +28%, 팀 공격력 +22.4%",
+    "atkPercent": 0.312,
+    "critRate": 0,
+    "critDmg": 0,
+    "physDmgBonus": 0,
+    "artsDmgBonus": 0,
+    "skillDmgBonus": 0,
+    "passive": "망자의 노래: 지능 +124, 공격력 +31.2% (자신), HP +28%, 팀 공격력 +22.4% (팀 버프)",
+    "mainStatFlatBonus": 124,
+    "mainStatType": "int",
+    "potentialBonuses": [
+      {
+        "level": 0,
+        "title": "잠재 미지원",
+        "description": "현재 버전에서는 잠재 미지원"
+      }
+    ]
+  }
+]
